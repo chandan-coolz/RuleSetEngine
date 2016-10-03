@@ -1,0 +1,76 @@
+
+div.active {
+
+background: #2EA2DF;
+
+}
+div.inactive {
+background: #8AD3F4;
+}
+
+div.taskBox {
+
+
+max-width:350px;
+box-sizing: border-box;
+/*background: #1A568A;*/
+
+padding: 10px;
+display: flex;
+
+align-items: stretch;
+justify-content: center;
+
+
+}
+
+div.taskBox > div.progress-indicator {
+flex: 1 1 33.3%;	
+
+position: relative;
+}
+
+div.taskBox > div.progress-indicator > i{
+
+color: #fff;
+position: absolute;
+box-sizing: border-box;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+
+}
+
+
+
+
+div.taskBox > div.task {
+flex: 2 2 auto;
+
+}
+
+
+div.taskBox > div.task > div.header {
+ 
+color: #fff;
+font-size: 1.5em;
+font-weight: bold;
+
+}
+
+div.taskBox > div.task > div.header > i{
+
+}
+
+div.taskBox > div.task > div.header  > span {
+
+
+}
+
+
+div.taskBox > div.task > div.content {
+
+ font-size: 1em;
+ color: #fff;
+
+}

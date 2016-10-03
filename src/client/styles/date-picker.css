@@ -1,0 +1,255 @@
+div.date-picker-main-container{
+
+
+width: 300px;
+background: #fff;
+position: absolute;
+margin-top: 5px;
+border-top: 3px solid #3498DB;
+z-index: 4;
+}
+
+
+
+div.date-picker-main-container > span.arrow-up{
+
+
+}	
+
+
+/*** datepickernavigation style **************************/
+
+div.date-picker-main-container > div.navigation-button{
+	
+    width: 100%;
+    background: #fff;
+    box-sizing: border-box;
+    
+     user-select: none;
+    -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+    -moz-user-select: none; /* mozilla browsers */
+    -khtml-user-select: none; /* webkit (konqueror) browsers */
+    -ms-user-select: none; /* IE10+ */
+    margin: 0px;
+    height: 35px;
+    
+}
+
+
+
+
+div.date-picker-main-container > div.navigation-button > ul{
+
+padding: 0;
+margin: 0;
+margin-top: 0px;
+list-style: none;
+text-align: center;
+
+
+}
+
+
+div.date-picker-main-container > div.navigation-button > ul > li {
+    color: #474747;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: inline-block;
+    margin: 5px;
+    padding: 0;
+}
+
+
+div.date-picker-main-container > div.navigation-button > ul > li::after {
+content: "";
+border: none;
+}
+
+div.date-picker-main-container > div.navigation-button > ul > li::before{
+
+content:"";
+border: none;
+}
+
+div.date-picker-main-container > div.navigation-button > ul > li.previous-month {
+float: left;
+
+}
+
+div.date-picker-main-container > div.navigation-button > ul > li.previous-month > i:hover{
+cursor: pointer;
+opacity: 0.7;
+
+}
+
+div.date-picker-main-container > div.navigation-button > ul > li.current-month {
+
+color: #474747;
+position: relative; 
+width: 130px;
+
+
+}
+
+div.date-picker-main-container > div.navigation-button > ul > li.current-month>div.year {
+
+position: absolute;
+font-size: 1em;
+top: 15px;
+left: 50%;
+transform: translateX(-50%);
+}
+
+div.date-picker-main-container > div.navigation-button > ul > li.current-month>div.year >i.fa-caret-left{
+margin-right: 5px;
+
+ }
+div.date-picker-main-container > div.navigation-button > ul > li.current-month>div.year >i.fa-caret-left:hover{
+opacity: 0.7;
+cursor: pointer;
+ }
+
+
+div.date-picker-main-container > div.navigation-button > ul > li.current-month>div.year >i.fa-caret-right:hover{
+
+opacity: 0.7;
+cursor: pointer;
+ }
+
+
+div.date-picker-main-container > div.navigation-button > ul > li.next-month {
+float: right;
+}
+
+div.date-picker-main-container > div.navigation-button > ul > li.next-month >i:hover{
+
+opacity: 0.7;
+cursor: pointer;
+}
+
+
+
+/****************************************************** week days style *****************************/
+div.date-picker-main-container > div.weekdays {
+
+	background: #F7F7F7;
+	
+
+}
+
+
+
+div.date-picker-main-container > div.weekdays > ul{
+margin: 0;
+padding: 0;
+
+list-style: none;
+width: 100%;
+
+}
+
+div.date-picker-main-container > div.weekdays > ul >li {
+    display: inline-block;
+    width: 12.8%;
+    
+    color: #EF4F69;
+    font-size: 0.6em;
+    font-weight: bold;
+    text-align: center;
+    
+    box-sizing: border-box;
+    margin: 2px;
+}
+
+div.date-picker-main-container > div.weekdays > ul >li::after,
+div.date-picker-main-container > div.weekdays > ul >li::before { 
+border: none;
+}	
+
+/******************************* days  style ******************************************************************/
+div.date-picker-main-container > div.calendar {
+
+	background: #F7F7F7;
+}
+
+
+div.date-picker-main-container > div.calendar > ul {
+
+    padding: 0;
+    
+    margin: 0;
+
+
+}
+
+
+div.date-picker-main-container > div.calendar > ul >li {
+    list-style-type: none;
+    display: inline-block;
+    width: 12.8%;
+    height: 20px;
+    margin: 2px;
+    
+    
+    font-size: 0.6em;
+    color: #000;
+    box-sizing: border-box;
+    border: 1px solid #ddd ;
+    position: relative;
+
+  
+}
+
+div.date-picker-main-container > div.calendar > ul >li::after,
+div.date-picker-main-container > div.calendar > ul >li::before {
+border: none;
+}	
+
+div.date-picker-main-container > div.calendar > ul >li.date {
+  background: #fff;
+}
+div.date-picker-main-container > div.calendar > ul >li.date:hover {
+  cursor: pointer;
+}
+
+div.date-picker-main-container > div.calendar > ul >li.selected {
+  background: #3498DB;
+}
+
+div.date-picker-main-container > div.calendar > ul >li.selected:hover {
+  cursor: pointer;
+}
+
+div.date-picker-main-container > div.calendar > ul >li:hover{
+  cursor: default;
+}
+
+
+
+div.date-picker-main-container > div.calendar > ul >li >span{
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%,-50%);
+background: transparent
+}
+
+div.date-picker-main-container > div.calendar > ul >li >span:hover{
+
+background: transparent
+}
+
+div.date-picker-main-container >span.go-to-time-link{
+
+    text-align: center;
+    margin-top: 3px;
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+div.date-picker-main-container >span.go-to-time-link>i{
+cursor: pointer;
+}    

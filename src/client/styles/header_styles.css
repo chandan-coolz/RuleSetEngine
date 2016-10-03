@@ -1,0 +1,182 @@
+
+
+
+/* header part */
+body{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+
+
+
+
+
+
+
+div.mainContainer >  div > header {
+	width: 100%;
+
+	background :  #419DF3;
+	position: relative;
+	min-width: 900px;
+	
+}
+div.mainContainer > div >header > span.logo{
+width: 100px;
+height:  70px;
+margin-left: 100px;
+background-color:#109AF7;
+display: inline-block;
+background-image: url('../Images/jivox_logo.png');
+background-size: contain;
+background-position: center left;
+background-repeat: no-repeat;
+
+
+}
+
+div.mainContainer > div > header > ul{
+list-style: none;
+display: flex;
+text-align: center;
+position: absolute;
+top: 0;
+right:0;
+height: 70px;
+margin-top: 0;
+align-items: center;
+box-sizing: border-box;
+}
+
+div.mainContainer > div > header > ul > li{
+flex: 1 1 auto;
+display: inline-block;
+/*background: #2B2B2B;*/
+margin-right: 10px;
+color: #fff;
+padding:7px;
+font-size: 1.3em;
+
+letter-spacing: 1px;
+}
+
+
+div.mainContainer > div >  header > ul > li:hover{
+
+background:#4694C2;
+
+cursor: pointer;
+}
+
+
+/* username header style */
+
+div.mainContainer > div > header > ul > li.user {
+	 height: 70px;
+	 background:  #F46B5B;
+	 box-sizing: border-box;
+	 display: flex;
+	 align-items: center;
+	 
+	 font-weight: bold;  
+	 position: relative;                      
+}
+
+div.mainContainer > div > header > ul > li.user > i {
+margin-right:5px;
+}	
+
+div.mainContainer > div > header > ul > li.user > span {
+    flex:  1 1 auto;
+	font-size: 0.7em;
+    
+}
+
+div.mainContainer > div > header > ul > li.user > div.arrow-up  {
+  width: 0; 
+  height: 0; 
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  
+  border-bottom: 5px solid #0762BD;
+  position: absolute;
+
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  
+}
+
+
+
+/* user account setting option show */
+/* 
+div.mainContainer > div > div.user-setting {
+
+	
+	 border: 2px solid red;
+	 height: 0;
+	 position: relative;                
+} */
+
+div.mainContainer > div > div.user-setting > div {
+	position: relative;
+	margin-right: 5px;
+	/*max-width: 200px;*/
+	position: absolute;
+	top: 70px;
+	right: 0;
+}
+
+
+div.mainContainer > div > div.user-setting > div > ul {
+
+	list-style: none;
+	background: #0762BD;
+	max-width: 200px;
+	margin: 0;
+	padding: 10px;
+	color: #fff;
+	display: flex;
+	flex-direction: column; 
+	margin-top: 5px;
+}
+
+div.mainContainer > div > div.user-setting > div >ul > li{
+flex: 1 1 auto;
+margin: 5px ;
+padding: 5px;
+border-bottom: 1px solid #ddd;
+	
+}
+
+div.mainContainer > div > div.user-setting > div >ul > li.user-name{
+
+border: none;
+font-size: 1.2em;
+
+color: #404040 ;
+padding: 5px;
+border-radius: 10px;
+}	
+
+
+div.mainContainer > div > div.user-setting > div >ul > li:hover{
+background: #8B3CE7;
+cursor: pointer;
+}
+
+
+div.mainContainer > div > div.user-setting > div > ul > li > i{
+margin-right: 10px;
+	
+}
+
+
+/* to hide the view */
+
+.hide {
+	display: none;
+}

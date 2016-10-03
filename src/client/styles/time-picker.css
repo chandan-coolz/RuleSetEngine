@@ -1,0 +1,127 @@
+div.time-picker-main-container{
+width: 210px;
+
+background: #F7F7F7;
+border-radius: 5px;
+position: absolute;
+z-index: 4;
+top: 28px;
+border-top: 3px solid #3498DB;
+}
+
+
+div.time-picker-main-container> div.top > ul {
+list-style: none;
+margin: 0;
+padding: 0;
+
+}	
+/**********timepicker top style ****************************************************************************/
+div.time-picker-main-container> div.top > ul > li {
+display: inline-block;
+margin: 10px;
+border: 2px solid #ddd;
+border-radius: 5px;
+padding: 2px 7px;
+text-align: center;
+font-weight: bold;
+color: #343434;
+width: 30px;
+}
+
+div.time-picker-main-container> div.top > ul > li::before {
+content: "";
+border: none;
+}
+
+div.time-picker-main-container> div.top > ul > li::after {
+content: "";
+border: none;
+}
+
+div.time-picker-main-container> div.top > ul > li:hover{
+	cursor: pointer;
+}	
+/******************timepicker middlestyle *******************************************************/
+
+div.time-picker-main-container> div.middle > ul {
+list-style: none;
+margin: 0;
+padding: 0;
+
+}	
+
+div.time-picker-main-container> div.middle> ul > li {
+
+display: inline-block;
+margin: 10px;
+border: 2px solid #ddd;
+border-radius: 5px;
+padding: 3px 7px;
+text-align: center;
+font-weight: bold;
+background: #fff;
+width: 30px;
+
+}	
+
+div.time-picker-main-container> div.middle > ul > li::before {
+content: "";
+border: none;
+}
+
+div.time-picker-main-container> div.middle > ul > li::after {
+content: "";
+border: none;
+}
+
+div.time-picker-main-container> div.middle > ul > li:hover{
+	cursor: pointer;
+}
+
+/*********timepicker bottom style   ***********************************/
+div.time-picker-main-container> div.bottom > ul {
+list-style: none;
+margin: 0;
+padding: 0;
+
+}	
+
+div.time-picker-main-container> div.bottom > ul > li {
+display: inline-block;
+margin: 10px;
+border: 2px solid #ddd;
+border-radius: 5px;
+padding: 2px 7px;
+text-align: center;
+font-weight: bold;
+color: #343434;
+width: 30px;
+}
+
+div.time-picker-main-container> div.bottom > ul > li::before {
+content: "";
+border: none;
+}
+
+div.time-picker-main-container> div.bottom > ul > li::after {
+content: "";
+border: none;
+}
+
+div.time-picker-main-container> div.bottom > ul > li:hover{
+	cursor: pointer;
+}
+
+div.time-picker-main-container>span.go-to-date-link{
+
+    text-align: center;
+    margin: 3px 0px;
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+div.time-picker-main-container>span.go-to-date-link:hover>i{
+cursor:pointer;
+}	

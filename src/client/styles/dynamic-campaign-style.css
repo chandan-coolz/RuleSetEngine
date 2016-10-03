@@ -1,0 +1,31 @@
+
+div.mainContainer > div.content-wrapper > div.dynamic-campaign-container {
+
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+
+
+
+
+width: 100%;
+
+box-sizing: border-box;
+border-top: none;
+margin-top: 40px;
+position: relative;
+box-shadow: 10px 0px 60px #888888;
+}
+
+div.mainContainer > div.content-wrapper > div.dynamic-campaign-container > p{
+width: 100%;
+height: 40px;
+background:#5B9BD1 ;
+padding: 5px;
+font-size: 1.5em;
+box-sizing: border-box;
+margin: 0;
+border: 1px solid #5B9BD1;
+
+}
