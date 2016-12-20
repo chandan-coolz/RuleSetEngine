@@ -1,35 +1,52 @@
 import React from 'react';
 import {render} from 'react-dom';
+import RuleStore from '../stores/RuleStore.jsx';
 import {updateValue}  from '../actions/RuleAction.jsx';
 
 
 export default class TimePicker extends React.Component {
 
-  componentDidMount() {
-  
-    $('.'+this.props.triggerObject.id).timepicker({timeFormat: "hh:mm TT"}).datetimepicker("setDate", new Date());
-    let newTime =  dateFormat($('.'+this.props.triggerObject.id).datepicker("getDate"), "HH:MM:ss") ;
-     updateValue(this.props.triggerObject,newTime);
+componentDidMount() {
 
-    $('.'+this.props.triggerObject.id).change(function(e){
+    
+    if(this.props.servicePropertyValue!=""){
+       let tempTime = dateFormat(dateFormat("mm-dd-yyyy") + " " + this.props.servicePropertyValue, "HH:MM");
+      // let tempTime=dateFormat(this.props.servicePropertyValue, "HH:MM:ss") ;
+         let d = new Date();
+         let timeToSet = tempTime.split(":");
+         d.setHours(timeToSet[0]);
+         d.setMinutes(timeToSet[1]);
+        $(this.refs.timePicker).timepicker({timeFormat: "hh:mm TT"}).datetimepicker("setDate", d );
+
+
+    } else{
+    
+     $(this.refs.timePicker).timepicker({timeFormat: "hh:mm TT"}).datetimepicker("setDate", new Date());
+     let newTime =  dateFormat($(this.refs.timePicker).datepicker("getDate"), "HH:MM:ss") ;
+     RuleStore.updateValue(this.props.secName,this.props.rulePosition,this.props.triggerObject,newTime);
+    
+    }
+
+
+    $(this.refs.timePicker).change(function(e){
       //fire your ajax call  
-     
-     let newTime =  dateFormat($('.'+this.props.triggerObject.id).datepicker("getDate"), "HH:MM:ss") ;
-     updateValue(this.props.triggerObject,newTime);
+     let newTime =  dateFormat($(this.refs.timePicker).datepicker("getDate"), "HH:MM:ss") ;
+     updateValue(this.props.secName,this.props.rulePosition,this.props.triggerObject,newTime);
 
    }.bind(this));
 }
 
-  componentWillUnmount() {
-     
-    $('.'+this.props.triggerObject.id).timepicker('destroy');
-    $('.'+this.props.triggerObject.id).datepicker('destroy');
-  }
+
+componentWillUnmount() {
+
+    $(this.refs.timePicker).timepicker('destroy');
+    $(this.refs.timePicker).datepicker('destroy');
+}
 
 
 render() {
     const props = this.props;
-    return <input type="text" className={this.props.triggerObject.id} readOnly='true'/>
+    return <input type="text" ref="timePicker" readOnly='true'/>
   }
 
 

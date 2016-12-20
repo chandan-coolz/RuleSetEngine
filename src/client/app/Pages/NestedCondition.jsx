@@ -1,7 +1,11 @@
 import React from 'react';
 import {render} from 'react-dom';
 import Trigger from './Trigger.jsx';
+import DeletedTrigger from './DeletedTrigger.jsx';
+import SelectStyle from './SelectStyle.jsx';
 import * as RuleAction from '../actions/RuleAction.jsx';
+import DynamicCampaignConfig from '../stores/dynamicCampaignConfig.jsx';
+import RuleErrorStore from '../stores/RuleErrorStore.jsx';
 
 export default class NestedCondition extends React.Component {
 
@@ -30,11 +34,162 @@ this.state = {
 
    },
     deleteConfirmationBoxContainerClass:"hide",
-    deleteConfirmationBoxClass:"confirmationBoxInitialPosition"
+    deleteConfirmationBoxClass:"confirmationBoxInitialPosition",
+    dyn_assetSource : DynamicCampaignConfig.getAssetSourceData(),
+    dyn__assetSourceServiceList : DynamicCampaignConfig.getDynamicCampaignConfig(),
+    isToShowSelectBox:false
 
 } //state
 
+
+this.selectorToWatch = [];
+this.deletedSelector = [];
+this.isBlurEventCalled=false;
+this.currentTop = 0;
+this.currentLeft = 0;
+
 } //constructor
+
+
+
+/*************function for asset change listener****************************************/
+
+refressAssetSource(){
+
+this.deletedSelector = [];
+//this.deletedSelector=tempDataStore.getDeletedTriggers(''+nextProps.condition.id);
+let temp_dyn_assetSource = DynamicCampaignConfig.getAssetSourceData();
+
+ /*****get the database trigger name***********************/
+ let databaseTrigger = [];
+ if(this.props.condition.selectors!=undefined){
+  databaseTrigger =  this.props.condition.selectors.filter( (trigger)=>{
+
+    var keys= Object.keys(trigger).filter((key)=>{
+      if(key=="id" || key=="comparator" || key=="pxIdx" ){return false;}
+       return true;
+     });
+    
+    
+     var serviceData = keys[0].split(":");
+     var serviceProperty = serviceData[1].split(".")[1];
+    
+    
+      if(serviceProperty == '_jvxMatchCount'){
+        return true;
+      }else{
+        return false;
+      }
+
+
+
+ }).map( (trigger)=> {
+    var keys= Object.keys(trigger); 
+    var serviceData = keys[2].split(":"); //get the 3rd property
+    return(serviceData[0]);
+
+}).unique(databaseTrigger);
+}
+
+  
+/**2check for deleted trigger****************************************************/
+let deletedTrigger = databaseTrigger.filter( (assetName)=>{
+
+    for(let i=0;i<temp_dyn_assetSource.length;i++){
+       if(assetName == temp_dyn_assetSource[i].dataServiceName){return false;}
+   
+    }
+   return true;
+
+});
+
+
+/**3 put deleted trigger in this.deleted trigger*****************************************/
+  let indexToDelete=[];
+ 
+  for(let i=0;i<deletedTrigger.length;i++){
+
+    for(let j=0;j<this.props.condition.selectors.length;j++){
+        
+       /* get the  value of trigger */
+       var trigger = this.props.condition.selectors[j];
+       var keys= Object.keys(trigger);
+       var serviceData = keys[2].split(":"); //get the 3rd property
+       var service = serviceData[0];
+      
+       if(service==deletedTrigger[i]){
+
+          indexToDelete.push(j);
+
+       }
+
+
+     }//for
+  }//outer for
+
+   
+for(let i=0;i<indexToDelete.length;i++){
+
+        this.deletedSelector.push(this.props.condition.selectors[indexToDelete[i]]);
+
+  }
+
+
+
+this.setState({
+   dyn_assetSource :temp_dyn_assetSource,
+   dyn__assetSourceServiceList : DynamicCampaignConfig.getDynamicCampaignConfig()
+  }) ;
+
+
+}//refressAssetSources
+
+
+
+/*******end function for asset change listener*****************************************/
+
+
+
+
+/***********function for check for duplicate*************************/
+contains(value) {
+    for(var i = 0; i < this.length; i++) {
+        if(this[i] === value) return true;
+    }
+    return false;
+};
+
+/***********function to get unique value****************************/
+unique() {
+    var arr = [];
+    for(var i = 0; i < this.length; i++) {
+        if(!arr.contains(this[i])) {
+            arr.push(this[i]);
+        }
+    }
+    return arr; 
+}
+
+
+
+componentWillMount() {
+
+   this.refressAssetSource();
+}//component will mount
+
+
+componentWillUnmount() {
+
+  clearTimeout(this.showConditionTimeOut);
+  clearTimeout(this.hideConditionTimeOut);
+  clearTimeout(this.deleteRuleDialogTimeOut);
+  
+
+}
+
+componentWillReceiveProps(nextProps) {
+  this.refressAssetSource();
+}
 
 
 
@@ -44,7 +199,7 @@ this.state = {
 
 showConditionalContent(){
 	this.setState({isToShowConditionContent : true,contentClass:"showAll"});
-  setTimeout(function(){
+  this.showConditionTimeOut = setTimeout(function(){
 
   this.setState({contentClass:"visuallyShow"});
   
@@ -55,7 +210,7 @@ showConditionalContent(){
 hideConditionalContent() {
 
 	this.setState({isToShowConditionContent : false,contentClass:"visuallyhidden"});
-  setTimeout(function(){
+  this.hideConditionTimeOut = setTimeout(function(){
 
   this.setState({contentClass:"hide"});
   
@@ -78,10 +233,10 @@ return ("TRI-R-"+this.props.advertiserId+"-"+this.props.addId+"-"+Date.now());
 }//generate trigger id
 
 addNestedCondition(){
-    
+   
   let temp = JSON.parse(JSON.stringify(this.state.newCondition));
   temp["id"] = this.generateConditionId();
-  RuleAction.addCondition(this.props.condition,temp);
+  RuleAction.addCondition(this.props.secName,this.props.rulePosition,this.props.condition,temp);
 
 }//add nestedcondition
 
@@ -90,7 +245,7 @@ addTrigger(){
 
 let temp = JSON.parse(JSON.stringify(this.state.newTrigger));
 temp["id"] = this.generateTriggerId();
-RuleAction.addTrigger(this.props.condition,temp);
+RuleAction.addTrigger(this.props.secName,this.props.rulePosition,this.props.condition,temp);
 
 }//add trigger
 
@@ -99,7 +254,7 @@ openDeleteRuleDialog(){
 
 this.setState({deleteConfirmationBoxContainerClass:"confirmationBoxContainer"});
 
-setTimeout(function(){
+this.deleteRuleDialogTimeOut = setTimeout(function(){
 
 this.setState({deleteConfirmationBoxClass:"confirmationBoxFinalPosition"});
 
@@ -115,57 +270,184 @@ this.setState({deleteConfirmationBoxContainerClass:"hide",deleteConfirmationBoxC
 
 deleteCondition(){
 
-   RuleAction.deleteCondition(this.props.parentCondition,this.props.condition.id);
+   RuleAction.deleteCondition(this.props.secName,this.props.rulePosition,this.props.parentCondition,this.props.condition.id);
    this.cancelDelete();
 } //delete COndition
 
 
-changeConditionOperator(){
+changeConditionOperator(newOperator){
 
-let newOperator = this.refs.conditionOperator.value;
-RuleAction.updateConditionOperator(this.props.condition, newOperator);
+this.setState({isToShowSelectBox:false});
+RuleAction.updateConditionOperator(this.props.secName,this.props.rulePosition,this.props.condition, newOperator);
 
 }//changeConditionOperator
 
+//add new trigger for restore Trigger 
 
+addNewRestoreTrigger(triggerObj,id){
+
+/*******delete from selector list  *****/
+RuleAction.deleteTrigger(this.props.secName,this.props.rulePosition,this.props.condition,id);
+
+/************add the new trigger********************************/
+
+RuleAction.addTrigger(this.props.secName,this.props.rulePosition,this.props.condition,triggerObj);
+this.refressAssetSource();
+this.forceUpdate();
+}
+
+deleteFromDeletedSelector(id){
+
+/*******delete from selector list  *****/
+RuleAction.deleteTrigger(this.props.secName,this.props.rulePosition,this.props.condition,id);
+this.refressAssetSource();
+this.forceUpdate();
+         
+
+
+}
+
+/***************toggle select box***********************************/
+  toggleSelectBox(){
+      let element=this.refs.conditionOperator.getBoundingClientRect();   
+      if(!this.isBlurEventCalled){
+      let temp = !this.state.isToShowSelectBox;
+      this.setState({isToShowSelectBox:temp});
+      this.currentTop = element.top ;
+      this.currentLeft =  element.left;      
+      }else{
+       this.isBlurEventCalled=false;
+      }
+    }
+
+   hideSelectBox(){
+    this.setState({isToShowSelectBox:false});
+    this.currentTop = 0 ;
+    this.currentLeft =  0;
+    this.isBlurEventCalled=true;
+   }  
 
 
 render(){
 
+  let validationError={};
+  validationError["display"]="none";
+  validationError["position"]="absolute";
+  validationError["top"]=23;
+  validationError["left"]=460;
+  validationError["color"]="red";
+
+if(RuleErrorStore.isEvaluateError()){
+  
+  if(RuleErrorStore.chekIfThereIsErrorForIds(this.props.condition.id,"Condition")){
+      validationError["display"]="inline-block";
+    }
+
+}
+
+
+/******filter the deleted trigger from our trigger list*********************************/
+
+var   nonDeletedTrigger =[];
+if(this.props.condition.selectors!=undefined){
+  nonDeletedTrigger = this.props.condition.selectors.filter( (trigger)=>{
+
+  for(let i=0;i<this.deletedSelector.length;i++){
+    
+     
+    if(trigger.id==this.deletedSelector[i].id){
+      
+      return false;
+    }
+  }
+
+ return true;
+});
+
+}
+
+
+/******check weather it has nested condition or not******************************/
+
+
+if( this.props.condition.hasOwnProperty('conditions') ){
+
+    var triggers = nonDeletedTrigger.map( (trigger,i) => {
+       
+      return <Trigger key={i} trigger={trigger}
+      parentCondition={this.props.condition} dyn_assetSource={this.state.dyn_assetSource}
+      dyn__assetSourceServiceList={this.state.dyn__assetSourceServiceList}
+      changePaddingListener={this.props.changePaddingListener}
+      secName={this.props.secName} rulePosition={this.props.rulePosition}
+      />
+ 
+     });
+
+ 
+    var nestedConditions = this.props.condition.conditions.map( (conditionObject,i) => 
+
+     <NestedCondition key={i} condition={conditionObject} parentCondition={this.props.condition}
+     advertiserId={this.props.advertiserId} addId={this.props.addId}
+     dyn__conditionOperator={this.props.dyn__conditionOperator}
+     conditionOperatorKey={this.props.conditionOperatorKey}
+     conditionClass={this.props.conditionClass}
+     conditionOperatorValue={this.props.conditionOperatorValue}
+     changePaddingListener={this.props.changePaddingListener}
+     secName={this.props.secName}  rulePosition={this.props.rulePosition}
+     />
+     );  
+
+}else{
+
+ //populate in trigger only
+//populate in last element of trigger  only
+   
+  var triggers = nonDeletedTrigger.map( (trigger,i) => {  
+      return <Trigger key={i} trigger={trigger}
+      parentCondition={this.props.condition} dyn_assetSource={this.state.dyn_assetSource}
+      dyn__assetSourceServiceList={this.state.dyn__assetSourceServiceList}
+      changePaddingListener={this.props.changePaddingListener}
+      secName={this.props.secName} rulePosition={this.props.rulePosition}
+      /> 
+  });
+}//condition property check if
 
 
 
-var triggers = this.props.condition.selectors.map( (trigger,i) => <Trigger key={i} trigger={trigger} 
-   parentCondition={this.props.condition}
-  />
 
-	);
 
-var isToShowTrigger = triggers.length>0?"":"hide";
 
-const showUpArrow = this.state.isToShowConditionContent ? "show" : "hide";
-const showDownArrow = this.state.isToShowConditionContent ? "hide" : "show";
+
+
+
+
+var DeletedTriggers = this.deletedSelector.map( (trigger,i) => <DeletedTrigger key={i} trigger={trigger}
+    addNewRestoreTrigger={this.addNewRestoreTrigger.bind(this)} dyn_assetSource={this.state.dyn_assetSource}
+     dyn__assetSourceServiceList={this.state.dyn__assetSourceServiceList}
+     deleteFromDeletedSelector={this.deleteFromDeletedSelector.bind(this)}
+     changePaddingListener={this.props.changePaddingListener}
+    />
+
+   ); 
+
+let isToShowTrigger = {'display':'none'};
+if( triggers.length>0 || (this.deletedSelector.length>0) ) {
+isToShowTrigger['display'] = 'block';
+}
+
  /*const contentClass = this.state.isToShowConditionContent? "show" : "hide" ; */
 
-if(this.props.condition.hasOwnProperty('conditions')){
-/*nestedcondition styling */
-var nestedConditions = this.props.condition.conditions.map( (conditionObject,i) => 
+let showUpArrow = {'display':'none'};
+let showDownArrow = {'display':'none'};
 
-    
-	
-	<NestedCondition key={i} condition={conditionObject} parentCondition={this.props.condition}
-   advertiserId={this.props.advertiserId} addId={this.props.addId} 
-   dyn__conditionOperator={this.props.dyn__conditionOperator}
-   conditionOperatorOption={this.props.conditionOperatorOption}
-   />
-
-        
-
-
-	 
-
-	); 
+if(this.state.isToShowConditionContent){
+  showUpArrow['display'] = 'block';
+  
+}else{
+ showDownArrow['display'] = 'block'; 
 }
+
+
  
 
 
@@ -204,11 +486,11 @@ return (
         <tr>
             <th>
                
-               <span  className={showUpArrow}><i className="fa fa-angle-up" aria-hidden="true" 
+               <span  style={showUpArrow}><i className="fa fa-angle-down"  aria-hidden="true" 
                 onClick={this.hideConditionalContent.bind(this)}></i>
              </span>
-             <span  className={showDownArrow}>
-              <i className="fa fa-angle-down" aria-hidden="true" 
+             <span  style={showDownArrow}>
+              <i  className="fa fa-angle-right" aria-hidden="true" 
                   onClick={this.showConditionalContent.bind(this)}></i>
              </span>
                
@@ -216,29 +498,45 @@ return (
             <th>
 
              <label>
-               <select className="condition-operator" ref="conditionOperator"
-               value={this.props.condition.operator}
-               onChange={this.changeConditionOperator.bind(this)}
-               >
+               
+                   <div className="condition-operator-select">
+                     <span onClick={this.toggleSelectBox.bind(this)}
+                      onMouseEnter={()=> this.isBlurEventCalled=false}
+                      ref="conditionOperator"
+                      >
+                      {this.props.dyn__conditionOperator[ this.props.condition.operator ]}
+                     </span>
+                     <div className="down-triangle" onClick={this.toggleSelectBox.bind(this)}
+                      onMouseEnter={()=> this.isBlurEventCalled=false}
+                     ></div>
+                     <SelectStyle keys={this.props.conditionOperatorKey} values={this.props.conditionOperatorValue} 
+                      methodToCall={this.changeConditionOperator.bind(this)}
+                      isToShowSelectBox={this.state.isToShowSelectBox} 
+                      hideSelectBox={this.hideSelectBox.bind(this)}
+                      currentTop={this.currentTop} currentLeft={this.currentLeft}
+                      />
 
-                {this.props.conditionOperatorOption}
-               </select>
+                   </div>
              </label>
             
-            <label>
-              <button onClick={this.addNestedCondition.bind(this)}><i className="fa fa-adjust" aria-hidden="true" ></i>Add Condition </button>
+            <label className="condition">
+              <span onClick={this.addNestedCondition.bind(this)}>
+              <span><i className="fa fa-adjust" aria-hidden="true" ></i></span>
+              Add Condition </span>
 
             </label>
 
-            <label>
-              <button onClick={this.addTrigger.bind(this)}><i className="fa fa-bolt" aria-hidden="true"></i>Add Trigger </button>
+            <label className="trigger">
+              <span onClick={this.addTrigger.bind(this)}>
+              <span><i className="fa fa-bolt" aria-hidden="true"></i></span>
+              Add Trigger </span>
 
             </label>
 
             </th>
             <th>
   
-             <i className="fa fa-trash" aria-hidden="true" onClick={this.openDeleteRuleDialog.bind(this)}></i>
+             <i data-tooltip="deleteCondition" className="fa fa-trash" aria-hidden="true" onClick={this.openDeleteRuleDialog.bind(this)}></i>
 
             
 
@@ -250,7 +548,7 @@ return (
 
           <ul className={this.state.contentClass}>
              
-            <li className={isToShowTrigger}><div className="trigger"> 
+            <li style={isToShowTrigger}><div className="trigger"> 
            <table>
             <thead>
              <tr>
@@ -263,6 +561,7 @@ return (
            </thead>
            <tbody>
               {triggers}
+              {DeletedTriggers}
            </tbody>
           </table>
           </div>
@@ -272,6 +571,9 @@ return (
              
 
           </ul>
+    <span style={validationError}>
+       <a style={{"cursor":"pointer"}} className="error"><i className="fa fa-exclamation"></i></a>
+   </span>       
   </li>    
 
 );

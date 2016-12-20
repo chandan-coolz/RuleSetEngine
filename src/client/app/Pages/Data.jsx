@@ -1,29 +1,110 @@
 import React from 'react';
 import {render} from 'react-dom';
 import Rule from './Rule.jsx';
+import RuleStore from '../stores/RuleStore.jsx';
 import AddRule from './AddRule.jsx';
+
 import * as RuleAction from '../actions/RuleAction.jsx';
 
 
 
 export default class Data extends React.Component {
 
+constructor(){
+
+super();
+this.state={
+  rule:{
+        "id": "",
+        "ruleName": "Default",
+        "reportConfig": {
+          "includeAssetSources": []
+        },
+        "creative_groups": [
+          
+        ],
+        "conditions": [
+          {
+            "id": "",
+            "operator": "and",
+            "selectors": [
+
+            ],
+            "conditions": [
+
+              ]
+
+          }
+        ]
+      }//rule
+  }//state
+
+this.sectionChangeListener = this.sectionChangeListener.bind(this);
+
+this.data=[];
+}//constructor
 
 
-generateRuleId(){
+/********sectionChangeListener*******************************/
 
-return ("R-"+this.props.advertiserId+"-"+this.props.addId+"-"+Date.now());
-} //generate Ruleid
-
-
-
-
+sectionChangeListener(){
+this.data = RuleStore.getDataForSection(this.props.secName);
+this.forceUpdate();
+}
 
 
-copyRuleFunction(currentPos,RuleActionObject,copyCreated){
+
+
+
+
+componentWillMount() {
+RuleStore.on("section"+this.props.secName, this.sectionChangeListener) ;    
+this.data = RuleStore.getDataForSection(this.props.secName);
+
+}
+
+
+componentWillUnmount() {
+  
+RuleStore.removeListener("section"+this.props.secName, this.sectionChangeListener);
+ 
+}
+
+componentWillReceiveProps(newProps) {
+ 
+this.data = RuleStore.getDataForSection(newProps.secName);
+
+}
+
+
+
+
+
+  /*********************method releated to adding  rules ***************************************/
+  generateRuleId(){
+
+  return ("R-"+this.props.advertiserId+"-"+this.props.addId+"-"+Date.now());
+  } //generate Ruleid
+
+  generateRuleName(){
+  let ruleNumber = this.props.data.data.length;
+  return("Rule "+(++ruleNumber) );
+
+  } //generateRuleName
+
+  generateRootConditionId(){
+
+  return ("R-"+this.props.advertiserId+"-"+this.props.addId+"-"+Date.now());
+
+  } //generateRootConditionId
+
+
+
+
+copyRuleFunction(secName,currentPos,RuleActionObject,copyCreated){
 let ruleId = this.generateRuleId();
 
-RuleActionObject.copyRule(currentPos,ruleId,copyCreated);
+RuleActionObject.copyRule(secName,currentPos,ruleId,copyCreated);
 
 } //copy rulefunction
 
@@ -33,57 +114,34 @@ RuleActionObject.copyRule(currentPos,ruleId,copyCreated);
 render() {
 
 
-var rules =this.props.data.data.map( (rule,i) => <Rule key={i} rule={rule} rulePosition={i} 
+var rules =this.data.map( (rule,i) => <Rule key={i}  rulePosition={i} secName={this.props.secName}
 	copyRuleFunction={this.copyRuleFunction.bind(this)} advertiserId={this.props.advertiserId}
-	hideRulePos={this.props.hideRulePos} addId={this.props.addId} 
+ addId={this.props.addId} 
 	/>
 
 ); //map
 
-var rulesForSelectBoxOption =this.props.data.data.map( (rule,i) => 
-     <option key={i} value={++i}>{rule.ruleName}</option>
-); //map
-
-
-
-//update rule count
-var ruleCount = this.props.data.data.length;
-
-
-var addRuleAtEndClass =  this.props.data.data.length ==0?"hide":"add-rule-at-end";
-
 
 return( 
-<div className="rule" >
-   
-    <div className="rule-tree">
 
-    <div className="add-rule-at-start">
-    <AddRule options={rulesForSelectBoxOption} ruleCount={ruleCount} addId={this.props.addId}
-     advertiserId={this.props.advertiserId}
-    />
-    </div>
+
+
      <ul>
-          
+
           {rules}
 
            
 
       </ul>  
 
-    <div className={addRuleAtEndClass}>
-    <AddRule options={rulesForSelectBoxOption} ruleCount={ruleCount} addId={this.props.addId}
-     advertiserId={this.props.advertiserId}/>
-    </div>
-
-   </div>
- 
 
 
-</div>   
 
 
   );  
+
+
+
 } //render
 
 } //Data

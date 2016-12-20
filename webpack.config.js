@@ -9,7 +9,7 @@ var config = {
   entry: APP_DIR + '/index.jsx',
   output: {
     path: BUILD_DIR,
-    filename: 'bundle.js'
+    filename: 'ruleEngine.js'
   },
 
     module : {
@@ -37,7 +37,7 @@ var config = {
         ],
         extensions: ['', '.json', '.js']
     },
-  /*  plugins: [
+/*  plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
@@ -48,8 +48,8 @@ var config = {
             }
         }),
         new webpack.optimize.UglifyJsPlugin()
-    ] */
-
+    ] 
+*/
 
 };
 

@@ -1,33 +1,129 @@
-import { EventEmitter }from  'events';
+import { EventEmitter }  from  'events';
 import dispatcher from '../dispatcher.jsx';
-
+EventEmitter.prototype._maxListeners = 0;
 class RuleStore extends EventEmitter {
 
 constructor(){
 super();
-  this.hidePos = -1;
-  
-  this.data = {
+this.initializeData(); 
+
+} //constructor
+
+
+/*********initialize data*******************************************/
+initializeData(){
+ this.hidePos = -1;
+ this.data = {
  
  "data": []
 
  } // this.jsondata
+ 
 
  this.data.data=dyn_dataToPost.data;
- 
-} //constructor
+
+this.ruleSections = [];
+
+//create rule section
+this.createRuleSection();
+//new rule adding info
+this.addedRuleSec=-1;
+this.addedRulePos=-1;
 
 
-initializeData(data){
-
-//console.log(data);
 }
+
+
+
+
+/*************method to create ruleSection**************************************/
+
+createRuleSection(){
+
+
+this.ruleSections = [];
+let noOfRuleSet = Math.floor( this.data.data.length /50 );
+
+if( (this.data.data.length % 50) >0){noOfRuleSet=noOfRuleSet + 1;}
+
+for(let i=0;i<noOfRuleSet;i++){
+  
+    let start=i*50;
+    let end=(i+1)*50;
+    let rules=[];
+    if( i == (noOfRuleSet-1) ){
+      for(let j=start;j<this.data.data.length;j++){
+
+           rules.push( this.data.data[j] );
+         }
+     this.ruleSections[i] = rules;
+
+     }else{
+      
+      for(let j=start;j<end;j++){
+
+           rules.push( this.data.data[j] );
+         }
+      this.ruleSections[i] = rules;   
+
+     }
+ 
+  
+     
+
+}//for
+
+ 
+
+
+
+}//createRuleSection
+
+
+
+getDataForSection(secName){
+
+return this.ruleSections[secName];
+
+}//getDataForFunction
+
+
+
+getDataForRule(secName,currentPos){
+
+let actualPos = secName*50 + currentPos;
+
+return this.data.data[actualPos];
+}//getDataForRule
+
+getAddedRuleSection(){
+return this.addedRuleSec;
+}
+getAddedRulePos(){
+return this.addedRulePos;
+}
+
+resetTheAddedRulePos(){
+ this.addedRuleSec=-1;
+ this.addedRulePos=-1; 
+}
+
+
+
+
+
+
+
+
+
+
+
 
 getRuleData(){
 
 
  
-	return this.data;
+  return this.data;
 } //getRuleData
 
 getHideRulsPos(){
@@ -38,62 +134,216 @@ getHideRulsPos(){
 addRuleToEnd(rule){
 
 this.data.data.push(rule);
+let prevRuleSectionLength = this.ruleSections.length;
+this.createRuleSection();
+this.addedRuleSec=this.ruleSections.length -1;
+this.addedRulePos=this.ruleSections[this.addedRuleSec].length - 1;
+
+if(prevRuleSectionLength==this.ruleSections.length){
+  let secToUpdate = this.ruleSections.length -1;
+  
+  if(this.ruleSections.length==1){
+
+   this.emit("change") 
+   this.emit("ruleChange");
+  }else{
+
+  this.emit("section"+secToUpdate);
+  this.emit("ruleChange");
+  }
+}else{
 this.emit("change");
+this.emit("ruleChange");
+}
 
 } //addRule
 
 addRuleToBegining(rule){
+this.emit("HideIfOpen");  
 this.data.data.unshift(rule);
+this.createRuleSection();
+this.addedRuleSec=0;
+this.addedRulePos=0;
 this.emit("change");
+this.emit("ruleChange");
 }//addRuleToBegining
 
 addRuleAfterSomeRuleFunction(rule,indexToInsert){
- 
-this.data.data.splice(indexToInsert,0,rule);
-this.emit("change");
+this.emit("HideIfOpen");
+let secName = Math.floor( indexToInsert /50 );   
+let temp=indexToInsert+1;
 
+this.data.data.splice(temp,0,rule);
+
+this.createRuleSection();
+ this.addedRuleSec=secName;
+ this.addedRulePos=(indexToInsert - 50*secName +1);
+ if(secName == 0){
+  this.emit("change");
+}else{
+  for(let i=secName;i<this.ruleSections.length;i++){
+
+       this.emit("section"+i);
+   }
+}   
+
+this.emit("ruleChange");
+}
+
+addRuleBeforeSomeRuleFunction(rule,indexToInsert){
+this.emit("HideIfOpen");
+let secName = Math.floor( indexToInsert /50 );
+this.data.data.splice(indexToInsert,0,rule);
+this.createRuleSection();
+this.addedRuleSec=secName;
+this.addedRulePos=(indexToInsert - 50*secName);
+if(secName == 0){
+  this.emit("change");
+}else{
+  for(let i=secName;i<this.ruleSections.length;i++){
+
+       this.emit("section"+i);
+   }
+}   
+this.emit("ruleChange");
+
+}  
+
+hideMoveUpView(secName,currentPos){
+
+//emit the event
+if(currentPos==0){ 
+let prevSecName = secName - 1;  
+this.emit("Hide"+prevSecName+"Rule"+ 49);
+}else{
+let prevPos = currentPos -1;
+this.emit("Hide"+secName+"Rule"+prevPos);
 }
 
 
-moveRuleUp(currentPos){
-let temp = this.data.data[currentPos];
-this.data.data[currentPos] = this.data.data[currentPos-1];
-this.data.data[currentPos-1] = temp;
-this.emit("change"); 
-/* this.data.data.splice(currentPos,1);
-this.data.data.splice((currentPos -1),0,temp);
-this.emit("change"); */
+
+
+}
+
+hideMoveDownView(secName,currentPos){
+
+//emit the event
+if(currentPos==49){ 
+let nextSecName = secName + 1;  
+this.emit("Hide"+nextSecName+"Rule"+ 0);
+}else{
+let nextPos = currentPos +1;
+this.emit("Hide"+secName+"Rule"+nextPos);
+}
+
+
+
+
+}
+
+hideOpenedRule(){   
+this.emit("HideIfOpen");      
+}   
+
+
+moveRuleUp(secName,currentPos){
+
+let actualPos = secName*50 + currentPos;
+let temp = this.data.data[actualPos];
+
+this.data.data[actualPos] = this.data.data[actualPos-1];
+this.data.data[actualPos-1] = temp;
+
+//emit the event
+if(currentPos==0){ 
+let prevSecName = secName - 1;  
+this.emit("Section"+prevSecName+"Rule"+ 49);
+this.emit("Section"+secName+"Rule"+currentPos);
+}else{
+
+let prevPos = currentPos - 1 ;
+  this.emit("Section"+secName+"Rule"+ prevPos);
+  this.emit("Section"+secName+"Rule"+currentPos);
+}
+
+this.emit("ruleChange");
 } //move rule up
 
 
-moveRuleDown(currentPos){
+moveRuleDown(secName,currentPos){
+let actualPos = secName*50 + currentPos;
+let temp = this.data.data[actualPos];
+this.data.data[actualPos] = this.data.data[actualPos+1];
+this.data.data[actualPos+1] = temp;
+//emit the event
+if(currentPos==49){ 
+let nextSecName = secName + 1;  
+this.emit("Section"+nextSecName+"Rule"+ 0);
+this.emit("Section"+secName+"Rule"+currentPos);
+}else{
 
-let temp = this.data.data[currentPos];
-this.data.data[currentPos] = this.data.data[currentPos+1];
-this.data.data[currentPos+1] = temp;
-this.emit("change");
+let nextPos = currentPos + 1 ;
+  this.emit("Section"+secName+"Rule"+ currentPos);
+  this.emit("Section"+secName+"Rule"+ nextPos);
+}
+
+this.emit("ruleChange");
+}
+
+dragRule(secName,currentPos,newSecName,newPos){
+ 
+let actualPos = secName*50 + currentPos;
+let swapActualPos = newSecName*50 + newPos;
+
+let temp =this.data.data[actualPos];
+this.data.data[actualPos] = this.data.data[swapActualPos];
+this.data.data[swapActualPos] = temp;
+this.emit("Hide"+secName+"Rule"+currentPos);
+this.emit("Hide"+secName+"Rule"+newPos);
+
+this.emit("Section"+secName+"Rule"+ currentPos);
+this.emit("Section"+newSecName+"Rule"+ newPos);
+
+this.emit("ruleChange");
+}
+
+moveRuleAfterSomeRule(secName,currentPos,newSecName,newPos){
+
+
+
+this.emit("HideIfOpen");  
+let actualPos = secName*50 + currentPos;
+let swapActualPos = newSecName*50 + newPos;
+if(swapActualPos<actualPos){
+  let temp = this.data.data[swapActualPos];
+  this.data.data.splice(swapActualPos,1);
+  this.data.data.splice(actualPos,0,temp);
+}else{
+  let temp = this.data.data[swapActualPos];
+  this.data.data.splice(swapActualPos,1);
+  this.data.data.splice(actualPos+1,0,temp);
+}
+
+
+
+this.createRuleSection();
+let minSecName = secName<newSecName ?secName:newSecName;
+
+  for(let i=minSecName;i<this.ruleSections.length;i++){
+
+       this.emit("section"+i);
+     }
+
+ this.emit("ruleChange");    
 
 }
 
-dragRule(currentPos,newPos){
+moveRuleBeforeSomeRule(secName,currentPos,newSecName,newPos){
 
-let temp =this.data.data[currentPos];
-this.data.data[currentPos] = this.data.data[newPos];
-this.data.data[newPos] = temp;
-this.emit("change");
+this.emit("HideIfOpen");  
+let beforeMoveIndex  = secName*50 + currentPos;
+let currentIndex = newSecName*50 + newPos;
 
-}
-
-moveRuleAfterSomeRule(afterMoveIndex,currentIndex){
-
-let temp = this.data.data[currentIndex];
-this.data.data.splice(currentIndex,1);
-this.data.data.splice(afterMoveIndex,0,temp);
-this.emit("change");
-
-}
-
-moveRuleBeforeSomeRule(beforeMoveIndex,currentIndex){
  if(beforeMoveIndex===0){
      let temp = this.data.data[currentIndex];
      this.data.data.splice(currentIndex,1);
@@ -109,105 +359,239 @@ moveRuleBeforeSomeRule(beforeMoveIndex,currentIndex){
      this.data.data.splice(currentIndex,1);
      this.data.data.splice(beforeMoveIndex,0,temp);
    }
-this.emit("change");
+
+this.createRuleSection();
+let minSecName = secName<newSecName ?secName:newSecName;
+
+  for(let i=minSecName;i<this.ruleSections.length;i++){
+
+       this.emit("section"+i);
+     }
+
+this.emit("ruleChange");
+
 }
 
-deleteRule(currentPos){
+deleteRule(secName,currentPos){
+this.emit("HideIfOpen");  
+let actualPos = secName*50 + currentPos;
+this.data.data.splice(actualPos,1);
+this.createRuleSection();
 
-this.data.data.splice(currentPos,1);
-this.emit("change");
+if( currentPos == 0 && (secName == this.ruleSections.length) ){
+
+    this.emit("change");
+}else if(this.ruleSections.length==1){
+ this.emit("change") ;
+}else{
+  
+   for(let i=secName;i<this.ruleSections.length;i++){
+
+       this.emit("section"+i);
+      }
 }
 
-changeRuleName(currentPos,newName){
 
-this.data.data[currentPos]["ruleName"] = newName;
+this.emit("ruleChange");
+}
 
-this.emit("change");
+changeRuleName(secName,currentPos,newName){
+
+let actualRulePos = secName*50 + currentPos;
+//update main data
+this.data.data[actualRulePos]["ruleName"] = newName;
+//update section data
+//this.ruleSections[secName][currentPos]["ruleName"] = newName;  
+
+
+this.emit("Section"+secName+"Rule"+currentPos);
+this.emit("ruleChange");
 } //end of  change RUleName
 
-copyRule(currentPos,ruleId,copyCreated){
+copyRule(secName,currentPos,ruleId,copyCreated){
+let actualRulePos = secName*50 + currentPos;
 
-let temp = JSON.parse(JSON.stringify(this.data.data[currentPos]));
+let temp = JSON.parse(JSON.stringify(this.data.data[actualRulePos]));
 this.data.data.push(temp);
 this.data.data[this.data.data.length - 1]["id"] = ruleId;
-this.data.data[this.data.data.length - 1]["ruleName"] = this.data.data[currentPos]["ruleName"] + " Clone "+copyCreated;
+this.data.data[this.data.data.length - 1]["ruleName"] = this.data.data[actualRulePos]["ruleName"] + " Clone "+copyCreated;
 
+let prevRuleSectionLength = this.ruleSections.length;
+this.createRuleSection();
+this.addedRuleSec=this.ruleSections.length -1;
+this.addedRulePos=this.ruleSections[this.addedRuleSec].length - 1;
+if(prevRuleSectionLength==this.ruleSections.length){
+  let secToUpdate = this.ruleSections.length -1;
 
+  if(secToUpdate == 0){
+    this.emit("change");
+  }else{
+   this.emit("section"+secToUpdate);
+  }
 
+}else{
 this.emit("change");
+}
 
+
+this.emit("ruleChange");
 } //end of copy rule
 
+updateCreativeGroupToShow(secName,currentPos,newCreativeGroup){
 
-addCondition(currentConditionObj,newCondition){
+let actualPos = secName*50 + currentPos;
+
+ if(this.data.data[actualPos].creative_groups != undefined){
+   this.data.data[actualPos].creative_groups = newCreativeGroup;
+   }else{
+      delete this.data.data[actualPos]["creative_group"];
+      this.data.data[actualPos]["creative_groups"] = newCreativeGroup;
+   }
+
+this.emit("Section"+secName+"Rule"+currentPos);
+
+}
+
+updateIncludeAssetSources(secName,currentPos,newAssetSources){
+let actualPos = secName*50 + currentPos; 
+if(this.data.data[actualPos].reportConfig == undefined){
+this.data.data[actualPos]["reportConfig"]={"includeAssetSources": newAssetSources};
+}else if(this.data.data[actualPos].reportConfig.includeAssetSources == undefined){
+this.data.data[actualPos]["reportConfig"]["includeAssetSources"] = newAssetSources;
+}else{
+this.data.data[actualPos].reportConfig.includeAssetSources = newAssetSources; 
+}
+
+
+this.emit("Section"+secName+"Rule"+currentPos);
+
+
+}
+
+addCondition(secName,currentPos,currentConditionObj,newCondition){
 
 
 if(currentConditionObj.conditions){
 
 currentConditionObj.conditions.push(newCondition);
 } else {
-	currentConditionObj["conditions"] = [newCondition];
-	
+  currentConditionObj["conditions"] = [newCondition];
+  
 }
-this.emit("change");
+
+this.emit("Section"+secName+"Rule"+currentPos);
+
 } //end of add condition
 
-updateConditionOperator(currentConditionObj,newOperator){
+updateConditionOperator(secName,currentPos,currentConditionObj,newOperator){
 currentConditionObj["operator"]=newOperator;
-this.emit("change");
+this.emit("Section"+secName+"Rule"+currentPos);
+
 }//endof update condition operator
 
-deleteCondition(conditionParentObject,id)
+deleteCondition(secName,currentPos,conditionParentObject,id)
 {
 
 
 conditionParentObject.conditions = conditionParentObject.conditions.filter( obj => obj.id!=id  );
 
-this.emit("change");
+this.emit("Section"+secName+"Rule"+currentPos);
 
 } //delete Condition
 
 
-updateTriggerService(triggerObject,newcomparator,newkey){
+updateTriggerService(secName,currentPos,triggerObject,newcomparator,newkey,defaultComboOption,pxIdx){
 
-   
+   if(triggerObject.pxIdx){
+    delete triggerObject["pxIdx"];
+   }
+
+   var keys= Object.keys(triggerObject).filter((key)=>{
+    if(key=="id" || key=="comparator" || key=="pxIdx" ){return false;}
+    return true;
+   });
+
+   delete triggerObject[keys[0]];
 
    triggerObject["comparator"] = newcomparator;
-   delete triggerObject[Object.keys(triggerObject)[2]];
-   triggerObject[newkey]="";
-   this.emit("change");
+   if(defaultComboOption!=""){
+     triggerObject[newkey]=defaultComboOption;
+     }else if(pxIdx!=""){
+
+     triggerObject[newkey]="";
+     triggerObject["pxIdx"] = pxIdx;
+    }else{
+     triggerObject[newkey]="";
+
+    }
+this.emit("Section"+secName+"Rule"+currentPos);
 }
 
 
-addTrigger(currentConditionObj,triggerObj){
+addTrigger(secName,currentPos,currentConditionObj,triggerObj,defaultComboOption){
 
 
 currentConditionObj.selectors.push(triggerObj);
 
-this.emit("change");
+this.emit("Section"+secName+"Rule"+currentPos);
  
 
 } //add trigger
+addMultipleTrigger(secName,currentPos,currentConditionObj,triggerObjs){
+if(triggerObjs.length>0){
+ for(let i=0;i<triggerObjs.length;i++){
 
-
-deleteTrigger(conditionParentObject,id){
-
-conditionParentObject.selectors =conditionParentObject.selectors.filter((obj) => obj.id!=id);
-this.emit("change");
+  currentConditionObj.selectors.push(triggerObjs[i]);
+ }
+ 
+this.emit("Section"+secName+"Rule"+currentPos);
+ }
 }
 
-updateOperator(triggerObject,newOperator){
+deletePxID(triggerObject){
+delete triggerObject["pxIdx"];
+}
+
+deleteTrigger(secName,currentPos,conditionParentObject,id){
+
+conditionParentObject.selectors =conditionParentObject.selectors.filter((obj) => obj.id!=id);
+this.emit("Section"+secName+"Rule"+currentPos);
+}
+
+deleteMultipleTrigger(secName,currentPos,conditionParentObject,ids){
+if(ids.length>0){  
+conditionParentObject.selectors = conditionParentObject.selectors.filter((obj) => {
+  
+  if( ids.indexOf(obj.id)!=-1 ){
+      return false;
+    }else{
+      return true;
+    }
+
+
+});
+this.emit("Section"+secName+"Rule"+currentPos);
+}
+
+}
+
+
+updateOperator(secName,currentPos,triggerObject,newOperator){
 
 triggerObject["comparator"]=newOperator;
-this.emit("change");
-
+this.emit("Section"+secName+"Rule"+currentPos);
 }//updateOperator
 
-updateValue(triggerObject,newValue){
+updateValue(secName,currentPos,triggerObject,newValue){
 
-let key = Object.keys(triggerObject);
-triggerObject[key[2]] = newValue;
-this.emit("change");
+var keys= Object.keys(triggerObject).filter((key)=>{
+    if(key=="id" || key=="comparator" || key=="pxIdx" ){return false;}
+    return true;
+   });
+
+triggerObject[keys[0]] = newValue;
+
+this.emit("Section"+secName+"Rule"+currentPos);
 
 } //updateValue
 
@@ -228,68 +612,83 @@ handleActions(action){
   case "ADD_RULE_AFTER_SOME_RULE" :
         this.addRuleAfterSomeRuleFunction(action.rule,action.indexToInsert);
         break;
+  case "ADD_RULE_BEOFRE_SOME_RULE":
+        this.addRuleBeforeSomeRuleFunction(action.rule,action.indexToInsert);
+        break;        
   case "MOVE_RULE_AFTER_SOME_RULE" :
-        this.moveRuleAfterSomeRule(action.afterMoveIndex,action.currentIndex);
+        this.moveRuleAfterSomeRule(action.secName,action.currentPos,action.newSecName,action.newPos);
         break;   
   case "MOVE_RULE_BEFORE_SOME_RULE" :
-        this.moveRuleBeforeSomeRule(action.beforeMoveIndex,action.currentIndex);
+        this.moveRuleBeforeSomeRule(action.secName,action.currentPos,action.newSecName,action.newPos);
         break;         
   case "MOVE_RULE_UP" :
-        this.moveRuleUp(action.currentPos);  
+        this.moveRuleUp(action.secName,action.currentPos);  
         break;
   case "MOVE_RULE_DOWN" :
-        this.moveRuleDown(action.currentPos);
+        this.moveRuleDown(action.secName,action.currentPos);
         break;
   case "DRAG_RULE" :
-        this.dragRule(action.currentPos,action.newPos);
+        this.dragRule(action.secName,action.currentPos,action.newSecName,action.newPos);
         break;      
   case "DELETE_RULE" :
-        this.deleteRule(action.currentPos); 
+        this.deleteRule(action.secName,action.currentPos); 
         break;
   case "CHANGE_RULE_NAME" :
-         this.changeRuleName(action.currentPos,action.newName);
+         this.changeRuleName(action.secName,action.currentPos,action.newName);
          break;   
   case "COPY_RULE" :
-         this.copyRule(action.currentPos,action.ruleId,action.copyCreated);                 
+         this.copyRule(action.secName,action.currentPos,action.ruleId,action.copyCreated);                 
+          break;
+  case "UPDATE_CREATIVE_GROUP" :
+          this.updateCreativeGroupToShow(action.secName,action.currentPos,action.newCreativeGroup);
+          break;  
+  case "UPDATE_ASSET_SOURCE" :
+          this.updateIncludeAssetSources(action.secName,action.currentPos,action.newAssetSources);
           break;
   case "ADD_CONDITION" :
-          this.addCondition(action.currentConditionObj,action.newCondition);
+          this.addCondition(action.secName,action.currentPos,action.currentConditionObj,action.newCondition);
           break;  
   case "HIDE_VIEW":
-         this.hidePos = action.i;
-         this.emit("change");
+         //this.hideView(action.secName,action.currentPos);
          break;  
   case "UPDATE_CONDITION_OPERATOR":
-         this.updateConditionOperator(action.currentConditionObj,action.newOperator);
+         this.updateConditionOperator(action.secName,action.currentPos,action.currentConditionObj,action.newOperator);
          break;        
   case "DELETE_CONDITION":
-         this.deleteCondition(action.conditionParentObject,action.id);
+         this.deleteCondition(action.secName,action.currentPos,action.conditionParentObject,action.id);
          break;  
   case "UPDATE_TRIGGER_SERVICE":
-         this.updateTriggerService(action.triggerObject,action.newcomparator,action.newkey);
+         this.updateTriggerService(action.secName,action.currentPos,action.triggerObject,action.newcomparator,action.newkey,action.defaultComboOption,action.pxIdx);
          break;
   case "UPDATE_OPERATOR":
-        this.updateOperator(action.triggerObject,action.newOperator);
+        this.updateOperator(action.secName,action.currentPos,action.triggerObject,action.newOperator);
         break; 
   case "UPDATE_VALUE":
-         this.updateValue(action.triggerObject,action.newValue);
+         this.updateValue(action.secName,action.currentPos,action.triggerObject,action.newValue);
          break;           
   case  "ADD_TRIGGER":
-         this.addTrigger(action.currentConditionObj,action.triggerObj);  
+         this.addTrigger(action.secName,action.currentPos,action.currentConditionObj,action.triggerObj,action.defaultComboOption);  
          break; 
+  case  "ADD_MULTIPLE_TRIGGER":
+          this.addMultipleTrigger(action.secName,action.currentPos,action.currentConditionObj,action.triggerObjs);
+          break;       
    case "DELETE_TRIGGER":
-         this.deleteTrigger(action.conditionParentObject,action.id);           
+         this.deleteTrigger(action.secName,action.currentPos,action.conditionParentObject,action.id);    
+         break;
+   case "DELETE_MULTIPLE_TRIGGER":
+         this.deleteMultipleTrigger(action.secName,action.currentPos,action.conditionParentObject,action.ids);   
+         break;       
  }//switch
 
 }//handleActions
 
 
 
-} //RuleStore	
+} //RuleStore 
 
 
 const ruleStore = new RuleStore;
 dispatcher.register(ruleStore.handleActions.bind(ruleStore));
 
 
-export default ruleStore;	
+export default ruleStore; 

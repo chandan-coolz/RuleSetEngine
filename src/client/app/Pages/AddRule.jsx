@@ -1,200 +1,372 @@
-	import React from 'react';
-	import {render} from 'react-dom';
-	import * as RuleAction from '../actions/RuleAction.jsx';
+		import React from 'react';
+		import {render} from 'react-dom';
+		import SelectStyle from './SelectStyle.jsx';
+		import RuleStore from '../stores/RuleStore.jsx';
+		import {addRuleToEnd} from '../actions/RuleAction.jsx';
+		import * as RuleAction from '../actions/RuleAction.jsx';
+		
+
+		export default class AddRule extends React.Component {
+
+	   constructor(){
+	  
+	   super();
+	   this.methodToCall="";
+	   this.indexToInsert=-1;
+	   this.isRuleBlurEventCalled=false;
+	   this.isAddRuleBlurEventCalled=false;
+	   this.state = {
+	     selectedOption:"end",
+	     isToShowRuleSelectBox:false,
+	     isToShowAddRuleSelectBox:false,
+	     isToShowAddRuleDialog:false,
+		   rule:{
+	      "id": "",
+	      "ruleName": "Default",
+	      "reportConfig": {
+	        "includeAssetSources": []
+	      },
+	      "creative_groups": [
+	        
+	      ],
+	      "conditions": [
+	        {
+	          "id": "",
+	          "operator": "and",
+	          "selectors": [
+
+	          ],
+	          "conditions": [
+
+	            ]
+
+	        }
+	      ]
+	    }//rule
+	  } ;//state
+     this.addRuleValue=[];
+     this.addRuleKey=[];
+     this.ruleCount =0;
+     this.addRuleOptionKey=["End","Begining","After","Before"];
+     this.addRuleOptionValue=["Add as Last","Add as First","Add After","Add Before"]; 
+     this.ruleDataChangeListener = this.ruleDataChangeListener.bind(this);     
+} //constructor
+
+ruleDataChangeListener(){
+
+    let ruledata = RuleStore.getRuleData();
+    this.ruleCount = ruledata.data.length;
+    this.addRuleValue=[];
+    this.addRuleKey=[];
+    for(let i=0;i<this.ruleCount;i++){
+     this.addRuleKey.push(i);
+     this.addRuleValue.push(ruledata.data[i].ruleName);
+     }
+
+  this.forceUpdate();
+}
 
 
-	export default class AddRule extends React.Component {
 
-   constructor(){
-  
-   super();
-   this.methodToCall="";
-   this.indexToInsert=-1;
-   this.state = {
-     
-     isAfterRuleRadioButtonSelected:false,
-	 rule:{
-      "id": "",
-      "ruleName": "Default",
-      "reportConfig": {
-        "includeAssetSources": []
-      },
-      "creative_groups": [
-        
-      ],
-      "conditions": [
-        {
-          "id": "",
-          "operator": "and",
-          "selectors": [
+componentWillMount() {
+   	
+   	let ruledata = RuleStore.getRuleData();
+    this.ruleCount = ruledata.data.length;
+    this.addRuleValue=[];
+    this.addRuleKey=[];
+    for(let i=0;i<this.ruleCount;i++){
+     this.addRuleKey.push(i);
+     this.addRuleValue.push(ruledata.data[i].ruleName);
+     }
+RuleStore.on("ruleChange",this.ruleDataChangeListener) ;  
 
-          ],
-          "conditions": [
+}
 
-            ]
+componentWillUnmount() {
+ RuleStore.removeListener("ruleChange",this.ruleDataChangeListener);
+}
 
-        }
-      ]
-    }//rule
-  } //state
 
- } //constructor
+	/*********************method releated to adding  rules ***************************************/
+	generateRuleId(){
 
-/*********************method releated to adding  rules ***************************************/
-generateRuleId(){
+	return ("R-"+this.props.advertiserId+"-"+this.props.addId+"-"+Date.now());
+	} //generate Ruleid
 
-return ("R-"+this.props.advertiserId+"-"+this.props.addId+"-"+Date.now());
-} //generate Ruleid
+	generateRuleName(){
+	let ruleNumber = this.ruleCount;
+	return("Rule "+(++ruleNumber) );
 
-generateRuleName(){
-let ruleNumber = this.props.ruleCount;
-return("Rule "+(++ruleNumber) );
+	} //generateRuleName
 
-} //generateRuleName
+	generateRootConditionId(){
 
-generateRootConditionId(){
+	return ("R-"+this.props.advertiserId+"-"+this.props.addId+"-"+Date.now());
 
-return ("R-"+this.props.advertiserId+"-"+this.props.addId+"-"+Date.now());
+	} //generateRootConditionId
 
-} //generateRootConditionId
+	addRuleToEndFunction(){
+  let tempRule =  JSON.parse(JSON.stringify(this.state.rule)); 
+	tempRule.id = this.generateRuleId();
+	tempRule.ruleName = this.generateRuleName();
+	tempRule.conditions[0].id = this.generateRootConditionId();
+  if(dyn_assetGroups){
+    if(dyn_assetGroups.length>0){
+      tempRule.creative_groups.push(dyn_assetGroups[0].groupName);
+    }
+  }
+	addRuleToEnd(tempRule);
 
-addRuleToEndFunction(){
-this.state.rule.id = this.generateRuleId();
-this.state.rule.ruleName = this.generateRuleName();
-this.state.rule.conditions[0].id = this.generateRootConditionId();
-let newRule = JSON.parse(JSON.stringify(this.state.rule));
-RuleAction.addRuleToEnd(newRule);
+	} //addRuleToEndFunction
 
-} //addRuleToEndFunction
+	addRuleToBeginingFunction(){
+  let tempRule =  JSON.parse(JSON.stringify(this.state.rule)); 
+  tempRule.id = this.generateRuleId();
+  tempRule.ruleName = this.generateRuleName();
+  tempRule.conditions[0].id = this.generateRootConditionId();
+  if(dyn_assetGroups){
+    if(dyn_assetGroups.length>0){
+      tempRule.creative_groups.push(dyn_assetGroups[0].groupName);
+    }
+  }
+	RuleAction.addRuleToBegining(tempRule);
 
-addRuleToBeginingFunction(){
-this.state.rule.id = this.generateRuleId();
-this.state.rule.ruleName = this.generateRuleName();
-this.state.rule.conditions[0].id = this.generateRootConditionId();
-let newRule = JSON.parse(JSON.stringify(this.state.rule));
-RuleAction.addRuleToBegining(newRule);
+	} //addRuleToBeginingFunction
 
-} //addRuleToBeginingFunction
+	addRuleAfterSomeRuleFunction(indexToInsert){
+  let tempRule =  JSON.parse(JSON.stringify(this.state.rule)); 
+  tempRule.id = this.generateRuleId();
+  tempRule.ruleName = this.generateRuleName();
+  tempRule.conditions[0].id = this.generateRootConditionId();
+  if(dyn_assetGroups){
+    if(dyn_assetGroups.length>0){
+      tempRule.creative_groups.push(dyn_assetGroups[0].groupName);
+    }
+  }
 
-addRuleAfterSomeRuleFunction(indexToInsert){
-this.state.rule.id = this.generateRuleId();
-this.state.rule.ruleName = this.generateRuleName();
-this.state.rule.conditions[0].id = this.generateRootConditionId();
-let newRule = JSON.parse(JSON.stringify(this.state.rule));
-RuleAction.addRuleAfterSomeRuleFunction(newRule,indexToInsert);
+	RuleAction.addRuleAfterSomeRuleFunction(tempRule ,indexToInsert);
 
-} //addRuleToBeginingFunction
-/********event releated method*****************************************************************/
-    insertAfterSelectCalled(e){
-     if(e.target.value){
+	} //addRuleToBeginingFunction
 
-       this.indexToInsert = e.target.value;
-      }  else {
+	addRuleBeforeSomeRuleFunction(indexToInsert){
+  let tempRule =  JSON.parse(JSON.stringify(this.state.rule)); 
+  tempRule.id = this.generateRuleId();
+  tempRule.ruleName = this.generateRuleName();
+  tempRule.conditions[0].id = this.generateRootConditionId();
+  if(dyn_assetGroups){
+    if(dyn_assetGroups.length>0){
+      tempRule.creative_groups.push(dyn_assetGroups[0].groupName);
+    }
+  }
+	RuleAction.addRuleBeforeSomeRuleFunction(tempRule,indexToInsert);
+
+	}
+/********method related to select box*****************************************************************/
+	 insertAfterBeforeSelectCalled(value){
+	   
+
+	      this.indexToInsert = value;
+	      this.setState({isToShowRuleSelectBox:false});
+	     
+	 }
+
+	 addRuleSelectBoxOptionmethod(value){
+	 	this.methodToCall = value;
+	 	this.setState({isToShowAddRuleSelectBox:false});
+	 }
+
+   openRuleAddDialog(){
+   	this.setState({isToShowAddRuleDialog:true});
+   }
+
+   closeRuleAddDialog(){
+   	this.setState({isToShowAddRuleDialog:false});
+   }
+    
+
+/*************handle add button click methods***************************************/ 
+
+	insertRule(){
+      
+
+	   switch(this.methodToCall){
+	   
+	   case "End" :
+	   this.addRuleToEndFunction();
+     this.state.isToShowAddRuleDialog=false;
+	   break;
+	   case "Begining":
+	   this.addRuleToBeginingFunction();
+     this.state.isToShowAddRuleDialog=false;
+	   break;
+	   case "After":
+	   
+	   if(this.indexToInsert >=0){
+	     
+	     this.addRuleAfterSomeRuleFunction(this.indexToInsert);
        this.indexToInsert = -1;
+       this.state.isToShowAddRuleDialog=false;
+	    }
+	   break;
+	   case "Before":
+	   
+	   if(this.indexToInsert >=0){
+	     
+	     this.addRuleBeforeSomeRuleFunction(this.indexToInsert);
+       this.indexToInsert = -1;
+       this.state.isToShowAddRuleDialog=false;
+	    }
+	   break;	   
+
+
+	   }//switch
+     
+     
+	}
+
+
+
+
+
+/**************toggle select box methods*****************************************/
+
+	toggleRuleSelectBox(){
+      if(!this.isRuleBlurEventCalled){
+      let temp = !this.state.isToShowRuleSelectBox;
+      this.setState({isToShowRuleSelectBox:temp});
+      }else{
+       this.isRuleBlurEventCalled=false;
       }
-   
-     
     }
 
+   hideRuleSelectBox(){
+    this.setState({isToShowRuleSelectBox:false});
+    this.isRuleBlurEventCalled=true;
+   }  
 
-  handleOptionChange(e){
-  
-  
-  if(e.target.value=="after"){
-  	this.setState({isAfterRuleRadioButtonSelected:true});
-  }else{
 
-  	 if(this.state.isAfterRuleRadioButtonSelected === true){
-  	 	this.setState({isAfterRuleRadioButtonSelected:false});
-  	 } 
-  }
-  
-  this.methodToCall = e.target.value; 
-
-   
-  }//handleOptinChange
-
-  insertRule(){
-
-   switch(this.methodToCall){
-   
-   case "end" :
-   this.addRuleToEndFunction();
-   break;
-   case "Begining":
-   this.addRuleToBeginingFunction();
-   break;
-   case "after":
-   
-   if(this.indexToInsert >=0){
-     
-     this.addRuleAfterSomeRuleFunction(this.indexToInsert);
+	toggleAddRuleSelectBox(){
+	
+      if(!this.isAddRuleBlurEventCalled){
+      let temp = !this.state.isToShowAddRuleSelectBox;
+      this.setState({isToShowAddRuleSelectBox:temp});
+      }else{
+       this.isAddRuleBlurEventCalled=false;
+      }
     }
-   break;
+
+   hideAddRuleSelectBox(){
+    this.setState({isToShowAddRuleSelectBox:false});
+    this.isAddRuleBlurEventCalled=true;
+   }
+
+	/**********************************************render*****************************************************/
+
+render(){
+                
+               /*************text to show in select box*******************************/
+               var ruleSelectBoxText="";
+               var selectRuleStyle={'display':'none'};
+               if(this.indexToInsert!=-1){
+               	ruleSelectBoxText = this.addRuleValue[this.indexToInsert];
+               }else{
+               	ruleSelectBoxText ="-- Select --"
+               }
+ 
+               var addRuelSelectBoxText="";
+               if(this.methodToCall!=""){
+                addRuelSelectBoxText=this.addRuleOptionValue[this.addRuleOptionKey.indexOf(this.methodToCall)];
+              }else{
+                addRuelSelectBoxText=this.addRuleOptionValue[0];
+                this.methodToCall = this.addRuleOptionKey[0];
+              }
+
+               if(this.methodToCall=='After' || this.methodToCall=='Before'){
+                 selectRuleStyle['display'] = 'block';
+               }
+
+var addRuleOptionContainerClass=this.state.isToShowAddRuleDialog?"add-rule-option-container":"add-rule-option-container-hide";
+
+ 
+return(
+
+   <div className="add-rule">
+   
+   <button onClick={this.insertRule.bind(this)} className="g-btnactive assetGroupRulesAdd">
+    <span className="button-icon"><i className="fa fa-plus"></i></span>Add Rule
+    </button>
 
 
-   }//switch
+  {/*  <button onClick={this.openRuleAddDialog.bind(this)} className="g-btnactive assetGroupRulesAdd">
+	  <span className="button-icon"><i className="fa fa-plus"></i></span>Add Rule
+	  </button>
 
-
-  }
-/**********************************************render*****************************************************/
-
-		render(){
-       
-
-			return(
-
-				<div className="add-rule">
-
-
-				<span>Add Rule </span>
-
-
-				<label>
-				<input type="radio" name="option"  value="end" 
-				  onChange={this.handleOptionChange.bind(this)} />
-				At The End
-				</label>
-
-
-				<label>
-				<input type="radio"  name="option" value="Begining" 
-				  onChange={this.handleOptionChange.bind(this)}/>
-				At The Begining
-				</label>
-
-				<label>
-				<input type="radio" name="option"  value="after" 
-				  onChange={this.handleOptionChange.bind(this)}/>
-				After
+{this.insertRule.bind(this)}
+     <div className={addRuleOptionContainerClass}>
+       <div className="titlebar">
         
-				
+        Add Rule
+       </div>
 
-				</label>
-       <label> 
-        <select  onChange={this.insertAfterSelectCalled.bind(this)} 
-                 disabled={!this.state.isAfterRuleRadioButtonSelected}
-                 defaultValue=""
+       <div className="content">
+        <table>
+         <tbody>
+          <tr>
+           <td>Options</td>
+           <td>
+           <div className="add-rule-select" onClick={this.toggleAddRuleSelectBox.bind(this)}
+            onMouseEnter={()=> {this.isAddRuleBlurEventCalled=false}}> 
+             <span> 
+             
+             {addRuelSelectBoxText}
+            </span>
 
-        >
+             <div  className="down-triangle" onClick={this.toggleAddRuleSelectBox.bind(this)}></div>
+             <SelectStyle keys={this.addRuleOptionKey} values={this.addRuleOptionValue} 
+             methodToCall={this.addRuleSelectBoxOptionmethod.bind(this)}
+             isToShowSelectBox={this.state.isToShowAddRuleSelectBox} 
+             hideSelectBox={this.hideAddRuleSelectBox.bind(this)}
+             />
+           </div>
+           </td>
+          </tr>
+          <tr>
+           <td>
+           </td>
+           <td> 
+           <div className="add-rule-select" onClick={this.toggleRuleSelectBox.bind(this)}
+            onMouseEnter={()=> {this.isRuleBlurEventCalled=false}}
+            style={selectRuleStyle} >
+            <span>
+             {ruleSelectBoxText}
+            </span>
+            <div  className="down-triangle" ></div>     
+             <SelectStyle keys={this.addRuleKey} values={this.addRuleValue} 
+             methodToCall={this.insertAfterBeforeSelectCalled.bind(this)}
+             isToShowSelectBox={this.state.isToShowRuleSelectBox} 
+             hideSelectBox={this.hideRuleSelectBox.bind(this)}
+             />
+           </div>
 
-         <option value="">Select</option>
-                 {this.props.options}
-        </select>
-       </label>
+           </td>
+          </tr>
+           
+          
+         </tbody>
+        </table>
+
+       </div>
+
+       <div className="action">
+         <button onClick={this.closeRuleAddDialog.bind(this)} className="g-btndeactive cancel"><span className="button-icon"><i className="fa fa-close"></i></span> Cancel</button> 
+         <button onClick={this.insertRule.bind(this)} className="g-btnactive showPreview"><span className="button-icon"><i className="fa fa-plus"></i></span> Add</button>
+       </div>
+     </div>*/}
+  </div>
+
+);
+
+		}//endof render method
 
 
-				<label>
-				<button onClick={this.insertRule.bind(this)} >Go </button>
-
-
-				</label>
-
-				</div>
-
-				);
-
-	}//endof render method
-
-
-	}//endof Add Rule class
+		}//endof Add Rule class
