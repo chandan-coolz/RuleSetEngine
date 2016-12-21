@@ -43,10 +43,8 @@ xhttp.onreadystatechange = function() {
          var errorData = JSON.parse(xhttp.responseText) ;
          this.RulesWithError = [];
          this.ConditionsWithError = [];
-         this.TriggersWithError = [];
          this.TriggerWithErrorIds = [];
          /*******after getting data process the data**************/
-
          let keys = Object.keys(errorData);	
          if(keys[0]=="error"){
          	keys=[];
@@ -61,7 +59,7 @@ xhttp.onreadystatechange = function() {
    
         }
 
-     //   this.emit("ruleErrorCheck");
+        this.emit("ruleErrorCheck");
         $("#info-modal").hide("blind", {direction: "down"}, 400);
     }
   }.bind(this);
@@ -84,9 +82,9 @@ xhttp.send("service=validateRules"+"&dynamicConfig="+dataToBeValidated+"&adId="+
 checkForErrorIds(obj,key,ruleID){
 
 if( key.indexOf("TRI-") == -1){
-	if(key!=ruleID){
+	
       this.ConditionsWithError.push(key);
-    }
+    
       let keys = Object.keys(obj[key]);
        if(keys.length>0){
          
@@ -100,20 +98,42 @@ if( key.indexOf("TRI-") == -1){
 
  }else{
 
-  let triggerValueObject = obj[key][Object.keys(obj[key])[0]];
-
- 	//add it to trigger list
+  let property = Object.keys(obj[key])[0];
+  let triggerValueObject = obj[key][property];
 	let temp = {};
 	this.TriggerWithErrorIds.push(key);
  	temp["id"] = key; 
+  temp["msg"] = [];
+  temp.msg.push(dyn_ruleErrorMessages[triggerValueObject.errorCode]);
+  if(triggerValueObject.errorData instanceof Array ){
+     temp.msg.push( triggerValueObject.errorData.join(", ") );
+    }else{
+     var serviceData = property.split(":"); 
+     var serviceProperty = serviceData[1].split(".")[1];
+     switch(serviceProperty){
+      case "local-date":
+      case "date":
+              temp.msg.push( dateFormat(triggerValueObject.errorData, "d mmm, yyyy") ) ;
+          break;
+      case "local-time":
+      case "time":
+              temp.msg.push( dateFormat(dateFormat("mm-dd-yyyy") + " " + triggerValueObject.errorData, "hh:MM TT") );
+          break;
+      case "local-date-time":
+      case "date-time":
+               
+              temp.msg.push( dateFormat(triggerValueObject.errorData, "d mmmm, yyyy hh:MM TT") ); 
+          break; 
+       default :
+            
+             temp.msg.push(triggerValueObject.errorData);     
 
-  
-  if(  triggerValueObject.errorData instanceof Array ){
- 
-     temp["msg"]= triggerValue.join(",")+" is wrong"; 
+     }
 
+      
+    }
 
-  this.TriggersWithError.push(temp);*/
+  this.TriggersWithError.push(temp);
  	return;
  }  
 

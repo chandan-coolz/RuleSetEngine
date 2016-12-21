@@ -863,7 +863,7 @@ return (
          <span style={validationError} 
          onMouseEnter={(e)=>{
           if(errorObj.msg!=""){
-            showMessageToolTip($(e.target), errorObj.msg, "groupSelectionQtipLeft");
+            showMessageToolTip($(e.target), "<ol><li>" + errorObj.msg.join("</li><li>") + "</li></ol>" , "groupSelectionQtipLeft");
            }
         }}
          >
