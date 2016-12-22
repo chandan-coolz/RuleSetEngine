@@ -499,6 +499,17 @@ var conditions = this.rule.conditions.map( (condition,i) =>
 //***********8 codeforsetting classes ********************//
 let showUpArrow = {'display':'none'};
 let showDownArrow = {'display':'none'};
+let ruleHighlighter = {
+    "display": "none",
+    "position": "absolute",
+    "top": -1,
+    "left": 0,
+    "width": 0,
+    "height": 0,
+    "borderBottom": "9px solid transparent",
+    "borderLeft": "10px solid #666"
+
+};
 
 if(this.state.isToShowRuleContent){
   showUpArrow['display'] = 'block';
@@ -514,7 +525,8 @@ if(this.props.rulePosition%2==0){
    tableBackground['background'] = '#FAFAFA';
  }
 if(this.state.conditionClass!="hide"){
-   tableBackground['background'] = '#e6e4e4';
+   tableBackground['background'] = '#CCCCCC';
+   ruleHighlighter['display'] = "inline-block";
 }
 
 return (
@@ -535,7 +547,7 @@ return (
               </div>
               <div className="action">
                <span className="delete" onClick={this.deleteRule.bind(this)}>Ok</span>
-              <span className="cancel" onClick={this.cancelDelete.bind(this)}>Cancel</span>
+               <span className="cancel" onClick={this.cancelDelete.bind(this)}>Cancel</span>
              
               </div>
 
@@ -658,6 +670,7 @@ return (
      <tbody>
      <tr>
        <td> 
+             <span style={ruleHighlighter}></span>
              <span  style={showUpArrow}><i className="fa fa-minus"
                 onClick={this.hideClicked.bind(this)}></i>
              </span>
