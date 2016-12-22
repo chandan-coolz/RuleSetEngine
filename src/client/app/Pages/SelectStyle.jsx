@@ -260,6 +260,16 @@ if(this.state.selectClass=="select-style"){
                  this.cln.style.display='block';
                  this.cln.style.top= (this.props.currentTop + 27 + scrollTop) + "px";
                  document.body.appendChild(this.cln);
+/***********check weather current display height is greater than viewport height or  not*****/
+                 let elementHeight = parseFloat(window.getComputedStyle(this.cln).height);
+                 let displayBottomCoordinate = this.props.currentTop + 27 + scrollTop + elementHeight;
+                 let browserBottomCoordinate = window.innerHeight + window.scrollY;
+                 if( displayBottomCoordinate > browserBottomCoordinate){
+                  //top 
+                  this.cln.style.top= (this.props.currentTop - elementHeight - 10 + scrollTop) + "px";
+                  this.cln.style.borderTop = "1px solid #ddd";
+                 }
+                
                  this.cln.focus();
                  /******for optgroup*****************************************/
             
