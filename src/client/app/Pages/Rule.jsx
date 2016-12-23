@@ -434,10 +434,10 @@ render(){
   validationError["display"]="none";
   validationError["position"]="absolute";
   validationError["top"]=10;
-  validationError["left"]=-1;
+  validationError["left"]=-4;
   validationError["color"]="red";
 
-if(RuleErrorStore.isEvaluateError()){
+if(RuleErrorStore.isEvaluateError() && this.state.conditionClass=="hide"){
   
   if(RuleErrorStore.chekIfThereIsErrorForIds(this.rule.id,"Rule")){
       validationError["display"]="inline-block";
@@ -722,7 +722,7 @@ return (
      </tbody> 
     </table>
     <span style={validationError}>
-       <a style={{"cursor":"pointer"}} className="error"><i className="fa fa-exclamation"></i></a>
+       <a  className="error"><i className="fa fa-exclamation"></i></a>
     </span>
 
      <ul className={this.state.conditionClass}> 

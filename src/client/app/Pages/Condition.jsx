@@ -289,20 +289,6 @@ this.forceUpdate();
 
 render(){
 
-  let validationError={};
-   validationError["display"]="none";
-  validationError["position"]="absolute";
-  validationError["top"]=23;
-  validationError["left"]=460;
-  validationError["color"]="red";
-
-if(RuleErrorStore.isEvaluateError()){
-  
-  if(RuleErrorStore.chekIfThereIsErrorForIds(this.props.condition.id,"Condition")){
-      validationError["display"]="inline-block";
-    }
-
-}
 
 
 /******filter the deleted trigger from our trigger list*********************************/
@@ -430,7 +416,7 @@ return(
                       methodToCall={this.changeConditionOperator.bind(this)}
                       isToShowSelectBox={this.state.isToShowSelectBox} 
                       hideSelectBox={this.hideSelectBox.bind(this)}
-                      currentTop={this.currentTop} currentLeft={this.currentLeft}
+                      currentTop={this.currentTop - 7} currentLeft={this.currentLeft + 6}
                       />
 
                    </div>
@@ -438,26 +424,31 @@ return(
 
              </label>
             
+
+
+
+
+
+
+
+
+
+            </th>
+            <th>
             <label className="condition">
               <span onClick={this.addConditionClicked.bind(this)}  >
               <span><i className="fa fa-adjust" aria-hidden="true" ></i></span>
 
               Add Condition </span>
-
-            </label>
-
-
-
-
+               </label>
+            </th>
+            <th>
             <label className="trigger">
               <span onClick={this.addTrigger.bind(this)}>
               <span><i className="fa fa-bolt" aria-hidden="true"></i></span>
               Add Trigger </span>
-
+        
             </label>
-
-
-
             </th>
         </tr>
         </thead>
@@ -491,9 +482,6 @@ return(
 <AssetSourceConfiguration ruleName={this.props.ruleName} rulePosition={this.props.rulePosition}
    includeAssetSources={this.props.includeAssetSources} secName={this.props.secName}
 /> 
- <span style={validationError}>
-       <a style={{"cursor":"pointer"}} className="error"><i className="fa fa-exclamation"></i></a>
- </span>  
  </li>
 );
 

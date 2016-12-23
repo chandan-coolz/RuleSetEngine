@@ -631,7 +631,7 @@ render(){
   validationError["cursor"]="pointer";
   validationError["color"]="red";
   validationError["position"]="absolute";
-  validationError["right"]=-21;
+  validationError["right"]=-23;
   let errorObj={"id":"","msg":""};
 if(RuleErrorStore.isEvaluateError()){
    errorObj = RuleErrorStore.chekIfThereIsErrorForIds(this.props.trigger.id,"Trigger") ;
@@ -852,7 +852,10 @@ return (
                       />
                 </div>
 
-           <span className="info" onMouseEnter={(e)=>{showMessageToolTip($(e.target), 'Detects a match in the specified comma separated string based on the option you select:<br><br>*Equal To*:  exact matches only (finds "234" in the string "234"). <br>*Is Contained In*:  if the value appears anywhere in the string (finds "234" within "123456789").  <br>*Contains All Of*:  if all values appear in the string (finds “123,345" in "123,234,345").<br>*Contains Any Of*:  if  the value matches any one string in a comma-separated list (finds "234" in the string "123,234,345").', "groupSelectionQtipLeft");}}> <i className="fa fa-question-circle fa-lg" ></i></span> 
+           <span className="info" 
+           onMouseEnter={(e)=>{showMessageToolTip($(e.target), 'Detects a match in the specified comma separated string based on the option you select:<br><br>*Equal To*:  exact matches only (finds "234" in the string "234"). <br>*Is Contained In*:  if the value appears anywhere in the string (finds "234" within "123456789").  <br>*Contains All Of*:  if all values appear in the string (finds “123,345" in "123,234,345").<br>*Contains Any Of*:  if  the value matches any one string in a comma-separated list (finds "234" in the string "123,234,345").', "groupSelectionQtipLeft");}}
+           onMouseLeave={(e)=>{ $('.media-plan-tooltip').hide();}}
+           > <i className="fa fa-question-circle fa-lg" ></i></span> 
           
        </td>
        <td className="value">

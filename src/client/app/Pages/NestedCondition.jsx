@@ -333,8 +333,8 @@ render(){
   let validationError={};
   validationError["display"]="none";
   validationError["position"]="absolute";
-  validationError["top"]=23;
-  validationError["left"]=460;
+  validationError["top"]=21;
+  validationError["left"]=511;
   validationError["color"]="red";
 
 if(RuleErrorStore.isEvaluateError()){
@@ -437,8 +437,8 @@ isToShowTrigger['display'] = 'block';
 
  /*const contentClass = this.state.isToShowConditionContent? "show" : "hide" ; */
 
-let showUpArrow = {'display':'none'};
-let showDownArrow = {'display':'none'};
+let showUpArrow = {'display':'none','paddingLeft' : 4};
+let showDownArrow = {'display':'none','paddingLeft' : 4};
 
 if(this.state.isToShowConditionContent){
   showUpArrow['display'] = 'block';
@@ -484,7 +484,7 @@ return (
         <table className="condition">
         <thead>
         <tr>
-            <th>
+            <th style={{"width":17}}>
                
                <span  style={showUpArrow}><i className="fa fa-angle-down"  aria-hidden="true" 
                 onClick={this.hideConditionalContent.bind(this)}></i>
@@ -513,19 +513,21 @@ return (
                       methodToCall={this.changeConditionOperator.bind(this)}
                       isToShowSelectBox={this.state.isToShowSelectBox} 
                       hideSelectBox={this.hideSelectBox.bind(this)}
-                      currentTop={this.currentTop} currentLeft={this.currentLeft}
+                      currentTop={this.currentTop - 7} currentLeft={this.currentLeft + 6}
                       />
 
                    </div>
              </label>
-            
+           </th>  
+           <th> 
             <label className="condition">
               <span onClick={this.addNestedCondition.bind(this)}>
               <span><i className="fa fa-adjust" aria-hidden="true" ></i></span>
               Add Condition </span>
 
             </label>
-
+           </th>
+           <th>
             <label className="trigger">
               <span onClick={this.addTrigger.bind(this)}>
               <span><i className="fa fa-bolt" aria-hidden="true"></i></span>
@@ -536,7 +538,7 @@ return (
             </th>
             <th>
   
-             <i data-tooltip="deleteCondition" className="fa fa-trash" aria-hidden="true" onClick={this.openDeleteRuleDialog.bind(this)}></i>
+             <i data-tooltip="deleteCondition" style={{'paddingRight' : 3}} className="fa fa-trash" aria-hidden="true" onClick={this.openDeleteRuleDialog.bind(this)}></i>
 
             
 
@@ -572,7 +574,7 @@ return (
 
           </ul>
     <span style={validationError}>
-       <a style={{"cursor":"pointer"}} className="error"><i className="fa fa-exclamation"></i></a>
+       <a  className="error"><i className="fa fa-exclamation"></i></a>
    </span>       
   </li>    
 

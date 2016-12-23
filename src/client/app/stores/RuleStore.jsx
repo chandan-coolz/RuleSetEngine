@@ -595,6 +595,20 @@ this.emit("Section"+secName+"Rule"+currentPos);
 
 } //updateValue
 
+//update value without emit
+updateValueWithoutEmit(secName,currentPos,triggerObject,newValue){
+
+var keys= Object.keys(triggerObject).filter((key)=>{
+    if(key=="id" || key=="comparator" || key=="pxIdx" ){return false;}
+    return true;
+   });
+
+triggerObject[keys[0]] = newValue;
+
+
+
+} //updateValue
+
 
 
 handleActions(action){

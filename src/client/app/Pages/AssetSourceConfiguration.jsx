@@ -249,7 +249,7 @@ var tempassetSorceData = this.state.dyn_assetSource.filter( (obj,i)=>{
   return true;    
 
 });
-/**********filter those whose datatype is reco***************************************/
+/**********filter those whose datatype is basicReco***************************************/
 
 var assetSorceData = tempassetSorceData.filter( (obj,i)=>{
 
@@ -257,7 +257,7 @@ var assetSorceData = tempassetSorceData.filter( (obj,i)=>{
 
        if(dyn_DatabaseList[j].dataServiceId == obj.assetDatabase){
            
-           if(dyn_DatabaseList[j].dbType == "reco"){
+           if(dyn_DatabaseList[j].dbType == "basicReco"){
               return false;
            }else{
               return true;

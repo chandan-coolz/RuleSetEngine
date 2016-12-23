@@ -44,6 +44,16 @@ componentWillUnmount() {
 }
 
 
+componentDidUpdate(prevProps, prevState) {
+
+     if(this.props.servicePropertyValue==""){
+         this.refs.timePicker.value = "";
+       }
+}
+
+
+
+
 render() {
     const props = this.props;
     return <input type="text" ref="timePicker" readOnly='true'/>

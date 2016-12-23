@@ -41,9 +41,10 @@ xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
         
          var errorData = JSON.parse(xhttp.responseText) ;
-         this.RulesWithError = [];
-         this.ConditionsWithError = [];
-         this.TriggerWithErrorIds = [];
+        this.RulesWithError = [];
+        this.ConditionsWithError = [];
+        this.TriggersWithError = [];
+        this.TriggerWithErrorIds = [];
          /*******after getting data process the data**************/
          let keys = Object.keys(errorData);	
          if(keys[0]=="error"){
@@ -82,9 +83,9 @@ xhttp.send("service=validateRules"+"&dynamicConfig="+dataToBeValidated+"&adId="+
 checkForErrorIds(obj,key,ruleID){
 
 if( key.indexOf("TRI-") == -1){
-	
+	  
       this.ConditionsWithError.push(key);
-    
+        
       let keys = Object.keys(obj[key]);
        if(keys.length>0){
          
