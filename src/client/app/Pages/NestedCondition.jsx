@@ -337,7 +337,7 @@ render(){
   validationError["left"]=511;
   validationError["color"]="red";
 
-if(RuleErrorStore.isEvaluateError()){
+if(RuleErrorStore.isEvaluateError() && !this.state.isToShowConditionContent){
   
   if(RuleErrorStore.chekIfThereIsErrorForIds(this.props.condition.id,"Condition")){
       validationError["display"]="inline-block";

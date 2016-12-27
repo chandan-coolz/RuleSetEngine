@@ -59,6 +59,7 @@ this.currentLeft = 0;
 this.currentServiceKey="";
 this.currentServicePropertyKey="";
 this.currentPxIdx="";
+this.isPxIdxDeleted=false;
 
 } //constructor
 
@@ -208,6 +209,7 @@ for ( let key of Object.keys(this.props.dyn__assetSourceServiceList) ) {
 
 serviceValueChanged(serviceKey) { 
 let defaultComboOption=""; 
+this.isPxIdxDeleted=false;
 let servicePropertyKeys = Object.keys(this.props.dyn__assetSourceServiceList[serviceKey]).filter(
   (key) => { 
 
@@ -362,6 +364,7 @@ unique() {
 servicePropertyValueChanged(serviceProperty){
 
 let servicePropertykey = serviceProperty;
+this.isPxIdxDeleted = false;
 let pxIdx = "";
 let tempSplit = serviceProperty.split(":");
 if(tempSplit.length==2){
@@ -396,7 +399,9 @@ this.setState({isToShowServicePropertyNameSelectBox:false});
 } //endof servicePropertyValueChanged
 /**************remove pxid from trigger in case if it is doesnt exist************************/
 deletePxID(){
+  this.isPxIdxDeleted = true;
   RuleStore.deletePxID(this.props.trigger);
+
 }
 
 /********************************operation method*******************************************************/
@@ -633,13 +638,39 @@ render(){
   validationError["position"]="absolute";
   validationError["right"]=-23;
   let errorObj={"id":"","msg":""};
-if(RuleErrorStore.isEvaluateError()){
+  if(RuleErrorStore.isEvaluateError()){
    errorObj = RuleErrorStore.chekIfThereIsErrorForIds(this.props.trigger.id,"Trigger") ;
-  if(errorObj !=""){
+   if(errorObj !=""){
       validationError["display"]="inline-block";
       
     }
+   }
+/******pixel id deleted error message**********************/
+let pixelIdDeletedErrorStyle = {
+    "display": "none",
+    "height": "100%",
+    "position": "absolute",
+    "top": 9,
+    "right": 1
+};
 
+/*********property info style******************************/
+
+let propertyNameInfoWithMsgStyle = {
+  "position":"absolute",
+  "display":"none",
+  "top":11,
+  "right":2 ,
+  "cursor":"pointer"
+}
+
+let propertyNameInfoWithoutMsgStyle = {
+  "position":"absolute",
+  "display":"inline-block",
+  "top":11,
+  "right":2 ,
+  "opacity":0.5,
+  "cursor":"pointer"
 }
 
 
@@ -664,19 +695,66 @@ if(RuleErrorStore.isEvaluateError()){
 this.currentServiceKey = service;
 this.currentServicePropertyKey = serviceProperty;
 
+/*************check for when to show help info in case of cookie datasignal***************/
+if(serviceProperty=="_jvxMatchCount"){
+
+let detaServiceId = "";
+  //find if
+for(let i=0;i<dyn_DatabaseList.length;i++){
+
+       if(dyn_DatabaseList[i].dataServiceName == service){
+
+          detaServiceId = dyn_DatabaseList[i].dataServiceId;
+          break;
+       }
+}//for
+
+for(let i=0;i<dyn_dataToPost.assetSources.length;i++){
+
+   if(dyn_dataToPost.assetSources[i].assetDatabase == detaServiceId){
+    
+       if(dyn_dataToPost.assetSources[i].dataSignal == "cookieData"){
+          
+        if(dyn_dataToPost.assetSources[i].property.indexOf("jvxdynsl_group") != -1){
+          propertyNameInfoWithMsgStyle["display"] = "inline-block";
+          propertyNameInfoWithoutMsgStyle["display"] = "none";
+        }
+       }
+       break;
+   }
+
+
+}//for
+
+
+
+}//if
+
+/*************End of check for when to show hepl info in case of cookie datasignal***************/
+
+
 /***check for service property name****/
 let servicePropertyName = this.props.dyn__assetSourceServiceList[service][serviceProperty].name;
 if(this.props.trigger.pxIdx!=undefined){
 if( dyn_configuredRetargetingPixels[this.props.trigger.pxIdx] ){
 servicePropertyName = dyn_configuredRetargetingPixels[this.props.trigger.pxIdx].pixelName;
-}else{
-  //delete the pxId from trigger
-this.deletePxID();
-} 
-servicePropertyName = dyn_configuredRetargetingPixels[this.props.trigger.pxIdx].pixelName;
-
 this.currentPxIdx = this.props.trigger.pxIdx;
+
+}else{
+this.deletePxID();  
+this.currentPxIdx = "";
+
+//delete the pxId from trigger
+
+} 
+
 }
+
+
+if(this.isPxIdxDeleted){
+ pixelIdDeletedErrorStyle["display"] = "inline-block"; 
+}
+
 
 
 this.getServiceNames();
@@ -810,7 +888,7 @@ return (
        </td>
        <td>
 
-              <div className="service-name-select">
+              <div className="service-name-select" style={{"marginRight":15}}>
                      <span onClick={this.toggleServicePropertyNameSelectBox.bind(this)}
                       onMouseEnter={()=> this.isServicePropertyNameBlurEventCalled=false} ref="servicePropertyName">
                       {servicePropertyName}
@@ -828,6 +906,26 @@ return (
                       />
 
               </div>
+             
+            <span style={propertyNameInfoWithMsgStyle}
+           onMouseEnter={(e)=>{showMessageToolTip($(e.target),"This trigger works well, when all matching values are fetched from respective asset source.", "groupSelectionQtipLeft");}}
+           onMouseLeave={(e)=>{ $('.media-plan-tooltip').hide();}}
+           > <i className="fa fa-question-circle fa-lg" ></i>
+           </span> 
+
+
+           <span style={propertyNameInfoWithoutMsgStyle}
+           > <i className="fa fa-question-circle fa-lg" ></i>
+           </span>
+
+
+          <span style={pixelIdDeletedErrorStyle} 
+            onMouseEnter={(e)=>{showMessageToolTip($(e.target), "Pixel configuration is updated since campaign creation (or last edit)." , "groupSelectionQtipLeft");
+            }}
+          >
+          <a style={{"cursor":"pointer"}} className="error"><i className="fa fa-exclamation"></i></a>
+          </span>
+
 
 
        </td>
@@ -855,7 +953,8 @@ return (
            <span className="info" 
            onMouseEnter={(e)=>{showMessageToolTip($(e.target), 'Detects a match in the specified comma separated string based on the option you select:<br><br>*Equal To*:  exact matches only (finds "234" in the string "234"). <br>*Is Contained In*:  if the value appears anywhere in the string (finds "234" within "123456789").  <br>*Contains All Of*:  if all values appear in the string (finds “123,345" in "123,234,345").<br>*Contains Any Of*:  if  the value matches any one string in a comma-separated list (finds "234" in the string "123,234,345").', "groupSelectionQtipLeft");}}
            onMouseLeave={(e)=>{ $('.media-plan-tooltip').hide();}}
-           > <i className="fa fa-question-circle fa-lg" ></i></span> 
+           > <i className="fa fa-question-circle fa-lg" ></i>
+           </span> 
           
        </td>
        <td className="value">
