@@ -211,7 +211,7 @@ closeCreativeGroupOption(){
 render(){
 
 /**************************check for assetGroup delete **************************************/
-let deletedAssetGroup = tempDataStore.getDeletedCreativeAssetGroup();
+let deletedAssetGroup = tempDataStore.getDeletedCreativeAssetGroup(""+this.props.secName+this.props.rulePosition);
 let tempForDeletedAssetGroup = this.state.creativeGroups.filter( (groupName)=>{
 
     for(let i=0;i< dyn_assetGroups.length ;i++){
@@ -252,7 +252,7 @@ for(let i=0;i<tempForRestoreAssetGroup.length;i++){
 
 }
 
-tempDataStore.setDeletedCreativeAssetGroup(deletedAssetGroup);
+tempDataStore.setDeletedCreativeAssetGroup(""+this.props.secName+this.props.rulePosition,deletedAssetGroup);
 
 /****************************************************************************************/
   let selectText = "";

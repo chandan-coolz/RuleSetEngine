@@ -32,12 +32,17 @@ getDeletedIncludeAssetSource(key){
 
 }
 
-setDeletedCreativeAssetGroup(value){
-this.deletedCreativeAssetGroup = value;	
+setDeletedCreativeAssetGroup(id,value){
+
+this.deletedCreativeAssetGroup[id] = value;	
 }
 
-getDeletedCreativeAssetGroup(){
-return this.deletedCreativeAssetGroup;
+getDeletedCreativeAssetGroup(id){
+if(this.deletedCreativeAssetGroup[id]){  
+return this.deletedCreativeAssetGroup[id];
+}else{
+  return [];
+}
 }
 
 
