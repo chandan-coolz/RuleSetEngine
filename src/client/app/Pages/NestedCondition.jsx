@@ -20,10 +20,7 @@ this.state = {
           "operator": "and",
           "selectors": [
 
-           ],
-           "conditions": [
-
-            ]
+           ]
 
           },
   newTrigger: {

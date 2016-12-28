@@ -159,11 +159,11 @@ checkedAll(){
   keys.splice(keys.indexOf("creativeGroupToShow"),1);
   let tmpCreativeGroup = []; 
 
-  
+  console.log(keys);
   for(let i=0;i<keys.length;i++){
      
        this.refs[keys[i]].checked = true;
-       tmpCreativeGroup.push( dyn_assetGroups[i].groupName );
+       tmpCreativeGroup.push( keys[i] );
      
      }
 
@@ -323,22 +323,25 @@ return(
   <input type="text" ref="selectText" readOnly value={selectText}></input>
 
   <span onClick={this.buttonToggleClicked.bind(this)}
-   onMouseOver={ (e)=>{ if(this.state.creativeGroups.length > 0) {showMessageToolTip($(e.target),  "<ol><li>" + this.state.creativeGroups.join("</li><li>") + "</li></ol>", "groupSelectionQtipLeft");} } } >
+   onMouseOver={ (e)=>{ if(this.state.creativeGroups.length > 0) {showMessageToolTip($(e.target),  "<ol><li>" + this.state.creativeGroups.join("</li><li>") + "</li></ol>", "groupSelectionQtipLeft");} } } 
+   onMouseLeave={(e)=>{ $('.media-plan-tooltip').hide();}}
+   >
+   
   <span className="arrow-down"></span></span>
 
   <div className={optionClass}  tabIndex="0" onBlur={this.hideCreativeGroupToShow.bind(this)}
    ref="creativeGroupToShow">
      <p><span onClick={this.checkedAll.bind(this)}>
       <i className="fa fa-check" aria-hidden="true"></i>
-      Check all
+      <span>Check all</span>
      </span>
      <span onClick={this.unCheckedAll.bind(this)}>
       <i className="fa fa-times" aria-hidden="true"></i>
-      Uncheck all
+      <span>Uncheck all</span>
      </span>
      <span className="close-icon">
        
-       <i className="fa fa-times-circle-o" aria-hidden="true" onClick={this.closeCreativeGroupOption.bind(this)}></i>
+       <i className="ui-icon ui-icon-circle-close" aria-hidden="true" onClick={this.closeCreativeGroupOption.bind(this)}></i>
      </span>
      
     </p> 

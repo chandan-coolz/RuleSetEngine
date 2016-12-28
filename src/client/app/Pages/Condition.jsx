@@ -22,10 +22,7 @@ this.state = {
           "operator": "and",
           "selectors": [
 
-           ],
-           "conditions": [
-
-            ]
+           ]
 
           },
 

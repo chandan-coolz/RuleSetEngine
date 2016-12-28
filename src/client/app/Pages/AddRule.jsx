@@ -35,13 +35,9 @@
 	          "operator": "and",
 	          "selectors": [
 
-	          ],
-	          "conditions": [
-
-	            ]
-
+	          ]
 	        }
-	      ]
+	      ]//conditions
 	    }//rule
 	  } ;//state
      this.addRuleValue=[];
