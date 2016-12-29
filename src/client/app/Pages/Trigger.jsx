@@ -908,7 +908,7 @@ return (
               </div>
              
             <span style={propertyNameInfoWithMsgStyle}
-           onMouseEnter={(e)=>{showMessageToolTip($(e.target),"This trigger works well, when all matching values are fetched from respective asset source.", "groupSelectionQtipLeft");}}
+           onMouseEnter={(e)=>{showMessageToolTip($(e.target),"This trigger works well, when you set 'Retargeting Cookie Setup' to 'All Matching values' in 'Retargeting Cookie Lookup Config'.", "groupSelectionQtipLeft");}}
            onMouseLeave={(e)=>{ $('.media-plan-tooltip').hide();}}
            > <i className="fa fa-question-circle fa-lg" ></i>
            </span> 

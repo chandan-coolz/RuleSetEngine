@@ -481,7 +481,7 @@ return (
         <table className="condition">
         <thead>
         <tr>
-            <th style={{"width":17}}>
+            <th style={{"width":17,"textAlign":"start"}}>
                
                <span  style={showUpArrow}><i className="fa fa-angle-down"  aria-hidden="true" 
                 onClick={this.hideConditionalContent.bind(this)}></i>
@@ -492,7 +492,7 @@ return (
              </span>
                
             </th>
-            <th>
+            <th style={{"textAlign":"start"}}>
 
              <label>
                
@@ -510,13 +510,13 @@ return (
                       methodToCall={this.changeConditionOperator.bind(this)}
                       isToShowSelectBox={this.state.isToShowSelectBox} 
                       hideSelectBox={this.hideSelectBox.bind(this)}
-                      currentTop={this.currentTop - 7} currentLeft={this.currentLeft + 6}
+                      currentTop={this.currentTop - 2} currentLeft={this.currentLeft + 11}
                       />
 
                    </div>
              </label>
            </th>  
-           <th> 
+           <th style={{"textAlign":"start"}}> 
             <label className="condition">
               <span onClick={this.addNestedCondition.bind(this)}>
               <span><i className="fa fa-adjust" aria-hidden="true" ></i></span>
@@ -524,7 +524,7 @@ return (
 
             </label>
            </th>
-           <th>
+           <th style={{"textAlign":"start"}}>
             <label className="trigger">
               <span onClick={this.addTrigger.bind(this)}>
               <span><i className="fa fa-bolt" aria-hidden="true"></i></span>
@@ -533,9 +533,9 @@ return (
             </label>
 
             </th>
-            <th>
+            <th style={{"textAlign":"start"}}>
   
-             <i data-tooltip="deleteCondition" style={{'paddingRight' : 3}} className="fa fa-trash" aria-hidden="true" onClick={this.openDeleteRuleDialog.bind(this)}></i>
+             <i data-tooltip="deleteCondition" style={{'paddingRight' : 3}} className="fa fa-trash " aria-hidden="true" onClick={this.openDeleteRuleDialog.bind(this)}></i>
 
             
 

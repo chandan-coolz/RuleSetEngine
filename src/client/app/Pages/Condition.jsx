@@ -413,7 +413,7 @@ return(
                       methodToCall={this.changeConditionOperator.bind(this)}
                       isToShowSelectBox={this.state.isToShowSelectBox} 
                       hideSelectBox={this.hideSelectBox.bind(this)}
-                      currentTop={this.currentTop - 7} currentLeft={this.currentLeft + 6}
+                      currentTop={this.currentTop -2 } currentLeft={this.currentLeft + 11}
                       />
 
                    </div>
