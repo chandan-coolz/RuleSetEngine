@@ -654,25 +654,7 @@ let pixelIdDeletedErrorStyle = {
     "right": 1
 };
 
-/*********property info style******************************/
-
-let propertyNameInfoWithMsgStyle = {
-  "position":"absolute",
-  "display":"none",
-  "top":11,
-  "right":2 ,
-  "cursor":"pointer"
-}
-
-let propertyNameInfoWithoutMsgStyle = {
-  "position":"absolute",
-  "display":"inline-block",
-  "top":11,
-  "right":2 ,
-  "opacity":0.5,
-  "cursor":"pointer"
-}
-
+let propertyNameStyle = {};
 
 
 /* get the  value of trigger */
@@ -695,42 +677,6 @@ let propertyNameInfoWithoutMsgStyle = {
 this.currentServiceKey = service;
 this.currentServicePropertyKey = serviceProperty;
 
-/*************check for when to show help info in case of cookie datasignal***************/
-if(serviceProperty=="_jvxMatchCount"){
-
-let detaServiceId = "";
-  //find if
-for(let i=0;i<dyn_DatabaseList.length;i++){
-
-       if(dyn_DatabaseList[i].dataServiceName == service){
-
-          detaServiceId = dyn_DatabaseList[i].dataServiceId;
-          break;
-       }
-}//for
-
-for(let i=0;i<dyn_dataToPost.assetSources.length;i++){
-
-   if(dyn_dataToPost.assetSources[i].assetDatabase == detaServiceId){
-    
-       if(dyn_dataToPost.assetSources[i].dataSignal == "cookieData"){
-          
-        if(dyn_dataToPost.assetSources[i].property.indexOf("jvxdynsl_group") != -1){
-          propertyNameInfoWithMsgStyle["display"] = "inline-block";
-          propertyNameInfoWithoutMsgStyle["display"] = "none";
-        }
-       }
-       break;
-   }
-
-
-}//for
-
-
-
-}//if
-
-/*************End of check for when to show hepl info in case of cookie datasignal***************/
 
 
 /***check for service property name****/
@@ -753,6 +699,7 @@ this.currentPxIdx = "";
 
 if(this.isPxIdxDeleted){
  pixelIdDeletedErrorStyle["display"] = "inline-block"; 
+ propertyNameStyle["marginRight"] = 15;
 }
 
 
@@ -888,7 +835,7 @@ return (
        </td>
        <td>
 
-              <div className="service-name-select" style={{"marginRight":15}}>
+              <div className="service-name-select" style={propertyNameStyle}>
                      <span onClick={this.toggleServicePropertyNameSelectBox.bind(this)}
                       onMouseEnter={()=> this.isServicePropertyNameBlurEventCalled=false} ref="servicePropertyName">
                       {servicePropertyName}
@@ -906,19 +853,6 @@ return (
                       />
 
               </div>
-             
-            <span style={propertyNameInfoWithMsgStyle}
-           onMouseEnter={(e)=>{showMessageToolTip($(e.target),"This trigger works well, when you set 'Retargeting Cookie Setup' to 'All Matching values' in 'Retargeting Cookie Lookup Config'.", "groupSelectionQtipLeft");}}
-           onMouseLeave={(e)=>{ $('.media-plan-tooltip').hide();}}
-           > <i className="fa fa-question-circle fa-lg" ></i>
-           </span> 
-
-
-           <span style={propertyNameInfoWithoutMsgStyle}
-           > <i className="fa fa-question-circle fa-lg" ></i>
-           </span>
-
-
           <span style={pixelIdDeletedErrorStyle} 
             onMouseEnter={(e)=>{showMessageToolTip($(e.target), "Pixel configuration is updated since campaign creation (or last edit)." , "groupSelectionQtipLeft");
             }}

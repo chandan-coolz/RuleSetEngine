@@ -37,7 +37,7 @@ var config = {
         ],
         extensions: ['', '.json', '.js']
     },
-/*  plugins: [
+  plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
@@ -49,7 +49,7 @@ var config = {
         }),
         new webpack.optimize.UglifyJsPlugin()
     ] 
-*/
+
 
 };
 
