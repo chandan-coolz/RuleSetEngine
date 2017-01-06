@@ -650,7 +650,7 @@ let pixelIdDeletedErrorStyle = {
     "display": "none",
     "height": "100%",
     "position": "absolute",
-    "top": 9,
+    "top": 14,
     "right": 1
 };
 
@@ -827,7 +827,8 @@ return (
                       hideSelectBox={this.hideServiceNameSelectBox.bind(this)}
                       databaseOptionChildrensKeys={this.databaseOptionChildrensKey}
                       databaseOptionChildrensValues={this.databaseOptionChildrensValue}
-                      currentTop={this.currentTop} currentLeft={this.currentLeft}
+                      currentTop={this.currentTop - 4} currentLeft={this.currentLeft + 6}
+                      width={160}
                       />
 
               </div>  
@@ -849,7 +850,8 @@ return (
                       optgroupOptions={this.optGroupOptionsServiceData}
                       isToShowSelectBox={this.state.isToShowServicePropertyNameSelectBox} 
                       hideSelectBox={this.hideServicePropertyNameSelectBox.bind(this)}
-                      currentTop={this.currentTop} currentLeft={this.currentLeft}
+                      currentTop={this.currentTop - 4} currentLeft={this.currentLeft + 6}
+                      width={160}
                       />
 
               </div>
@@ -880,7 +882,8 @@ return (
                       methodToCall={this.serviceOperatorValueChanged.bind(this)}
                       isToShowSelectBox={this.state.isToShowServiceOperatorSelectBox} 
                       hideSelectBox={this.hideServiceOperatorSelectBox.bind(this)}
-                      currentTop={this.currentTop} currentLeft={this.currentLeft}
+                      currentTop={this.currentTop - 4} currentLeft={this.currentLeft + 6}
+                      width={160}
                       />
                 </div>
 

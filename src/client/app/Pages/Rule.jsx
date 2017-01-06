@@ -7,6 +7,7 @@ import RuleStore from '../stores/RuleStore.jsx';
 import Data from './Data.jsx';
 import CreativeGroupToShow from './CreativeGroupToShow.jsx';
 import tempDataStore from '../stores/tempDataStore.jsx';
+import AssetSourceConfiguration from './AssetSourceConfiguration.jsx';
 import RuleErrorStore from '../stores/RuleErrorStore.jsx';
 
 export default class Rule extends React.Component {
@@ -44,8 +45,9 @@ this.assetSourceChangeListener = this.assetSourceChangeListener.bind(this);
 
 /************ruleDataChangeListener***************************/
 ruleDataRefressListener(){
-
+ 
 this.rule = RuleStore.getDataForRule(this.props.secName,this.props.rulePosition);
+tempDataStore.reSetDeletedCreativeAssetGroup();
 this.forceUpdate();
 }
 
@@ -58,6 +60,7 @@ if(this.state.conditionClass){
   if(element.top<0){
    window.scrollTo(0,currentTopPos-100);
   }
+  $(this.refs.conditionContainer).slideUp() ;
   this.setState({conditionClass:"hide",isToShowRuleContent:false});
  }  
 }
@@ -66,8 +69,8 @@ if(this.state.conditionClass){
 hideRuleIfOpenListener(){
 if(this.state.conditionClass){
   if(this.state.conditionClass!="hide"){
-
-  this.setState({conditionClass:"hide",isToShowRuleContent:false});
+   $(this.refs.conditionContainer).slideUp() ; 
+   this.setState({conditionClass:"hide",isToShowRuleContent:false});
   }
 }
 }
@@ -78,7 +81,7 @@ assetSourceChangeListener() {
 
  if(this.state.conditionClass){
   if(this.state.conditionClass!="hide"){
-
+  $(this.refs.conditionContainer).slideUp() ; 
   this.setState({conditionClass:"hide",isToShowRuleContent:false});
   }
  }
@@ -117,6 +120,9 @@ componentWillReceiveProps(newProps) {
 }
 
 componentDidMount() {
+
+  $(this.refs.conditionContainer).slideDown();
+  $(this.refs.conditionContainer).slideUp()
   
   /******move the browser scroll to  newly added rule position*******************/
   if( (RuleStore.getAddedRuleSection()==this.props.secName) && 
@@ -206,28 +212,21 @@ componentDidUpdate(prevProps, prevState) {
 /** function to collapse the conditions **********/
 hideClicked(){
 
-
-this.setState({isToShowRuleContent:false,conditionClass:"visuallyhidden"});
-
-setTimeout(function(){
-
-  this.setState({conditionClass:"hide"});
+ $(this.refs.conditionContainer).slideUp() ;  
+  setTimeout(function(){
+  this.setState({isToShowRuleContent:false,conditionClass:"hide"});
   
 
 }.bind(this),500);
-
 
 } //hideClicked
 
 showClicked(){
 
 this.setState({isToShowRuleContent:true,conditionClass:"showAll"});
-setTimeout(function(){
-
-  this.setState({conditionClass:"visuallyShow"});
-  
-
-}.bind(this),500);
+setTimeout(function(){ 
+$(this.refs.conditionContainer).slideDown() ;
+}.bind(this),100);
 
 }
 
@@ -236,7 +235,7 @@ moveUp(){
 
 
 //window.scrollTo(0,rule-100);
-
+$(this.refs.conditionContainer).slideUp() ;
 RuleStore.hideMoveUpView( this.props.secName,this.props.rulePosition);
 this.setState({ruleTableClass:"moveup-rule",isToShowRuleContent:false,conditionClass:"hide"});
 
@@ -247,9 +246,6 @@ RuleAction.moveRuleUp(this.props.secName,this.props.rulePosition);
 
 setTimeout(function(){
 this.setState({ruleTableClass:"rule"});
-
-
-
  }.bind(this),400);
  
  
@@ -261,6 +257,8 @@ this.setState({ruleTableClass:"rule"});
 } //move rule up
 
 moveDown(){
+
+  $(this.refs.conditionContainer).slideUp() ;
   RuleStore.hideMoveDownView( this.props.secName,this.props.rulePosition);
   this.setState({ruleTableClass:"movedown-rule",isToShowRuleContent:false,conditionClass:"hide"});
   setTimeout(function(){
@@ -396,7 +394,6 @@ this.setState({selectedOption:e.target.value});
 }  
 
 dragRuleMethod(){
-
 switch(this.state.selectedOption){
 
   case "before" :
@@ -431,6 +428,7 @@ switch(this.state.selectedOption){
 render(){
 
   let validationError={};
+  let assetSourceConfiguration = "";
   validationError["display"]="none";
   validationError["position"]="absolute";
   validationError["top"]=10;
@@ -487,11 +485,16 @@ if(this.state.conditionClass!="hide"){
 var conditions = this.rule.conditions.map( (condition,i) =>   
 
  <Condition key={i} ruleName={this.rule.ruleName} condition={condition} advertiserId={this.props.advertiserId} addId={this.props.addId}
-  rulePosition={this.props.rulePosition} includeAssetSources={includeAssetSources}
+  rulePosition={this.props.rulePosition} 
   changePaddingListener={this.changePaddingListener.bind(this)}
   secName={this.props.secName} conditionClass={this.state.conditionClass}
  /> 
   );
+
+assetSourceConfiguration =    <AssetSourceConfiguration ruleName={this.props.ruleName} rulePosition={this.props.rulePosition}
+      includeAssetSources={includeAssetSources} secName={this.props.secName}
+
+    /> ;
 }else{
   var conditions = [];
 }
@@ -642,29 +645,7 @@ return (
 
 
 
-    <table className={this.state.ruleTableClass} ref="ruleTable" style={tableBackground}
-     onMouseOver={ ()=>{ 
-
-         if(this.state.conditionClass!="hide"){
-
-            this.refs.ruleTable.style.background = '#e6e4e4';
-           }else{
-            this.refs.ruleTable.style.background = '#F1F1F1';
-            
-           }
-      }}
-     
-     onMouseOut={ ()=>{ 
-       if(this.state.conditionClass=="hide"){  
-           if(this.props.rulePosition%2==0){
-              this.refs.ruleTable.style.background = '#FAFAFA';
-            } else{
-              this.refs.ruleTable.style.background = '#FFFFFF';
-            }
-         }    
-      }}
-
-    >      
+    <table className={this.state.ruleTableClass} ref="ruleTable" style={tableBackground}>      
         
  
      <tbody>
@@ -697,9 +678,10 @@ return (
             changeZIndex={this.changeZIndex.bind(this)} secName={this.props.secName} rulePosition={this.props.rulePosition}/>
           
               <span className={isToShowCreativeGroupWarningClass}>
-               <i className="fa fa-exclamation" aria-hidden="true"></i>
+               <a  className="error" ><i className="fa fa-exclamation"></i></a>
               </span>
              
+
               <div className="error-message">
               <div className="arrow-right"></div>
               <div className="message">
@@ -724,13 +706,15 @@ return (
     <span style={validationError}>
        <a  className="error"><i className="fa fa-exclamation"></i></a>
     </span>
-
-     <ul className={this.state.conditionClass}> 
+ 
+  <div  ref="conditionContainer">   
+     <ul > 
       {conditions}
-     </ul>
+     </ul>      
+     {assetSourceConfiguration}
+  </div>
 
-
-  </li>
+</li>
 
 );
 

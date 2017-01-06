@@ -8,8 +8,8 @@ export default class CreativeGroupToShow extends React.Component {
 constructor(){
 super();
 this.state = {
-	isToShowOptions : false,
-	selectText : "-- Select Groups --",
+  isToShowOptions : false,
+  selectText : "-- Select Groups --",
   creativeGroups:[]
 };
 this.isZindexChanged = false;
@@ -67,10 +67,8 @@ componentWillReceiveProps(newProps) {
       this.setState({creativeGroups:tempCreativeGroup})
   }else{
 
-
     this.setState({creativeGroups:newProps.creativeGroups})
   }
-
 
 }//componentWillReceiveProps
 
@@ -95,10 +93,6 @@ for(let i=0;i<this.state.creativeGroups.length;i++){
  
 }
 
-        
-
-
- 
   let tempSelectText = "changed";
   this.setState({selectText:tempSelectText})  ;
 
@@ -140,7 +134,7 @@ checkBoxChanged(isChecked,groupName){
 let tmpCreativeGroup = JSON.parse(JSON.stringify(this.state.creativeGroups));
 
     if(isChecked){
-    	 tmpCreativeGroup.push(groupName);
+       tmpCreativeGroup.push(groupName);
        this.refs[groupName].checked = true;
     }else{
       var index = tmpCreativeGroup.indexOf(groupName);
@@ -158,8 +152,6 @@ checkedAll(){
   keys.splice(keys.indexOf("selectText"),1);
   keys.splice(keys.indexOf("creativeGroupToShow"),1);
   let tmpCreativeGroup = []; 
-
-  console.log(keys);
   for(let i=0;i<keys.length;i++){
      
        this.refs[keys[i]].checked = true;
@@ -167,9 +159,6 @@ checkedAll(){
      
      }
 
-  for(let i=0;i<this.deletedCreativeAssetGroup.length;i++){
-     tmpCreativeGroup.push(this.deletedCreativeAssetGroup[i]);
-  }
   updateCreativeGroupToShow(this.props.secName,this.props.rulePosition,tmpCreativeGroup);
 
 }//CheckedAll
@@ -186,7 +175,7 @@ unCheckedAll(){
      }
 
  updateCreativeGroupToShow(this.props.secName,this.props.rulePosition,tmpCreativeGroup);
-	
+  
 }//unCheckedAll
 
 hideCreativeGroupToShow(e){
@@ -211,7 +200,7 @@ closeCreativeGroupOption(){
 render(){
 
 /**************************check for assetGroup delete **************************************/
-let deletedAssetGroup = tempDataStore.getDeletedCreativeAssetGroup(""+this.props.secName+this.props.rulePosition);
+this.deletedCreativeAssetGroup = tempDataStore.getDeletedCreativeAssetGroup(""+this.props.secName+this.props.rulePosition);
 let tempForDeletedAssetGroup = this.state.creativeGroups.filter( (groupName)=>{
 
     for(let i=0;i< dyn_assetGroups.length ;i++){
@@ -225,15 +214,15 @@ let tempForDeletedAssetGroup = this.state.creativeGroups.filter( (groupName)=>{
 });
 
 for(let i=0;i<tempForDeletedAssetGroup.length;i++){
-  if( deletedAssetGroup.indexOf(tempForDeletedAssetGroup[i]) == -1){
-     deletedAssetGroup.push(tempForDeletedAssetGroup[i]);
+  if( this.deletedCreativeAssetGroup.indexOf(tempForDeletedAssetGroup[i]) == -1){
+     this.deletedCreativeAssetGroup.push(tempForDeletedAssetGroup[i]);
    }
 
 }
 
 /********check for restore********************************************************/
 
-let tempForRestoreAssetGroup = deletedAssetGroup.filter( (groupName)=>{
+let tempForRestoreAssetGroup = this.deletedCreativeAssetGroup.filter( (groupName)=>{
 
     for(let i=0;i< dyn_assetGroups.length ;i++){
 
@@ -247,12 +236,12 @@ let tempForRestoreAssetGroup = deletedAssetGroup.filter( (groupName)=>{
 
 for(let i=0;i<tempForRestoreAssetGroup.length;i++){
 
-   let index = deletedAssetGroup.indexOf(tempForRestoreAssetGroup[i]);
-   deletedAssetGroup.splice(index,1);
+   let index = this.deletedCreativeAssetGroup.indexOf(tempForRestoreAssetGroup[i]);
+   this.deletedCreativeAssetGroup.splice(index,1);
 
 }
 
-tempDataStore.setDeletedCreativeAssetGroup(""+this.props.secName+this.props.rulePosition,deletedAssetGroup);
+tempDataStore.setDeletedCreativeAssetGroup(""+this.props.secName+this.props.rulePosition,this.deletedCreativeAssetGroup);
 
 /****************************************************************************************/
   let selectText = "";
@@ -283,20 +272,22 @@ var assestsList = dyn_assetGroups.map( (obj,i) =>
                  
 );
 
-for(let i=0;i<deletedAssetGroup.length;i++){
+for(let i=0;i<this.deletedCreativeAssetGroup.length;i++){
 
   assestsList.push(
-     <li key={deletedAssetGroup+i}>
+     <li key={this.deletedCreativeAssetGroup+i}>
      <div className="checkbox" >
          <span className="checkbox-border"></span>
          <label >  
-          <input type="checkbox" onChange={(e) => this.checkBoxChanged(e.target.checked,deletedAssetGroup[i])}
-           ref={deletedAssetGroup[i]}
+          <input type="checkbox" onChange={(e) => this.checkBoxChanged(e.target.checked,this.deletedCreativeAssetGroup[i])}
+           ref={this.deletedCreativeAssetGroup[i]}
            />
-          <span onMouseOver={(e)=> { getOverflowContent($(e.target), '', $(e.target) ) ;  } }>{deletedAssetGroup[i]} </span>
+          <span onMouseOver={(e)=> { getOverflowContent($(e.target), '', $(e.target) ) ;  } }>{this.deletedCreativeAssetGroup[i]} </span>
          </label> 
           <span className="recordDeleted" >
-          <i className="fa fa-exclamation" aria-hidden="true"></i>
+           <a  className="error">
+            <i className="fa fa-exclamation" aria-hidden="true"></i>
+           </a> 
          </span> 
 
         
@@ -357,4 +348,4 @@ return(
 );
 }//render
 
-}//end of class	
+}//end of class 

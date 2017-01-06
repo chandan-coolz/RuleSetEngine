@@ -60,7 +60,7 @@ this.checkForAddIdChange="";
 
 
 ruleStoreChangeListener(){
-
+ TempStore.reSetDeletedCreativeAssetGroup();
  this.state.data = RuleStore.getRuleData();
 
 /*********depending upon no of rules data create data instances********************/

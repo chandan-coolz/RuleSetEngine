@@ -3,7 +3,7 @@ import {render} from 'react-dom';
 import Rule from './Rule.jsx';
 import RuleStore from '../stores/RuleStore.jsx';
 import AddRule from './AddRule.jsx';
-
+import tempDataStore from '../stores/tempDataStore.jsx';
 import * as RuleAction from '../actions/RuleAction.jsx';
 
 
@@ -48,6 +48,7 @@ this.data=[];
 /********sectionChangeListener*******************************/
 
 sectionChangeListener(){
+tempDataStore.reSetDeletedCreativeAssetGroup();  
 this.data = RuleStore.getDataForSection(this.props.secName);
 this.forceUpdate();
 }

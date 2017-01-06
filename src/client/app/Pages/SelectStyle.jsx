@@ -266,7 +266,7 @@ if(this.state.selectClass=="select-style"){
                  let browserBottomCoordinate = window.innerHeight + window.scrollY;
                  if( displayBottomCoordinate > browserBottomCoordinate){
                   //top 
-                  this.cln.style.top= (this.props.currentTop - elementHeight - 10 + scrollTop) + "px";
+                  this.cln.style.top= (this.props.currentTop - elementHeight  + scrollTop) + "px";
                   this.cln.style.borderTop = "1px solid #ddd";
                  }
                 
@@ -351,12 +351,15 @@ componentWillReceiveProps(newProps) {
   if(newProps.currentTop ){
 
      if(newProps.currentTop!=0 ){
-     
+        let w = 172;
+        if(newProps.width){
+           w = newProps.width;
+        }
         this.ulStyle={
 
           top: newProps.currentTop + 27,
           left: newProps.currentLeft - 12,
-          width: 172,
+          width: w,
           display: 'none',
           position: 'fixed'
         }

@@ -357,7 +357,7 @@ assetSourceConfigurationStyle['display'] = 'none';
 return(
 
 <div className={this.state.assetSourceConfigurationClass} style={assetSourceConfigurationStyle}>
-
+<hr />
 <h5><i className="fa fa-arrow-down" aria-hidden="true"></i> <span>Asset Source Configuration</span></h5>
 
 <table className="asset-source-table">

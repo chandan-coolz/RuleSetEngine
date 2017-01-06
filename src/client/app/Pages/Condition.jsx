@@ -7,7 +7,6 @@ import SelectStyle from './SelectStyle.jsx';
 import * as RuleAction from '../actions/RuleAction.jsx';
 import tempDataStore from '../stores/tempDataStore.jsx';
 import DynamicCampaignConfig from '../stores/dynamicCampaignConfig.jsx';
-import AssetSourceConfiguration from './AssetSourceConfiguration.jsx';
 import RuleErrorStore from '../stores/RuleErrorStore.jsx';
 
 export default class Condition extends React.Component {
@@ -476,9 +475,7 @@ return(
              
 
           </ul>
-<AssetSourceConfiguration ruleName={this.props.ruleName} rulePosition={this.props.rulePosition}
-   includeAssetSources={this.props.includeAssetSources} secName={this.props.secName}
-/> 
+
  </li>
 );
 

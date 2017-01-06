@@ -45,6 +45,10 @@ return this.deletedCreativeAssetGroup[id];
 }
 }
 
+reSetDeletedCreativeAssetGroup(){
+ this.deletedCreativeAssetGroup = []; 
+}
+
 
 setRulesHaveingIncludedAssetSourceChecked(value,isItOnPageLoad){
 	let previousLength = this.rulesHaveingIncludedAssetSourceChecked.length;

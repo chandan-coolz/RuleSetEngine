@@ -14,7 +14,6 @@ super();
 
 this.state = {
   isToShowConditionContent : true,
-  contentClass : "visuallyShow",
    newCondition: {
           "id": "",
           "operator": "and",
@@ -195,24 +194,14 @@ componentWillReceiveProps(nextProps) {
 
 
 showConditionalContent(){
-	this.setState({isToShowConditionContent : true,contentClass:"showAll"});
-  this.showConditionTimeOut = setTimeout(function(){
+ this.setState({isToShowConditionContent : true});
+ $(this.refs.conditionContent).slideDown();
 
-  this.setState({contentClass:"visuallyShow"});
-  
-
-}.bind(this),500);
 } //showConditionalContent
 
 hideConditionalContent() {
-
-	this.setState({isToShowConditionContent : false,contentClass:"visuallyhidden"});
-  this.hideConditionTimeOut = setTimeout(function(){
-
-  this.setState({contentClass:"hide"});
-  
-
-}.bind(this),500);
+ this.setState({isToShowConditionContent : false});
+ $(this.refs.conditionContent).slideUp();
 } //hideConditionalCOntent
 
 //generatecondition id
@@ -434,8 +423,8 @@ isToShowTrigger['display'] = 'block';
 
  /*const contentClass = this.state.isToShowConditionContent? "show" : "hide" ; */
 
-let showUpArrow = {'display':'none','paddingLeft' : 4};
-let showDownArrow = {'display':'none','paddingLeft' : 4};
+let showUpArrow = {'width':12, 'display':'none','padding' : 3,'marginRight' : 8, 'textAlign':'center','cursor':'pointer'};
+let showDownArrow = {'width':12 ,'display':'none','padding' : 3,'marginRight' : 8, 'textAlign':'center','cursor':'pointer'};
 
 if(this.state.isToShowConditionContent){
   showUpArrow['display'] = 'block';
@@ -483,16 +472,16 @@ return (
         <tr>
             <th style={{"width":17,"textAlign":"start"}}>
                
-               <span  style={showUpArrow}><i className="fa fa-angle-down"  aria-hidden="true" 
+               <span  style={showUpArrow}><i className="fa fa-minus"  aria-hidden="true" 
                 onClick={this.hideConditionalContent.bind(this)}></i>
              </span>
              <span  style={showDownArrow}>
-              <i  className="fa fa-angle-right" aria-hidden="true" 
+              <i  className="fa fa-plus" aria-hidden="true" 
                   onClick={this.showConditionalContent.bind(this)}></i>
              </span>
                
             </th>
-            <th style={{"textAlign":"start"}}>
+            <th style={{"textAlign":"end"}}>
 
              <label>
                
@@ -516,7 +505,7 @@ return (
                    </div>
              </label>
            </th>  
-           <th style={{"textAlign":"start"}}> 
+           <th style={{"textAlign":"end"}}> 
             <label className="condition">
               <span onClick={this.addNestedCondition.bind(this)}>
               <span><i className="fa fa-adjust" aria-hidden="true" ></i></span>
@@ -524,7 +513,7 @@ return (
 
             </label>
            </th>
-           <th style={{"textAlign":"start"}}>
+           <th style={{"textAlign":"end"}}>
             <label className="trigger">
               <span onClick={this.addTrigger.bind(this)}>
               <span><i className="fa fa-bolt" aria-hidden="true"></i></span>
@@ -533,9 +522,9 @@ return (
             </label>
 
             </th>
-            <th style={{"textAlign":"start"}}>
+            <th style={{"textAlign":"end"}}>
   
-             <i data-tooltip="deleteCondition" style={{'paddingRight' : 3}} className="fa fa-trash " aria-hidden="true" onClick={this.openDeleteRuleDialog.bind(this)}></i>
+             <i data-tooltip="deleteCondition"  className="fa fa-trash " aria-hidden="true" onClick={this.openDeleteRuleDialog.bind(this)}></i>
 
             
 
@@ -545,7 +534,7 @@ return (
     </table>
 
 
-          <ul className={this.state.contentClass}>
+          <ul   ref="conditionContent">
              
             <li style={isToShowTrigger}><div className="trigger"> 
            <table>
