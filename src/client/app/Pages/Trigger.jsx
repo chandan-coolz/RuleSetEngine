@@ -94,7 +94,8 @@ componentWillUnmount() {
 
 componentWillReceiveProps(newProps) {    
 
-  var trigger = newProps.trigger;
+ this.isPxIdxDeleted = false;
+ var trigger = newProps.trigger;
  var keys= Object.keys(trigger).filter((key)=>{
   if(key=="id" || key=="comparator" || key=="pxIdx" ){return false;}
    return true;
@@ -650,8 +651,8 @@ let pixelIdDeletedErrorStyle = {
     "display": "none",
     "height": "100%",
     "position": "absolute",
-    "top": 14,
-    "right": 1
+    "top": 13,
+    "right": 4
 };
 
 let propertyNameStyle = {};
@@ -699,7 +700,7 @@ this.currentPxIdx = "";
 
 if(this.isPxIdxDeleted){
  pixelIdDeletedErrorStyle["display"] = "inline-block"; 
- propertyNameStyle["marginRight"] = 15;
+ propertyNameStyle["marginRight"] = 21;
 }
 
 
@@ -742,15 +743,16 @@ case "combo":
 
          }
 
-      var value= <div className="service-name-select">
-                     <span onClick={this.toggleServiceValueSelectBox.bind(this)}
-                      onMouseEnter={()=> this.isServiceValueBlurEventCalled=false}
+      var value= <div className="service-name-select"  
+                  onClick={this.toggleServiceValueSelectBox.bind(this)}
+                  onMouseEnter={()=> this.isServiceValueBlurEventCalled=false}
+                  >
+                     <span 
                       ref="serviceValue"
                       >
                       {this.state.currentObject.values[servicePropertyValue]}
                      </span>
-                     <div className="down-triangle" onClick={this.toggleServiceValueSelectBox.bind(this)}
-                      onMouseEnter={()=> this.isServiceValueBlurEventCalled=false}
+                     <div className="down-triangle" 
                      ></div>
                      <SelectStyle keys={optionKey} values={optionValue} 
                       methodToCall={this.comboBoxValueChange.bind(this)}
@@ -758,6 +760,8 @@ case "combo":
                       hideSelectBox={this.hideServiceValueSelectBox.bind(this)}
                       currentTop={this.currentTop} currentLeft={this.currentLeft}
                       serviceProperty={serviceProperty}
+                      currentTop={this.currentTop - 7} currentLeft={this.currentLeft + 4}
+                      width={154} fontSize={11}
                       />
                 </div>
 
@@ -809,17 +813,17 @@ return (
    
    <tr>
        <td>
-             <div className="service-name-select" >
-                     <span onClick={this.toggleServiceNameSelectBox.bind(this)}
-                      onMouseEnter={()=> this.isServiceNameBlurEventCalled=false}
+             <div className="service-name-select" 
+              onClick={this.toggleServiceNameSelectBox.bind(this)}
+              onMouseEnter={()=> this.isServiceNameBlurEventCalled=false}
+             >
+                     <span 
                        ref="serviceName"
                       >
                       {this.props.dyn__assetSourceServiceList[service].name}
                       
                      </span>
-                     <div className="down-triangle" onClick={this.toggleServiceNameSelectBox.bind(this)}
-                      onMouseEnter={()=> this.isServiceNameBlurEventCalled=false}
-                     ></div>
+                     <div className="down-triangle"></div>
                      <SelectStyle keys={this.serviceNameKey} values={this.serviceNameValue} 
                       optgroupOptions={this.optGroupOptionsServiceNameData}
                       methodToCall={this.serviceValueChanged.bind(this)}
@@ -827,8 +831,8 @@ return (
                       hideSelectBox={this.hideServiceNameSelectBox.bind(this)}
                       databaseOptionChildrensKeys={this.databaseOptionChildrensKey}
                       databaseOptionChildrensValues={this.databaseOptionChildrensValue}
-                      currentTop={this.currentTop - 4} currentLeft={this.currentLeft + 6}
-                      width={160}
+                      currentTop={this.currentTop - 7} currentLeft={this.currentLeft + 4}
+                      width={154} fontSize={11}
                       />
 
               </div>  
@@ -836,22 +840,22 @@ return (
        </td>
        <td>
 
-              <div className="service-name-select" style={propertyNameStyle}>
-                     <span onClick={this.toggleServicePropertyNameSelectBox.bind(this)}
-                      onMouseEnter={()=> this.isServicePropertyNameBlurEventCalled=false} ref="servicePropertyName">
+              <div className="service-name-select" style={propertyNameStyle}
+              onClick={this.toggleServicePropertyNameSelectBox.bind(this)}
+              onMouseEnter={()=> this.isServicePropertyNameBlurEventCalled=false}
+              >
+                     <span  ref="servicePropertyName">
                       {servicePropertyName}
                       
                      </span>
-                     <div className="down-triangle" onClick={this.toggleServicePropertyNameSelectBox.bind(this)}
-                      onMouseEnter={()=> this.isServicePropertyNameBlurEventCalled=false}
-                     ></div>
+                     <div className="down-triangle"></div>
                      <SelectStyle keys={this.servicePropertyNameKey} values={this.servicePropertyNameValue} 
                       methodToCall={this.servicePropertyValueChanged.bind(this)}
                       optgroupOptions={this.optGroupOptionsServiceData}
                       isToShowSelectBox={this.state.isToShowServicePropertyNameSelectBox} 
                       hideSelectBox={this.hideServicePropertyNameSelectBox.bind(this)}
-                      currentTop={this.currentTop - 4} currentLeft={this.currentLeft + 6}
-                      width={160}
+                      currentTop={this.currentTop - 7} currentLeft={this.currentLeft + 4}
+                      width={154} fontSize={11}
                       />
 
               </div>
@@ -868,22 +872,22 @@ return (
        <td className="operator">
 
 
-                <div className="service-name-select">
-                     <span onClick={this.toggleServiceOperatorSelectBox.bind(this)}
-                      onMouseEnter={()=> this.isServiceOperatorBlurEventCalled=false}
+                <div className="service-name-select"
+                 onClick={this.toggleServiceOperatorSelectBox.bind(this)}
+                 onMouseEnter={()=> this.isServiceOperatorBlurEventCalled=false}
+                >
+                     <span 
                       ref="serviceOperator"
                       >
                       {this.state.dyn__operations[operator]}
                      </span>
-                     <div className="down-triangle" onClick={this.toggleServiceOperatorSelectBox.bind(this)}
-                      onMouseEnter={()=> this.isServiceOperatorBlurEventCalled=false}
-                     ></div>
+                     <div className="down-triangle"></div>
                      <SelectStyle keys={this.serviceOperatorKey} values={this.serviceOperatorValue} 
                       methodToCall={this.serviceOperatorValueChanged.bind(this)}
                       isToShowSelectBox={this.state.isToShowServiceOperatorSelectBox} 
                       hideSelectBox={this.hideServiceOperatorSelectBox.bind(this)}
-                      currentTop={this.currentTop - 4} currentLeft={this.currentLeft + 6}
-                      width={160}
+                      currentTop={this.currentTop - 7} currentLeft={this.currentLeft + 4}
+                      width={154} fontSize={11}
                       />
                 </div>
 

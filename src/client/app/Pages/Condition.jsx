@@ -389,7 +389,7 @@ isToShowTrigger['display'] = 'block';
 
 return(
 
-  <li>
+  <li style={{"marginBottom":11,"paddingLeft":0}}>
      <table className="condition">
         <thead>
         <tr>

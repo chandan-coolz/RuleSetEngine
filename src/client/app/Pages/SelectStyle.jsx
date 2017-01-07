@@ -258,6 +258,9 @@ if(this.state.selectClass=="select-style"){
                  let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                  this.cln.style.position='absolute';
                  this.cln.style.display='block';
+                 if(this.props.fontSize){
+                  this.cln.style.fontSize = this.props.fontSize+"px"; 
+                 }
                  this.cln.style.top= (this.props.currentTop + 27 + scrollTop) + "px";
                  document.body.appendChild(this.cln);
 /***********check weather current display height is greater than viewport height or  not*****/

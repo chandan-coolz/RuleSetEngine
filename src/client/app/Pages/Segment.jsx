@@ -45,7 +45,7 @@ showSegmentInfo(this.refs.segmentInput,this.props.service);
 
 
 editSegmentClicked(){
-      this.refs.bar.style.opacity = 0;
+      this.refs.barInfoContainer.style.opacity = 0;
       this.refs.segmentInput.readOnly = false;
       this.refs.segmentInput.focus();
     	
@@ -54,7 +54,7 @@ editSegmentClicked(){
 doneSegmentEdit(){
 
 this.refs.segmentInput.readOnly = true;
-this.refs.bar.style.opacity = 1;
+this.refs.barInfoContainer.style.opacity = 1;
 getUnmatchSegmentId(this.refs.segmentInput, this.props.service, '');
 
 } //donerule name  edit
@@ -78,8 +78,8 @@ render(){
      onChange={this.changeSegmentInput.bind(this)}
      onBlur={this.doneSegmentEdit.bind(this)}
      />     
-     <div className="bar-info-logo">
-       <span className="bars" ref="bar" onClick={this.showSegment.bind(this)}><i className="fa fa-bars" aria-hidden="true"></i></span>
+     <div className="bar-info-logo" ref="barInfoContainer">
+       <span className="bars"  onClick={this.showSegment.bind(this)}><i className="fa fa-bars" aria-hidden="true"></i></span>
        <span className="info" onClick={this.showSegmentInformation.bind(this)}><i className="fa fa-info-circle fa-lg" aria-hidden="true"></i></span>
        <span className="edit" onClick={this.editSegmentClicked.bind(this)}><i className="fa fa-pencil" aria-hidden="true"></i></span>
      </div>

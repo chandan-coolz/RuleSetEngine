@@ -35,9 +35,10 @@ if(newProps.isOptionChanged){
      
           this.ulStyle={
 
-          top: newProps.currentTop + 30,
+          top: newProps.currentTop + 28,
           left: newProps.currentLeft ,
-          width: 172,
+          fontSize : 11,
+          width: 150,
           display: 'none',
           position: 'fixed'
                }

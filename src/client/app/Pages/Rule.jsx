@@ -102,6 +102,13 @@ RuleStore.on("Hide"+this.props.secName+"Rule"+this.props.rulePosition, this.hide
 RuleStore.on("HideIfOpen", this.hideRuleIfOpenListener) ;  
 DynamicCampaignConfig.on("assetSourcechange", this.assetSourceChangeListener) ; 
 this.rule = RuleStore.getDataForRule(this.props.secName,this.props.rulePosition);
+  /******move the browser scroll to  newly added rule position*******************/
+  if( (RuleStore.getAddedRuleSection()==this.props.secName) && 
+    (RuleStore.getAddedRulePos()==this.props.rulePosition) ){
+    this.setState({isToShowRuleContent:true,conditionClass:"showAll"});
+    }
+
+
 
 }
 
@@ -121,13 +128,21 @@ componentWillReceiveProps(newProps) {
 
 componentDidMount() {
 
-  $(this.refs.conditionContainer).slideDown();
-  $(this.refs.conditionContainer).slideUp()
   
   /******move the browser scroll to  newly added rule position*******************/
   if( (RuleStore.getAddedRuleSection()==this.props.secName) && 
     (RuleStore.getAddedRulePos()==this.props.rulePosition) ){
-   
+       this.refs.conditionContainer.style.opacity = 0;
+       this.refs.ruleHighlighter.style.opacity = 0;
+       this.refs.showDownArrow.style.display = "inline-block";
+       this.refs.showUpArrow.style.display = "none";
+       if(this.props.rulePosition%2==0){
+          this.refs.ruleTable.style.background = "#FAFAFA";
+        }else{
+          this.refs.ruleTable.style.background = "#FFFFFF";
+        }
+    
+       $(this.refs.conditionContainer).slideUp();
       let element=this.refs.ruleTable.getBoundingClientRect();
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       let currentTopPos = element.top + scrollTop;
@@ -136,15 +151,29 @@ componentDidMount() {
      // if(element.top<0 || element.top>=height-50){
        window.scrollTo(0,currentTopPos-100);
        //}
-       this.refs.ruleTable.style.opacity = 0;
+      // this.refs.ruleTable.style.opacity = 0;
        setTimeout(function(){ 
-        this.refs.ruleTable.style.transition = "opacity 1s";
-        this.refs.ruleTable.style.opacity = 1;
+        this.refs.conditionContainer.style.transition = "opacity 1s";
+        this.refs.conditionContainer.style.opacity = 1;
+        //this.refs.ruleTable.style.background = "red";
+        setTimeout(function(){
+         this.refs.ruleTable.style.transition = "background 1s"; 
+         this.refs.ruleTable.style.background = "#CCCCCC";
+         this.refs.ruleHighlighter.style.transition = "opacity 1s";
+         this.refs.ruleHighlighter.style.opacity = 1;
+         this.refs.showDownArrow.style.display = "none";
+         this.refs.showUpArrow.style.display = "inline-block";
+         $(this.refs.conditionContainer).slideDown("slow");
+        }.bind(this),500);
+        
        }.bind(this),500);
       //reset the getAddedRulePos
       RuleStore.resetTheAddedRulePos();
 
-  }
+    }else{  
+      $(this.refs.conditionContainer).slideDown();
+      $(this.refs.conditionContainer).slideUp()
+    }
 
   $(this.refs.ruleTable).draggable({
     cursor: "move",
@@ -265,7 +294,7 @@ moveDown(){
  /* this.setState({ruleTableClass:"movedownUp-rule"}); */
 
   RuleAction.moveRuleDown(this.props.secName,this.props.rulePosition);
-   setTimeout(function(){
+  setTimeout(function(){
   this.setState({ruleTableClass:"rule"});
 }.bind(this),400); 
   }.bind(this),700);
@@ -651,11 +680,11 @@ return (
      <tbody>
      <tr>
        <td> 
-             <span style={ruleHighlighter}></span>
-             <span  style={showUpArrow}><i className="fa fa-minus"
+             <span style={ruleHighlighter} ref="ruleHighlighter"></span>
+             <span  style={showUpArrow} ref="showUpArrow"><i className="fa fa-minus"
                 onClick={this.hideClicked.bind(this)}></i>
              </span>
-             <span  style={showDownArrow}>
+             <span  style={showDownArrow} ref="showDownArrow">
               <i   className="fa fa-plus"
                   onClick={this.showClicked.bind(this)}></i>
              </span>
