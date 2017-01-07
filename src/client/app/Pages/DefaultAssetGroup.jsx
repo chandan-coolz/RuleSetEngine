@@ -92,6 +92,8 @@ let  isToShowCreativeGroupWarningClass="recordDeleted";
 
 let assetGroupsOptionKey=[];
 let assetGroupOptionValue=[];
+assetGroupsOptionKey.push("");
+assetGroupOptionValue.push("-- No Asset Groups --");
 for(let i=0;i<dyn_assetGroups.length;i++){
 
    assetGroupsOptionKey.push(dyn_assetGroups[i].groupName);
@@ -104,19 +106,12 @@ for(let i=0;i<dyn_assetGroups.length;i++){
 }
 
 if(this.lastDeletedDefaultRule!=""){
-  
-   if(assetGroupsOptionKey.length==0){
-       assetGroupsOptionKey.push("");
-       assetGroupOptionValue.push("-- No Asset Groups --");
-   }
    assetGroupsOptionKey.push(this.lastDeletedDefaultRule);
    assetGroupOptionValue.push(this.lastDeletedDefaultRule);
-   
-
 }
 /****check for default asset group text****/
 let defaultAssetGroupCurrentValueText = this.state.defaultAssetGroup==""?"-- Select Default Group --":this.state.defaultAssetGroup;
-if(assetGroupsOptionKey.length == 0 && this.lastDeletedDefaultRule == ""){
+if(dyn_assetGroups.length == 0 && this.lastDeletedDefaultRule == ""){
 
    defaultAssetGroupCurrentValueText = "-- No Asset Groups --";
 }
