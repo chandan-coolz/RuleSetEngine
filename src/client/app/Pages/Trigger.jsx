@@ -761,7 +761,7 @@ case "combo":
                       currentTop={this.currentTop} currentLeft={this.currentLeft}
                       serviceProperty={serviceProperty}
                       currentTop={this.currentTop - 7} currentLeft={this.currentLeft + 4}
-                      width={154} fontSize={11}
+                      width={154} fontSize={12}
                       />
                 </div>
 
@@ -832,7 +832,7 @@ return (
                       databaseOptionChildrensKeys={this.databaseOptionChildrensKey}
                       databaseOptionChildrensValues={this.databaseOptionChildrensValue}
                       currentTop={this.currentTop - 7} currentLeft={this.currentLeft + 4}
-                      width={154} fontSize={11}
+                      width={154} fontSize={12}
                       />
 
               </div>  
@@ -855,7 +855,7 @@ return (
                       isToShowSelectBox={this.state.isToShowServicePropertyNameSelectBox} 
                       hideSelectBox={this.hideServicePropertyNameSelectBox.bind(this)}
                       currentTop={this.currentTop - 7} currentLeft={this.currentLeft + 4}
-                      width={154} fontSize={11}
+                      width={154} fontSize={12}
                       />
 
               </div>
@@ -887,7 +887,7 @@ return (
                       isToShowSelectBox={this.state.isToShowServiceOperatorSelectBox} 
                       hideSelectBox={this.hideServiceOperatorSelectBox.bind(this)}
                       currentTop={this.currentTop - 7} currentLeft={this.currentLeft + 4}
-                      width={154} fontSize={11}
+                      width={154} fontSize={12}
                       />
                 </div>
 

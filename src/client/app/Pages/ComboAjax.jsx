@@ -37,7 +37,7 @@ if(newProps.isOptionChanged){
 
           top: newProps.currentTop + 28,
           left: newProps.currentLeft ,
-          fontSize : 11,
+          fontSize : 12,
           width: 150,
           display: 'none',
           position: 'fixed'

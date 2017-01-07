@@ -319,7 +319,7 @@ render(){
   let validationError={};
   validationError["display"]="none";
   validationError["position"]="absolute";
-  validationError["top"]=21;
+  validationError["top"]=16;
   validationError["left"]=511;
   validationError["color"]="red";
 
