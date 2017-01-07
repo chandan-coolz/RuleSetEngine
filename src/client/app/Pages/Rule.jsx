@@ -47,7 +47,6 @@ this.assetSourceChangeListener = this.assetSourceChangeListener.bind(this);
 ruleDataRefressListener(){
  
 this.rule = RuleStore.getDataForRule(this.props.secName,this.props.rulePosition);
-tempDataStore.reSetDeletedCreativeAssetGroup();
 this.forceUpdate();
 }
 
@@ -274,6 +273,7 @@ setTimeout(function(){
 RuleAction.moveRuleUp(this.props.secName,this.props.rulePosition);
 
 setTimeout(function(){
+tempDataStore.reSetDeletedCreativeAssetGroup();  
 this.setState({ruleTableClass:"rule"});
  }.bind(this),400);
  
@@ -295,6 +295,7 @@ moveDown(){
 
   RuleAction.moveRuleDown(this.props.secName,this.props.rulePosition);
   setTimeout(function(){
+  tempDataStore.reSetDeletedCreativeAssetGroup();  
   this.setState({ruleTableClass:"rule"});
 }.bind(this),400); 
   }.bind(this),700);
@@ -382,20 +383,20 @@ this.setState({copyConfirmationBoxContainerClass:"hide",copyConfirmationBoxClass
 swapRule(){
 
 RuleAction.dragRule(this.props.secName,this.props.rulePosition,this.swapSecName,this.swapRulePosition);
+tempDataStore.reSetDeletedCreativeAssetGroup();
 this.setState({dragConfirmationContainerBox:"hide",selectedOption:"before"});
 }
 
 insertAfterRule(){
 
 RuleAction.moveRuleAfterSomeRule(this.props.secName,this.props.rulePosition,this.swapSecName,this.swapRulePosition);
+tempDataStore.reSetDeletedCreativeAssetGroup();
 this.setState({dragConfirmationContainerBox:"hide",isToShowRuleContent:false,conditionClass:"hide",selectedOption:"before"});
 }
  
 insertBeforeRule(){
-
-
 RuleAction.moveRuleBeforeSomeRule(this.props.secName,this.props.rulePosition,this.swapSecName,this.swapRulePosition);
-
+tempDataStore.reSetDeletedCreativeAssetGroup();
 this.setState({dragConfirmationContainerBox:"hide",isToShowRuleContent:false,conditionClass:"hide",selectedOption:"before"});
 }  
 
