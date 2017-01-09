@@ -138,7 +138,7 @@ let prevRuleSectionLength = this.ruleSections.length;
 this.createRuleSection();
 this.addedRuleSec=this.ruleSections.length -1;
 this.addedRulePos=this.ruleSections[this.addedRuleSec].length - 1;
-
+$("#showNoOfRules").html("Showing 1 to "+this.data.data.length+" of "+this.data.data.length+" Rules");
 if(prevRuleSectionLength==this.ruleSections.length){
   let secToUpdate = this.ruleSections.length -1;
   
@@ -376,8 +376,13 @@ deleteRule(secName,currentPos){
 this.emit("HideIfOpen");  
 let actualPos = secName*50 + currentPos;
 this.data.data.splice(actualPos,1);
-this.createRuleSection();
+if(this.data.data.length < 1){
+$("#showNoOfRules").html("");
+}else{
+$("#showNoOfRules").html("Showing 1 to "+this.data.data.length+" of "+this.data.data.length+" Rules");
+}
 
+this.createRuleSection();
 if( currentPos == 0 && (secName == this.ruleSections.length) ){
 
     this.emit("change");
@@ -415,7 +420,7 @@ let temp = JSON.parse(JSON.stringify(this.data.data[actualRulePos]));
 this.data.data.push(temp);
 this.data.data[this.data.data.length - 1]["id"] = ruleId;
 this.data.data[this.data.data.length - 1]["ruleName"] = this.data.data[actualRulePos]["ruleName"] + " Clone "+copyCreated;
-
+$("#showNoOfRules").html("Showing 1 to "+this.data.data.length+" of "+this.data.data.length+" Rules");
 let prevRuleSectionLength = this.ruleSections.length;
 this.createRuleSection();
 this.addedRuleSec=this.ruleSections.length -1;
@@ -461,7 +466,6 @@ this.data.data[actualPos]["reportConfig"]["includeAssetSources"] = newAssetSourc
 }else{
 this.data.data[actualPos].reportConfig.includeAssetSources = newAssetSources; 
 }
-
 
 this.emit("Section"+secName+"Rule"+currentPos);
 

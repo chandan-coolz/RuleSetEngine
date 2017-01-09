@@ -14,6 +14,7 @@ this.state ={
 
 };//state
 this.isBlurEventCalled=false;
+this.isToShowGroupOptions = true;
  lastDeletedDefaultRule:"" ;
 }//constructor
 
@@ -32,9 +33,11 @@ componentWillMount() {
 componentDidMount() {
 
   if(this.refs.defaultAssetGroupCurrentValueText.innerHTML=="-- No Asset Groups --"){
-        this.refs.defaultAssetGroupCurrentValueText.style.opacity = 0.5;
+        this.refs.defaultAssetGroupCurrentValueText.style.color = "#ec9aec";
+        this.refs.defaultAssetGroup.style.background = "#f7f7f7";
+        this.isToShowGroupOptions = false;
   }else{
-    this.refs.defaultAssetGroupCurrentValueText.style.opacity = 1;
+    this.isToShowGroupOptions = true;
   }
 }
 componentWillReceiveProps(nextProps) {
@@ -42,20 +45,29 @@ componentWillReceiveProps(nextProps) {
 }
 componentDidUpdate(prevProps, prevState) {
   if(this.refs.defaultAssetGroupCurrentValueText.innerHTML=="-- No Asset Groups --"){
-        this.refs.defaultAssetGroupCurrentValueText.style.opacity = 0.5;
+        this.refs.defaultAssetGroupCurrentValueText.style.color = "#ec9aec";
+        this.refs.defaultAssetGroup.style.background = "#f7f7f7";
+        this.isToShowGroupOptions = false;
   }else{
     this.refs.defaultAssetGroupCurrentValueText.style.opacity = 1;
+    this.isToShowGroupOptions = true;
   }
 }
 
 
 toggleSelectBox(){
+
+if(this.isToShowGroupOptions){
+  
 if(!this.isBlurEventCalled){
   let temp = !this.state.isToShowSelectBox;
   this.setState({isToShowSelectBox:temp});
  }else{
   this.isBlurEventCalled=false;
  }
+
+}
+
 }
 
 hideSelectBox(){
@@ -93,7 +105,7 @@ let  isToShowCreativeGroupWarningClass="recordDeleted";
 let assetGroupsOptionKey=[];
 let assetGroupOptionValue=[];
 assetGroupsOptionKey.push("");
-assetGroupOptionValue.push("-- No Asset Groups --");
+assetGroupOptionValue.push("-- Select Default Group --");
 for(let i=0;i<dyn_assetGroups.length;i++){
 
    assetGroupsOptionKey.push(dyn_assetGroups[i].groupName);
@@ -114,6 +126,8 @@ let defaultAssetGroupCurrentValueText = this.state.defaultAssetGroup==""?"-- Sel
 if(dyn_assetGroups.length == 0 && this.lastDeletedDefaultRule == ""){
 
    defaultAssetGroupCurrentValueText = "-- No Asset Groups --";
+   assetGroupsOptionKey.pop();
+   assetGroupOptionValue.pop();
 }
 
 
@@ -121,7 +135,7 @@ if(dyn_assetGroups.length == 0 && this.lastDeletedDefaultRule == ""){
 
 return( 
  <div style={{"display":"inline-block"}}> 
-       <div className="default-asset-group-select"
+       <div className="default-asset-group-select" ref="defaultAssetGroup"
         onClick={this.toggleSelectBox.bind(this)}
         onMouseEnter={function(){this.isBlurEventCalled=false}.bind(this) } >
             <span ref="defaultAssetGroupCurrentValueText">

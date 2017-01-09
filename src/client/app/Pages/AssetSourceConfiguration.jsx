@@ -51,7 +51,7 @@ refressAassetSource(nextProps){
      if(this.deletedIncludeAssetSource.indexOf(filterResult[i]) == -1){ 
         this.deletedIncludeAssetSource.push(filterResult[i]);
        }
-      if(this.refs[filterResult[i]]){this.refs[filterResult[i]].checked = false; } 
+      if(this.refs[""+this.props.secName+this.props.rulePosition+filterResult[i]]){this.refs[""+this.props.secName+this.props.rulePosition+filterResult[i]].checked = false; } 
    }
 
  if(filterResult.length>0){
@@ -158,10 +158,9 @@ this.isHavingAnyIncludeAssetSourceChecked = false;
 /*****************setup the errorMessageClass*********************************************/
 
 componentDidUpdate(prevProps,prevState){
-
     for(let i=0;i<this.props.includeAssetSources.length;i++){
-           if( this.refs[this.props.includeAssetSources[i]]  ){
-             this.refs[this.props.includeAssetSources[i]].checked = true;  
+           if( this.refs[""+this.props.secName+this.props.rulePosition+this.props.includeAssetSources[i]]  ){
+             this.refs[""+this.props.secName+this.props.rulePosition+this.props.includeAssetSources[i]].checked = true;  
               }
               
      }   
@@ -185,8 +184,8 @@ componentDidUpdate(prevProps,prevState){
 componentDidMount(){
 
   for(let i=0;i<this.props.includeAssetSources.length;i++){
-           if( this.refs[this.props.includeAssetSources[i]]  ){
-             this.refs[this.props.includeAssetSources[i]].checked = true;  
+           if( this.refs[""+this.props.secName+this.props.rulePosition+this.props.includeAssetSources[i]]  ){
+             this.refs[""+this.props.secName+this.props.rulePosition+this.props.includeAssetSources[i]].checked = true;  
               }
               
      }
@@ -212,7 +211,6 @@ componentDidMount(){
 
 
 checkBoxChanged(isChecked,assetDatabase){
-
 let tmpAssetSources = JSON.parse(JSON.stringify(this.props.includeAssetSources));
 
     if(isChecked){
@@ -235,7 +233,6 @@ let tmpAssetSources = JSON.parse(JSON.stringify(this.props.includeAssetSources))
 
 
 render(){
-
 
 var tempassetSorceData = this.state.dyn_assetSource.filter( (obj,i)=>{
 
@@ -274,11 +271,11 @@ var assetSourceTableRow = assetSorceData.map( (obj,i)=>
         <tr key={i}>
          <td>{obj.dataServiceName}</td>
          <td>
-             <div className="checkbox" ><input type="checkbox" id={this.props.ruleName+obj.assetDatabase} 
-               onChange={(e) => this.checkBoxChanged(e.target.checked,obj.assetDatabase)}
-               ref={obj.assetDatabase}
+             <div className="checkbox" ><input type="checkbox" id={""+this.props.secName+this.props.rulePosition+obj.assetDatabase}
+               onChange={(e) => this.checkBoxChanged(e.target.checked,obj.assetDatabase) }
+               ref={""+this.props.secName+this.props.rulePosition+obj.assetDatabase}
               />
-               <label htmlFor={this.props.ruleName+obj.assetDatabase}></label>
+               <label htmlFor={""+this.props.secName+this.props.rulePosition+obj.assetDatabase}></label>
              </div> 
          </td>
         </tr>
@@ -316,11 +313,11 @@ var deletedIncludeAssetSourceRow = deletedIncludeAssetSourceObject.map( (obj,i)=
     <tr key={i}>
       <td>{obj.dataServiceName}</td>
       <td>
-          <div className="checkbox" ><input type="checkbox" id={this.props.ruleName+obj.assetDatabase} 
+          <div className="checkbox" ><input type="checkbox" id={""+this.props.secName+this.props.rulePosition+obj.assetDatabase} 
                 onChange={(e) => this.checkBoxChanged(e.target.checked,obj.assetDatabase)}
-                ref={obj.assetDatabase}
+                ref={""+this.props.secName+this.props.rulePosition+obj.assetDatabase}
               />
-               <label htmlFor={this.props.ruleName+obj.assetDatabase}></label>
+               <label htmlFor={""+this.props.secName+this.props.rulePosition+obj.assetDatabase}></label>
           </div> 
           
         
@@ -358,7 +355,8 @@ return(
 
 <div className={this.state.assetSourceConfigurationClass} style={assetSourceConfigurationStyle}>
 <hr />
-<h5><i className="fa fa-arrow-down" aria-hidden="true"></i> <span>Asset Source Configuration</span></h5>
+<hr style={{"position":"relative","top":-4}}/>
+<h5 style={{"marginBottom":5}}><i className="fa fa-arrow-down" aria-hidden="true"></i> <span>Asset Source Configuration</span></h5>
 
 <table className="asset-source-table">
   <thead>

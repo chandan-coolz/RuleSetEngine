@@ -168,6 +168,12 @@ componentWillUnmount() {
 
 componentDidMount() {
 this.prevAddId = this.refs.adId.value;  
+if(this.state.data.data.length < 1){
+this.refs.showNoOfRules.innerHTML = "";
+}else{
+this.refs.showNoOfRules.innerHTML = "Showing 1 to "+this.state.data.data.length+" of "+this.state.data.data.length+" Rules";
+}
+
 this.checkForAddIdChange = setInterval(function(){ 
 if(this.prevAddId!=this.refs.adId.value){
 this.prevAddId = this.refs.adId.value;   
@@ -236,6 +242,13 @@ defaultAssetGroupStyle['right']=14;
 }else{
 defaultAssetGroupStyle['right']=300;
 }
+
+let ruleEndLinestyle={"position":"relative","top":-4,"width":"100%"};
+if(ruleCount < 1){
+  ruleEndLinestyle["display"] = "none";
+}
+
+
 
 return(
 
@@ -312,7 +325,8 @@ return(
                          
       </div>
     </div>
-
+    <hr style={ruleEndLinestyle}/>
+    <span id="showNoOfRules" ref="showNoOfRules" ></span>
   </div>
 
 );//return function

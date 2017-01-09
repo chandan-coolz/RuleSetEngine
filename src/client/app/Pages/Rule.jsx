@@ -40,6 +40,7 @@ this.hideRuleConditionListener = this.hideRuleConditionListener.bind(this);
 this.hideRuleIfOpenListener = this.hideRuleIfOpenListener.bind(this);
 this.rule={};
 this.assetSourceChangeListener = this.assetSourceChangeListener.bind(this);
+this.isToShowCreativeGroup = true;
 
 } //constructor
 
@@ -132,6 +133,7 @@ componentDidMount() {
   if( (RuleStore.getAddedRuleSection()==this.props.secName) && 
     (RuleStore.getAddedRulePos()==this.props.rulePosition) ){
        this.refs.conditionContainer.style.opacity = 0;
+       this.refs.conditionContainer.style.height = "20px";
        this.refs.ruleHighlighter.style.opacity = 0;
        this.refs.showDownArrow.style.display = "inline-block";
        this.refs.showUpArrow.style.display = "none";
@@ -141,29 +143,32 @@ componentDidMount() {
           this.refs.ruleTable.style.background = "#FFFFFF";
         }
     
-       $(this.refs.conditionContainer).slideUp();
+      $(this.refs.conditionContainer).slideUp();
       let element=this.refs.ruleTable.getBoundingClientRect();
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       let currentTopPos = element.top + scrollTop;
       var height = window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight;
     
      // if(element.top<0 || element.top>=height-50){
-       window.scrollTo(0,currentTopPos-100);
+       window.scrollTo(0,currentTopPos - 5);
        //}
       // this.refs.ruleTable.style.opacity = 0;
        setTimeout(function(){ 
         this.refs.conditionContainer.style.transition = "opacity 1s";
         this.refs.conditionContainer.style.opacity = 1;
+        this.refs.ruleTable.style.transition = "background 0.2s"
+        this.refs.ruleTable.style.background = "#CCCCCC";
         //this.refs.ruleTable.style.background = "red";
         setTimeout(function(){
-         this.refs.ruleTable.style.transition = "background 1s"; 
-         this.refs.ruleTable.style.background = "#CCCCCC";
-         this.refs.ruleHighlighter.style.transition = "opacity 1s";
-         this.refs.ruleHighlighter.style.opacity = 1;
+         //; 
          this.refs.showDownArrow.style.display = "none";
          this.refs.showUpArrow.style.display = "inline-block";
-         $(this.refs.conditionContainer).slideDown("slow");
-        }.bind(this),500);
+        // this.refs.ruleHighlighter.style.transition = "1s";
+         this.refs.conditionContainer.style.height = "auto";
+         this.refs.ruleHighlighter.style.opacity = 1;
+         
+         $(this.refs.conditionContainer).slideDown();
+        }.bind(this),400);
         
        }.bind(this),500);
       //reset the getAddedRulePos
@@ -261,7 +266,7 @@ $(this.refs.conditionContainer).slideDown() ;
 
 moveUp(){
 
-
+this.isToShowCreativeGroup = false;
 //window.scrollTo(0,rule-100);
 $(this.refs.conditionContainer).slideUp() ;
 RuleStore.hideMoveUpView( this.props.secName,this.props.rulePosition);
@@ -273,32 +278,33 @@ setTimeout(function(){
 RuleAction.moveRuleUp(this.props.secName,this.props.rulePosition);
 
 setTimeout(function(){
+this.isToShowCreativeGroup = true;  
 tempDataStore.reSetDeletedCreativeAssetGroup();  
 this.setState({ruleTableClass:"rule"});
  }.bind(this),400);
  
  
 
-}.bind(this),700); 
+}.bind(this),400); 
 
 
 
 } //move rule up
 
 moveDown(){
-
+  this.isToShowCreativeGroup = false;
   $(this.refs.conditionContainer).slideUp() ;
   RuleStore.hideMoveDownView( this.props.secName,this.props.rulePosition);
   this.setState({ruleTableClass:"movedown-rule",isToShowRuleContent:false,conditionClass:"hide"});
   setTimeout(function(){
  /* this.setState({ruleTableClass:"movedownUp-rule"}); */
-
+  this.isToShowCreativeGroup = true;
   RuleAction.moveRuleDown(this.props.secName,this.props.rulePosition);
   setTimeout(function(){
   tempDataStore.reSetDeletedCreativeAssetGroup();  
   this.setState({ruleTableClass:"rule"});
 }.bind(this),400); 
-  }.bind(this),700);
+  }.bind(this),400);
  
 } //move rule down
 
@@ -563,7 +569,7 @@ if(this.state.conditionClass!="hide"){
 }
 
 return (
-
+   
   <li 
   
   className={this.state.zIndexClass} 
@@ -705,7 +711,9 @@ return (
        <td >
              
             <CreativeGroupToShow creativeGroups={this.rule.creative_groups} creativeGroup={this.rule.creative_group}
-            changeZIndex={this.changeZIndex.bind(this)} secName={this.props.secName} rulePosition={this.props.rulePosition}/>
+            changeZIndex={this.changeZIndex.bind(this)} secName={this.props.secName} rulePosition={this.props.rulePosition}
+            isToShowCreativeGroup={this.isToShowCreativeGroup}
+            />
           
               <span className={isToShowCreativeGroupWarningClass}>
                <a  className="error" ><i className="fa fa-exclamation"></i></a>
@@ -733,7 +741,14 @@ return (
      </tr>
      </tbody> 
     </table>
-    <span style={validationError}>
+    <span style={validationError}
+       onMouseEnter={(e)=>{
+          
+            showMessageToolTip($(e.target), "Expand the rule to see the errors" , "groupSelectionQtipLeft");
+           
+        }}
+
+    >
        <a  className="error"><i className="fa fa-exclamation"></i></a>
     </span>
  

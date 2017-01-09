@@ -15,9 +15,12 @@ this.state = {
 this.isZindexChanged = false;
 this.isFirstTimeCalled = false;
 this.deletedCreativeAssetGroup = [];
+this.assestsList = [];
 }
 
 buttonToggleClicked(){
+ if(this.assestsList.length > 0){
+
 
   if(!this.isZindexChanged && !this.isFirstTimeCalled){
      this.isZindexChanged = true;  
@@ -32,7 +35,7 @@ buttonToggleClicked(){
      this.props.changeZIndex();
      
    }
-
+}
 
 
 }//buttonToggleClicked
@@ -59,6 +62,10 @@ componentWillMount() {
 
 
 componentWillReceiveProps(newProps) { 
+ 
+ if(this.state.isToShowOptions && !newProp.isToShowCreativeGroup){
+   this.state.isToShowOptions = false;
+  }
 
  if(newProps.creativeGroups == undefined) {
 
@@ -100,6 +107,9 @@ for(let i=0;i<this.state.creativeGroups.length;i++){
 }//componentDidMount()
 
 componentDidUpdate(prevProps, prevState){
+
+this.state.isToShowOptions
+
 if(this.refs.selectText.value == '-- No Asset Groups --'){
   this.refs.selectText.style.color = '#ddd';
  }else{
@@ -254,8 +264,8 @@ tempDataStore.setDeletedCreativeAssetGroup(""+this.props.secName+this.props.rule
   }
   
 var  optionClass= this.state.isToShowOptions == true?"options" : "hide";
-
-var assestsList = dyn_assetGroups.map( (obj,i) => 
+this.assestsList = [];
+this.assestsList = dyn_assetGroups.map( (obj,i) => 
 
     
     <li key={i}>
@@ -263,7 +273,7 @@ var assestsList = dyn_assetGroups.map( (obj,i) =>
          <span className="checkbox-border"></span>
          <label >  
           <input type="checkbox" 
-          ref={obj.groupName} onChange={(e) => this.checkBoxChanged(e.target.checked,obj.groupName)} />
+          ref={obj.groupName} onChange={(e) => {this.checkBoxChanged(e.target.checked,obj.groupName)} }/>
           <span onMouseOver={(e)=> { getOverflowContent($(e.target), '', $(e.target) ) ;  } }>{obj.groupName}</span>
         </label>
      </div>
@@ -274,7 +284,7 @@ var assestsList = dyn_assetGroups.map( (obj,i) =>
 
 for(let i=0;i<this.deletedCreativeAssetGroup.length;i++){
 
-  assestsList.push(
+  this.assestsList.push(
      <li key={this.deletedCreativeAssetGroup+i}>
      <div className="checkbox" >
          <span className="checkbox-border"></span>
@@ -300,7 +310,7 @@ for(let i=0;i<this.deletedCreativeAssetGroup.length;i++){
 }
 
 /**check weather asset list is empty or not******************/
-if(assestsList.length<1){
+if(this.assestsList.length<1){
 
 selectText="-- No Asset Groups --";
 }
@@ -338,7 +348,7 @@ return(
     </p> 
   <ul>
 
-   {assestsList}
+   {this.assestsList}
 
   </ul>
   </div>
