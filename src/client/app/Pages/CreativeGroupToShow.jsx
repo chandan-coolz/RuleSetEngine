@@ -63,7 +63,7 @@ componentWillMount() {
 
 componentWillReceiveProps(newProps) { 
  
- if(this.state.isToShowOptions && !newProp.isToShowCreativeGroup){
+ if(this.state.isToShowOptions && !newProps.isToShowCreativeGroup){
    this.state.isToShowOptions = false;
   }
 

@@ -266,6 +266,7 @@ $(this.refs.conditionContainer).slideDown() ;
 
 moveUp(){
 
+$(".jivox-message").hide();
 this.isToShowCreativeGroup = false;
 //window.scrollTo(0,rule-100);
 $(this.refs.conditionContainer).slideUp() ;
@@ -292,6 +293,7 @@ this.setState({ruleTableClass:"rule"});
 } //move rule up
 
 moveDown(){
+  $(".jivox-message").hide();
   this.isToShowCreativeGroup = false;
   $(this.refs.conditionContainer).slideUp() ;
   RuleStore.hideMoveDownView( this.props.secName,this.props.rulePosition);
