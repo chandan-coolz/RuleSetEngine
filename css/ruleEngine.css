@@ -1,0 +1,2372 @@
+/******************************layout style start******************************************************/
+div.mainContainer > div.content-wrapper {
+	width:100%;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+/***********dynamic container style ************************************************/
+
+div.mainContainer > div.content-wrapper > div.dynamic-campaign-container {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	width: 100%;
+	box-sizing: border-box;
+	border-top: none;
+	margin-top: 20px;
+	position: relative;
+	padding: 27px 15px 15px 15px; 
+}
+
+div.mainContainer > div.content-wrapper > div.dynamic-campaign-container> div.default-asset-group {
+	position: absolute;
+	top: 20px;  
+}
+
+div.mainContainer > div.content-wrapper > div.dynamic-campaign-container> div.default-asset-group>span.default-asset-group-heading {
+	margin-right: 5px;
+	display: inline-block;
+	position: relative;
+	top: -7px;
+}
+
+div.mainContainer > div.content-wrapper > div.dynamic-campaign-container> div.default-asset-group>div>div.default-asset-group-select{
+	display: inline-block;
+	position: relative;
+	width: 170px;
+	height: 22px;
+	border: 1px solid #cccccc;
+	border-radius: 1px;
+	border-bottom-color: #b3b3b3;
+	cursor: pointer;
+    background-color: #f5f5f5;
+    background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+    background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+    background-repeat: repeat-x;
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    border-bottom-color: #b3b3b3;
+}
+
+div.mainContainer > div.content-wrapper > div.dynamic-campaign-container> div.default-asset-group>div>div.default-asset-group-select:hover{
+background: #e6e6e6;
+}
+div.mainContainer > div.content-wrapper > div.dynamic-campaign-container> div.default-asset-group>div>div.default-asset-group-select>span{
+	display: inline-block;
+	position: absolute;
+	top: 50%;
+	left: 5px;
+	width: 90%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	color: #c0c;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+div.mainContainer > div.content-wrapper > div.dynamic-campaign-container> div.default-asset-group>div>div.default-asset-group-select>div.down-triangle{
+	display: inline-block;
+	width: 0px;
+	height: 0px;
+	position: absolute;
+	right: 5px;
+	top: 10px;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-top: 4px solid #656464;
+}
+
+div.mainContainer > div.content-wrapper > div.dynamic-campaign-container> div.default-asset-group>div>div.default-asset-group-select>ul.select-style{
+	list-style: none;
+	text-align: start;
+	background: #fff;
+	position: absolute;
+	width: 172px;
+	left: -1px;
+	z-index: 11;
+	max-height: 200px;
+	top: 23px;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	overflow-wrap: break-word;
+	border: 1px solid #ddd;
+	border-top: none;
+}
+
+div.mainContainer > div.content-wrapper > div.dynamic-campaign-container> div.default-asset-group>div>div.default-asset-group-select>ul.hide{
+	display: none !important;
+} 
+
+div.mainContainer > div.content-wrapper > div.dynamic-campaign-container> div.default-asset-group>div>div.default-asset-group-select>ul.select-style > li {
+	text-decoration: none;
+	display: block;
+	padding: 2px;
+	text-indent: 5px;
+	line-height: 1.5;
+	min-height: 0;
+	font-weight: normal;
+	white-space: nowrap;
+	width: 98%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	color: #191919;
+}  
+
+div.mainContainer > div.content-wrapper > div.dynamic-campaign-container> div.default-asset-group>div>div.default-asset-group-select>ul.select-style >li:hover{
+	cursor: pointer;
+	background: #C0C;
+	background: -webkit-linear-gradient(#C400C4,#A100A1);
+	background: linear-gradient(#C400C4,#A100A1);
+	color: #fff;
+}
+
+div.mainContainer > div.content-wrapper > div.dynamic-campaign-container> div.default-asset-group>div>span.recordDeleted{
+	margin: 0 10px;
+	display: inline-block;
+	width: 15px;
+	position: absolute;
+	top: 2.5px;
+	right: -30px;
+	border: 1px solid #FC0;
+	background-color: #FFD;
+	text-align: center;
+	border-radius: 50%;
+	padding: 1px 0px 1px 1px;
+	cursor: pointer;
+	color: rgba(255, 0, 0, 0.5);
+	box-shadow: 0px 0px 6px 6px rgba(255, 255, 152, 0.3);
+}
+
+div.mainContainer > div.content-wrapper > div.dynamic-campaign-container> div.default-asset-group>div>span.hide{
+	display: none!important;  
+}
+
+div.mainContainer > div.content-wrapper > div.dynamic-campaign-container> div.default-asset-group>div>div.error-message{
+	display: none;
+}  
+
+div.mainContainer > div.content-wrapper > div.dynamic-campaign-container> div.default-asset-group>div>span.recordDeleted:hover+ div.error-message{
+	position: relative;
+	display: block;
+}  
+
+div.mainContainer > div.content-wrapper > div.dynamic-campaign-container> div.default-asset-group>div>div.error-message>div.arrow-up{
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 7px solid #333333;
+	position: absolute;
+	top: -5px;
+	right: -16px;
+	z-index: 11;
+}  
+
+div.mainContainer > div.content-wrapper > div.dynamic-campaign-container> div.default-asset-group>div>div.error-message>div.message{
+	position: absolute;
+	width: 300px;
+	padding: 5px 9px;
+	background: #333333;
+	font-size: 11px;
+	z-index: 11;
+	color: #ccc;
+	word-wrap: break-word;
+	text-align: justify;
+	line-height: 12px;
+	top: 2px;
+	right: -25px;
+	border-radius: 2px;
+
+}
+
+div.rule{
+	position: relative;
+	margin-top: 10px;
+	width:100%; 
+	margin:20px 10px 0px  0px;
+
+}
+
+div.rule > div.rule-tree {
+	min-width: 100%;
+	margin-bottom: 40px;
+	width: auto;
+	position: relative;
+
+}
+
+/************style for add rule button at the start***************************/
+
+div.rule > div.rule-tree>div.hide {
+	display: none!important;
+}
+
+div.rule > div.rule-tree>div.add-rule-button>p {
+	padding: 15px;
+	border-top: 1px solid #CCC;
+	border-bottom: 1px solid #CCC;
+	text-align: center;
+	color: #666666;
+	margin-top: 46px;
+	font-size: 13px;
+	word-wrap: break-word;
+	background-color: #FAFAFA;
+}
+
+div.rule > div.rule-tree>div.add-rule-button>p:hover {
+	background: #F1F1F1;
+}
+
+div.rule > div.rule-tree>div.add-rule-button>label.add-rule-button{
+	position: relative; 
+	float: right;
+	top: 30px;
+}
+
+div.rule > div.rule-tree>div.add-rule-button>label.add-rule-button>span  {
+	color: #fff;
+	background: #c0c;
+	border: 1px solid #c0c0c0;
+	border-bottom-color: #b3b3b3;
+	text-align: center;
+	padding-left: 23px;
+	position: relative;
+	border-radius: 2px;
+	width: 80px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 14px;
+	display: inline-block;
+	box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+}
+
+div.rule > div.rule-tree>div.add-rule-button>label.add-rule-button>span:hover  {
+	background: #909;
+	cursor: pointer;
+}
+
+div.rule > div.rule-tree>div.add-rule-button>label.add-rule-button>span>span{
+	position: absolute;
+	top: 0;
+	left: 1px;
+	display: inline-block;
+	height: 30px;
+	width: 25px;
+	text-align: center;
+	border-right: 2px solid #D0D;
+	border-right-style: groove;
+}
+
+div.rule > div.rule-tree>div.add-rule-button>label.add-rule-button>span>span>i  {
+	color: #fff;
+	position: relative;
+}
+
+/*******style to rule table heading ****************************/
+div.rule > div.rule-tree > table.ruleHeading {
+	margin: 0;
+	padding-top: 1px;
+	width: 100%;
+	box-sizing: border-box;
+	border-collapse: separate ;
+	border-spacing: 0px;
+}
+
+div.rule > div.rule-tree > table.hide{
+	display: none!important;  
+}
+div.rule > div.rule-tree  > table.ruleHeading > thead> tr > th{
+border-bottom: none;	
+}
+div.rule > div.rule-tree  > table.ruleHeading > thead> tr > th:nth-child(1){
+	width: 5%;
+	border-right: none;
+	text-align: end;
+	padding-right: 0;
+}
+
+div.rule > div.rule-tree  > table.ruleHeading > thead> tr > th:nth-child(2) {
+	width: 50%;
+	text-align: start;
+
+}
+
+div.rule > div.rule-tree  > table.ruleHeading > thead> tr > th:nth-child(3){
+	width: 28%;
+}
+
+div.rule > div.rule-tree  > table.ruleHeading > thead> tr > th:nth-child(4) {
+	width: 17%;
+}
+
+div.rule > div.rule-tree > table.ruleHeading > thead> tr > th {
+	color: #C0C !important;   
+	padding: 10px 15px !important;
+	border-top: 1px dashed #dedede !important;
+	border-right: 1px solid #dedede ;
+	text-align: center;
+	box-sizing: border-box;
+	cursor: inherit;
+}
+
+div.rule > div.rule-tree > table.ruleHeading > thead> tr > th:last-child{
+	border-right : none !important;
+}
+
+/********** style rleated to add  rule ********************************************/
+
+/*************add rule at start ********************************************************/
+div.dynamic-campaign-container>div.hide{
+	display: none;
+}
+div.dynamic-campaign-container>div.add-rule-at-start{
+	display: inline-block;
+	float: right;
+    position: relative;
+    top: -12px;
+}
+div.dynamic-campaign-container>div.add-rule-at-start > div.add-rule {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none; 
+    display: inline;
+    user-select: none;
+    position: relative;
+    margin-left: 9px;
+}
+
+div.dynamic-campaign-container>div.add-rule-at-start > div.add-rule>div.add-rule-option-container{
+	width: 350px;
+	position: absolute;
+	background: #FFF;
+	right: 0px;
+	top: -9px;
+	border-color: #AAA;
+	color: #666;
+	border-width: 1px;
+	border-style: solid;
+	background-color: #FFF;
+	z-index: 10001;
+	border-radius: 2px;
+	display: block!important;
+	transition: display 1s;
+}
+
+div.dynamic-campaign-container>div.add-rule-at-start >div.add-rule>div.add-rule-option-container-hide{
+	display: none!important;
+	transition: display 1s;
+}
+
+/************************add rule at end end here******************************/
+div.rule >div.rule-tree>div.add-rule-at-end{
+	position: relative;
+	z-index: 10;
+	display: inline-block;
+	float: right;
+	top: 47px;
+	border: 1px solid transparent;
+}
+
+div.rule >div.rule-tree>div.hide{
+	display: none!important;  
+}
+
+div.rule >div.rule-tree>div.add-rule-at-end > div.add-rule {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none; 
+	position: relative;
+	width: 100%;
+	text-align: end;
+}
+
+div.rule >div.rule-tree>div.add-rule-at-end > div.add-rule>div.add-rule-option-container{
+	width: 350px;
+	position: absolute;
+	background: #FFF;
+	right: 0px;
+	top: -162px;
+	border-color: #AAA;
+	color: #666;
+	border-width: 1px;
+	border-style: solid;
+	background-color: #FFF;
+	z-index: 10001;
+	border-radius: 2px;
+	display: block!important;
+	transition: display 1s;
+}
+
+div.rule  > div.rule-tree>div.add-rule-at-end >div.add-rule>div.add-rule-option-container-hide{
+	display: none!important;
+	transition: display 1s;
+}
+
+div>div > div.add-rule>div.add-rule-option-container>div.titlebar{
+	background: #aaaaaa;
+	background: -moz-linear-gradient(top, #aaaaaa 0%, #dddddd 0%, #bbbbbb 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#aaaaaa), color-stop(0%,#dddddd), color-stop(100%,#bbbbbb));
+	background: -webkit-linear-gradient(top, #aaaaaa 0%,#dddddd 0%,#bbbbbb 100%);
+	background: -o-linear-gradient(top, #aaaaaa 0%,#dddddd 0%,#bbbbbb 100%);
+	background: -ms-linear-gradient(top, #aaaaaa 0%,#dddddd 0%,#bbbbbb 100%);
+	background: linear-gradient(to bottom, #aaaaaa 0%,#dddddd 0%,#bbbbbb 100%);
+	font-size: 12px;
+	padding: 10px 4px;
+	border-bottom: 1px solid transparent;
+	border-top-left-radius: 1px;
+	border-top-right-radius: 1px;
+	margin-bottom: 4px;
+	color: #333;
+	text-align: start;
+	font-weight: 700;
+}
+
+div>div > div.add-rule>div.add-rule-option-container>div.content{
+	position: relative;
+	text-align: left;
+	width: 320px;
+	margin: 16px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #E0E0E0;
+}
+
+div>div > div.add-rule>div.add-rule-option-container>div.content>table{
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+}
+
+div>div > div.add-rule>div.add-rule-option-container>div.content>table>tbody>tr>td{
+	padding: 8px 0;
+	color: #666;
+	margin: 0;
+	width: 60%;
+} 
+
+div>div > div.add-rule>div.add-rule-option-container>div.content>table>tbody>tr>td:first-child{
+	width: 30%;
+	text-align: center;
+} 
+
+div>div > div.add-rule>div.add-rule-option-container>div.content>table>tbody>tr>td>div.add-rule-select{
+	display: inline-block;
+	position: relative;
+	cursor: pointer;
+	background: #F5F5F5;
+	border: 1px solid #ddd;
+	width: 100%;
+	width: calc(100% - 7px);
+	height:20.6px;
+	padding-left: 5px;
+	text-align: start;
+	box-sizing: border-box;
+	background: -webkit-linear-gradient(#fff,#dedede);
+	background: linear-gradient(#fff,#dedede);
+}
+
+div>div > div.add-rule>div.add-rule-option-container>div.content>table>tbody>tr>td>div.add-rule-select>span{
+    display: inline-block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 210px;
+    color: #c0c;
+    position: relative;
+    top: 2px;
+    padding-left: 5px;
+    left: -5px;
+}
+
+div>div > div.add-rule>div.add-rule-option-container>div.content>table>tbody>tr>td>div.add-rule-select>span.hide{
+	display: none!important;
+}    
+
+div>div > div.add-rule>div.add-rule-option-container>div.content>table>tbody>tr>td>div.add-rule-select>div.down-triangle{
+	display: inline-block;
+	width: 0px;
+	height: 0px;
+	position: absolute;
+	right: 5px;
+	top: 9px;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-top: 4px solid #656464;
+}
+
+div>div > div.add-rule>div.add-rule-option-container>div.content>table>tbody>tr>td>div.add-rule-select>div.hide{
+	display: none !important;
+}
+
+div>div > div.add-rule>div.add-rule-option-container>div.content>table>tbody>tr>td>div.add-rule-select>ul.select-style{
+	list-style: none;
+	text-align: start;
+	background: #fff;
+	position: absolute;
+	width: 100%;
+	left: -1px;
+	z-index: 13;
+	max-height: 200px;
+	top: 20px;
+	margin: 0;
+	padding: 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+	overflow-wrap: break-word;
+	border: 1px solid #ddd;
+	border-top: none;
+}
+
+div>div > div.add-rule>div.add-rule-option-container>div.content>table>tbody>tr>td>div.add-rule-select>ul.hide{
+	display: none;
+}
+
+div>div > div.add-rule>div.add-rule-option-container>div.content>table>tbody>tr>td>div.add-rule-select>ul.select-style > li {
+	text-decoration: none;
+	display: block;
+	padding: 2px ;
+	text-indent: 5px;
+	line-height: 1.5;
+	min-height: 0;
+	font-weight: normal;
+	white-space: nowrap;
+	width: 98%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	color: #191919;
+}  
+
+div>div.add-rule-option-container>div.content>table>tbody>tr>td>div.add-rule-select>ul.select-style > li::after {
+	border: none;
+} 
+
+div>div.add-rule-option-container>div.content>table>tbody>tr>td>div.add-rule-select>ul.select-style > li::before {
+	border: none;
+}  
+
+div>div > div.add-rule>div.add-rule-option-container>div.content>table>tbody>tr>td>div.add-rule-select>ul.select-style >li:hover{
+	cursor: pointer;
+	background: #C0C;
+	color: #fff;
+}
+
+div>div > div.add-rule>div.add-rule-option-container>div.action{
+	padding: 0px 15px 10px 0px;
+	display: inline-block;
+	float: right;
+}
+/**********end of style related to addrule ********************************/
+
+/**************style the scrollbar of rule********************************************/
+	
+
+div.rule > div.rule-tree > ul > li >div >ul{
+	height: auto;
+	width: calc(100% - 35px);
+	margin-right: 35px;
+	overflow-x: auto;
+	overflow-y: hidden;
+}
+
+div.rule > div.rule-tree > ul > li >div >ul::-webkit-scrollbar {
+	height: 0.5em;
+	opacity: 0;
+}
+ 
+div.rule > div.rule-tree > ul > li >div >ul:hover::-webkit-scrollbar {
+	height: 0.5em;
+	opacity: 1;
+}
+
+div.rule > div.rule-tree > ul > li>div >ul:hover::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.3);
+}
+ 
+div.rule > div.rule-tree > ul > li>div >ul:hover::-webkit-scrollbar-thumb {
+	background-color: darkgrey;
+	outline: 1px solid slategrey;
+	border-radius: 5px;
+}
+/**************rule tree style starts from here *****************************/
+
+div.rule > div.rule-tree  ul , div.rule > div.rule-tree  ul  li  {
+	list-style: none;
+	position: relative;
+	padding:0px 10px;
+	padding-top: 5px;
+	padding-bottom: 0px;
+} 
+
+div.rule > div.rule-tree ul {
+	padding-left: 32px;
+	position: relative;
+}
+
+div.rule > div.rule-tree > ul {
+	padding-left: 32px;
+	position: relative;
+	padding-bottom: 150px;
+	padding: 0;
+	margin: 0px;
+}
+
+div.rule > div.rule-tree > ul > li{
+	margin: 0px;
+	padding: 0px;
+}
+
+
+div.rule > div.rule-tree  ul li::before, div.rule > div.rule-tree  ul  li::after{
+	content: "";
+	position: absolute;
+	left: -12px;
+}
+
+div.rule > div.rule-tree  ul  li::before {
+	border-top: 1px dashed #ddd;
+	top: 23px;
+	width: 15px;
+	height: 0;
+}
+
+div.rule > div.rule-tree  ul  li::after {
+	border-left: 1px dashed #ddd;
+	height: 100%;
+	width: 0px;
+	top: 0px;
+} 
+
+div.rule > div.rule-tree  >ul  >li::after {
+	border: none;
+}
+
+div.rule > div.rule-tree  >ul  >li::before {
+	border: none;
+}
+
+div.rule > div.rule-tree ul  > li > table.moveup-rule {
+	position: relative;
+	box-sizing: border-box;
+	margin: 0;
+	width: 100%;
+	-webkit-transform: translate3d(0,-99%,0);
+	transform: translate3d(0,-99%,0);       
+	-webkit-transition: -webkit-transform 0.3s ease; 
+	transition: transform 0.3s ease;   
+	border-top: 1px solid #ddd;  
+	cursor: move;
+	background: #FAFAFA;
+	box-sizing: border-box;
+	border-collapse: separate ;
+	border-spacing: 0px;
+	position: relative;
+	z-index: 10;
+}
+
+div.rule > div.rule-tree ul  > li > table.movedown-rule {
+	position: relative;
+	box-sizing: border-box;
+	margin: 0;
+	width: 100%;
+	-webkit-transform: translate3d(0,99%,0);
+	transform: translate3d(0,99%,0);    
+	-webkit-transition: -webkit-transform 0.3s ease; 
+	transition: transform 0.3s ease; 
+	border-top: 1px solid #ddd;
+	cursor: move;
+	border-collapse: separate ;
+	border-spacing: 0px;
+	background: #FAFAFA;
+	position: relative;
+	z-index: 10;
+}
+ 
+div.rule > div.rule-tree ul  > li > table.rule {
+	position: relative;
+	box-sizing: border-box;
+	margin: 0;
+	width: 100%;
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);  
+	-webkit-transition: -webkit-transform 0.3s ease; 
+	transition: transform 0.3s ease;   
+	border-top: 1px solid #ddd;
+	cursor: move;
+	box-sizing: border-box;
+	border-collapse: separate ;
+	border-spacing: 0px;
+	position: relative;
+	z-index: 9;
+}
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td , div.rule > div.rule-tree ul > li > table.moveup-rule > tbody> tr > td, div.rule > div.rule-tree ul > li > table.movedown-rule > tbody> tr > td {
+	text-align: center;
+	box-sizing: border-box;
+	color: #000 !important;
+	padding: 5px 15px !important;
+	position: relative;
+	border-right: 1px solid #dedede ;
+}    
+
+div.rule > div.rule-tree ul  > li > table.rule > tbody> tr > td:nth-child(1),div.rule > div.rule-tree ul  > li > table.moveup-rule > tbody> tr > td:nth-child(1), div.rule > div.rule-tree ul  > li > table.movedown-rule > tbody> tr > td:nth-child(1) {
+	width: 5%;
+	border-right: none;
+	text-align: start;
+	padding-right: 0 !important;
+}
+
+div.rule > div.rule-tree ul  > li > table.rule > tbody> tr > td:nth-child(2), div.rule > div.rule-tree ul  > li > table.moveup-rule > tbody> tr > td:nth-child(2), div.rule > div.rule-tree ul  > li > table.movedown-rule > tbody> tr > td:nth-child(2) {
+	width: 50%;
+	text-align: start;
+}
+
+div.rule > div.rule-tree ul  > li > table.rule > tbody> tr > td:nth-child(3), div.rule > div.rule-tree ul  > li > table.moveup-rule > tbody> tr > td:nth-child(3), div.rule > div.rule-tree ul  > li > table.movedown-rule > tbody> tr > td:nth-child(3)  {
+	width: 28%;
+}
+
+div.rule > div.rule-tree ul  > li > table.rule > tbody> tr > td:nth-child(4), div.rule > div.rule-tree ul  > li > table.moveup-rule > tbody> tr > td:nth-child(4), div.rule > div.rule-tree ul  > li > table.movedown-rule > tbody> tr > td:nth-child(4)  {
+	width: 17%;
+	border-right: none !important;
+}
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td.ruleName >input, div.rule > div.rule-tree ul > li > table.moveup-rule > tbody> tr > td.ruleName >input, div.rule > div.rule-tree ul > li > table.movedown-rule > tbody> tr > td.ruleName >input {
+	pointer-events:none;
+	margin-right: 5px;
+	text-align: start;
+	border: none;
+	background: transparent !important;
+	color: #373D3F;
+	padding: 5px;
+	outline: 0;
+	width: 80%;
+}
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td.ruleName >input.edit{
+	pointer-events:auto;
+	color: #373D3F;
+}
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td.ruleName >i , div.rule > div.rule-tree ul > li > table.moveup-rule > tbody> tr > td.ruleName >i, div.rule > div.rule-tree ul > li > table.movedown-rule > tbody> tr > td.ruleName >i {
+	float: right;
+	color: #666;
+	font-size: 13px;
+	top: 3px;
+	position: relative;
+}    
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > i , div.rule > div.rule-tree ul > li > table.moveup-rule > tbody> tr > td > i, div.rule > div.rule-tree ul > li > table.movedown-rule > tbody> tr > td > i {
+	margin-right: 10px;
+	padding: 2px;
+	font-size: 16px;
+	color: #666;
+}   
+
+div.rule > div.rule-tree  > ul > li> table.rule > tbody > tr >td>span>i.fa-minus, div.rule > div.rule-tree ul > li > table.moveup-rule > tbody> tr > td > span>i.fa-minus, div.rule > div.rule-tree ul > li > table.movedown-rule > tbody> tr > td > span>i.fa-minus  {
+	color: #c0c;
+}
+
+div.rule > div.rule-tree  > ul > li> table.rule > tbody > tr >td>span>i.fa-plus, div.rule > div.rule-tree ul > li > table.moveup-rule > tbody> tr > td >span> i.fa-plus,
+div.rule > div.rule-tree ul > li > table.movedown-rule > tbody> tr > td > span>i.fa-plus  {
+	color: #c0c;
+}
+
+div.rule > div.rule-tree  > ul > li> table.rule > tbody > tr >td>span>i.fa-minus:hover, div.rule > div.rule-tree  > ul > li> table.rule > tbody > tr >td>span>i.fa-plus:hover{
+	color: #909;
+	cursor: pointer;
+}
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td >i:hover{
+	color: #C0C;
+	box-sizing: border-box;
+	cursor: pointer;
+
+}
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td >i:active{
+	opacity: 0.5;
+}
+
+div.rule > div.rule-tree  > ul:nth-child(2) > li:first-child table.rule > tbody > tr >td>i.fa-chevron-up  {
+	pointer-events: none;
+	cursor: default; 
+	color: #ddd;
+}
+
+div.rule > div.rule-tree  > ul:nth-last-child(3)  > li:last-child table.rule > tbody > tr >td>i.fa-chevron-down  {
+	pointer-events: none;
+	cursor: default;
+	color: #ddd; 
+}
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td>label >select, div.rule > div.rule-tree ul > li > table.moveup-rule > tbody> tr > td>label >select, div.rule > div.rule-tree ul > li > table.movedown-rule > tbody> tr > td>label >select {
+	display: inline-block !important;
+	opacity: 1 !important;
+	color: #909;
+	padding: 0;
+	outline: none;
+}
+/*******style for creative group to show ********************************************/
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > span.hide, div.rule > div.rule-tree ul > li > table.moveup-rule > tbody> tr > td span.hide, div.rule > div.rule-tree ul > li > table.movedown-rule > tbody> tr > td span.hide{
+	display: none!important;
+}    
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > span.recordDeleted, div.rule > div.rule-tree ul > li > table.moveup-rule > tbody> tr > td span.recordDeleted, div.rule > div.rule-tree ul > li > table.movedown-rule > tbody> tr > td span.recordDeleted{
+	margin: 0 10px;
+	display: inline-block;
+	width: 15px;
+	position: absolute;
+	top: 9px;
+	right: -5px;
+	cursor: pointer;
+
+}
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.error-message, div.rule > div.rule-tree ul > li > table.moveup-rule > tbody> tr > td div.error-message, div.rule > div.rule-tree ul > li > table.movedown-rule > tbody> tr > td div.error-message{
+	display: none;
+}  
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > span.recordDeleted:hover+ div.error-message, div.rule > div.rule-tree ul > li > table.moveup-rule > tbody> tr > td
+span.recordDeleted:hover+ div.error-message, div.rule > div.rule-tree ul > li > table.movedown-rule > tbody> tr > td span.recordDeleted:hover+ div.error-message{
+	display: inline-block;
+	position: absolute;
+	display: inline-block;
+	top: 43px;
+	left: 362px;
+} 
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.error-message>div.arrow-right, div.rule > div.rule-tree ul > li > table.moveup-rule > tbody> tr > td div.error-message>div.arrow-right, div.rule > div.rule-tree ul > li > table.movedown-rule > tbody> tr > td div.error-message>div.arrow-right{
+	width: 0;
+	height: 0;
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+	border-left: 7px solid #333333;
+	position: absolute;
+	top: -32px;
+	right: 122px;
+	z-index: 11;
+}  
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.error-message>div.message, div.rule > div.rule-tree ul > li > table.moveup-rule > tbody> tr > td> div.error-message>div.message, div.rule > div.rule-tree ul > li > table.movedown-rule > tbody> tr > td div.error-message>div.message{
+	position: absolute;
+	width: 300px;
+	padding: 5px 9px;
+	background: #333333;
+	font-size: 11px;
+	color: #ccc;
+	word-wrap: break-word;
+	text-align: justify;
+	line-height: 12px;
+	top: -54px;
+	right: 129px;
+	z-index: 11;
+	border-radius: 2px;
+}
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.creative-group-to-show, div.rule > div.rule-tree ul > li > table.moveup-rule > tbody> tr > td > div.creative-group-to-show, div.rule > div.rule-tree ul > li > table.movedown-rule > tbody> tr > td > div.creative-group-to-show{
+	cursor: default;
+	box-sizing: border-box;
+	margin: 0 12px;
+}
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.creative-group-to-show >input[type="text"], div.rule > div.rule-tree ul > li > table.moveup-rule > tbody> tr > td > div.creative-group-to-show >input[type="text"], div.rule > div.rule-tree ul > li > table.movedown-rule > tbody> tr > td > div.creative-group-to-show >input[type="text"]{
+    pointer-events: none;
+    text-align: center;
+    color: #373D3F;
+    border: 1px solid #ddd;
+    border-right: none;
+    border-radius: 0;
+    outline: none;
+    padding: 3px;
+    outline: 0;
+    width: 88%;
+    top: 2px;
+    position: relative;
+    box-sizing: border-box;
+}
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.creative-group-to-show > span, div.rule > div.rule-tree ul > li > table.moveup-rule > tbody> tr > td > div.creative-group-to-show > span, div.rule > div.rule-tree ul > li > table.movedown-rule > tbody> tr > td > div.creative-group-to-show > span {
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    width: 12%;
+    height: 23px;
+    background: #FAFAFA;
+    position: relative;
+    display: inline-block;
+    top: -1px;
+    cursor: pointer;
+}
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.creative-group-to-show > span> span.arrow-down, div.rule > div.rule-tree ul > li > table.moveup-rule > tbody> tr > td > div.creative-group-to-show > span> span.arrow-down , div.rule > div.rule-tree ul > li > table.movedown-rule > tbody> tr > td > div.creative-group-to-show > span>
+span.arrow-down  {
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    cursor: pointer;
+    border-top: 4px solid #555;
+    position: relative;
+    top: 14px;
+    right: 1px;
+}
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.creative-group-to-show > div.options, div.rule > div.rule-tree ul > li > table.moveup-rule > tbody> tr > td >
+div.creative-group-to-show > div.options, div.rule > div.rule-tree ul > li > table.movedown-rule > tbody> tr > td > div.creative-group-to-show > div.options {
+	position: relative;
+	width: 100%;
+	border: 1px solid #ddd;
+	border-bottom: none;
+	border-top: none;
+	box-sizing: border-box;
+}
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.creative-group-to-show > div.hide, div.rule > div.rule-tree ul > li > table.moveup-rule > tbody> tr > td > 
+div.creative-group-to-show > div.hide, div.rule > div.rule-tree ul > li > table.movedown-rule > tbody> tr > td > div.creative-group-to-show > div.hide{
+	display: none!important;   
+}
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.creative-group-to-show > div.options >p{
+	text-align: start;
+	box-sizing: border-box;
+	padding: 5px 0px;
+	position: absolute;
+	text-align: center;
+	background-color: #CCCCCC;
+	width: 100%;
+	z-index: 9;
+}
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.creative-group-to-show > div.options >ul{
+	width: 100%;
+	position: absolute;
+	background: #fff;
+	border: 1px solid #ddd;
+	height: 175px;
+	box-sizing: border-box;
+	top: 25px;
+	left: 0px;
+	padding: 0;
+	margin: 0;
+	z-index: 9;
+	overflow-y: scroll;
+	list-style: none;
+	text-align: start;
+}
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.creative-group-to-show > div.options >p>span{
+	cursor: pointer;
+	width: 40%;
+	padding-left: 3%;
+}  
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.creative-group-to-show > div.options >p>span.close-icon{
+	position: relative;
+	display: inline-block;
+	width: 11%;
+	text-align: center;
+	float: right;
+	position: relative;
+	cursor: pointer;
+}
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.creative-group-to-show > div.options >p>span >span{
+font-weight: bold;
+}
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.creative-group-to-show > div.options >p>span >span:hover{
+color: #c0c;
+text-decoration: underline;
+}
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.creative-group-to-show > div.options >ul>li{
+position: relative;
+margin: 5px;
+padding: 0;
+width: 95%;	
+height: 20px;
+}
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.creative-group-to-show > div.options >ul>li::after, div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.creative-group-to-show > div.options >ul>li::before{
+	border: none;
+} 
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.creative-group-to-show > div.options >ul>li>div.checkbox {
+	width: 100%;
+	background-color: #fff;
+	position: relative;
+	display: inline-block;
+	top: 2px;
+}
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.creative-group-to-show > div.options >ul>li>div.checkbox >span.checkbox-border{
+display: inline-block;
+height: 15px;
+width: 15px;
+border: 2px solid #ddd;
+position: relative;
+box-sizing: border-box;
+}
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.creative-group-to-show > div.options >ul>li>div.checkbox >label{
+	position: relative;
+	display: inline-block;
+    width: 90%;
+}
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.creative-group-to-show > div.options >ul>li>div.checkbox >label>input[type="checkbox"] {
+	display: none;
+}  
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.creative-group-to-show > div.options >ul>li>div.checkbox >label>span{
+display: inline-block;
+width: 90%;
+margin-left: 10px;
+white-space: nowrap;
+text-overflow: ellipsis;
+overflow: hidden;
+}
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.creative-group-to-show > div.options >ul>li>div.checkbox >label>span::before {
+content: "";
+width: 9px;
+height: 9px;
+position: absolute;
+bottom: 33%;
+left: -7.1%;
+background-color: #990099;
+opacity: 0;
+cursor: pointer;
+}
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.creative-group-to-show > div.options >ul>li>div.checkbox >label>input[type="checkbox"]:checked + span::before {
+	opacity: 1;
+} 
+
+div.rule > div.rule-tree ul > li > table.rule > tbody> tr > td > div.creative-group-to-show > div.options >ul>li>div.checkbox >span.recordDeleted{
+    margin: 0 10px;
+    display: inline-block;
+    width: 15px;
+    position: absolute;
+    right: -12px;
+    top: -1px;
+}
+/*************end of creative group to show ************************************************/
+
+div.rule > div.rule-tree ul > li>ul.hide{
+	display: none!important;
+}
+
+
+/*condition style */ 
+ul > li  table.condition  {    
+    padding: 5px 3px 3px 0px;
+    min-width: 484px;
+    margin-left: -5px;
+    border-collapse: separate;
+    border-spacing: 0px;
+    border-radius: 2px;
+    background: #fff;
+}
+  
+
+ul > li  table.condition + ul.hide{
+	display: hide !important;
+}
+
+
+ul > li  table.condition > thead > tr > th {
+	cursor: default;
+	padding: 0;
+	border: none;
+	text-align: center;
+}
+
+ul > li  table.condition > thead > tr > th > label>div.condition-operator-select{
+	display: inline-block;
+	position: relative;
+	top: 2px; 
+	width: 172px;
+	height: 22px;
+	border: 1px solid #cccccc;
+	cursor: pointer;
+	border-radius: 1px;
+    background-color: #f5f5f5;
+    background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+    background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+    background-repeat: repeat-x;
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    border-bottom-color: #b3b3b3;
+}
+ul > li  table.condition > thead > tr > th > label>div.condition-operator-select:hover{
+background: #e6e6e6;  
+}	
+ul > li  table.condition > thead > tr > th > label>div.condition-operator-select>span{
+    display: inline-block;
+    position: relative;
+    height: 100%;
+    text-align: start;
+    padding-top: 4px;
+    padding-left: 3px;
+    width: 100%;
+    width: calc(100% - 3px);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: #909;
+}
+
+ul > li  table.condition > thead > tr > th > label>div.condition-operator-select>div.down-triangle{
+	display: inline-block;
+	width: 0px;
+	height: 0px;
+	position: absolute;
+	right: 5px;
+	top: 10px;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-top: 4px solid #656464;
+}
+
+ul > li  table.condition > thead > tr > th > label>div.condition-operator-select>ul.select-style{
+	list-style: none;
+	text-align: start;
+	background: #fff;
+	position: absolute;
+	width: 100%;
+	left: -1px;
+	z-index: 11;
+	max-height: 200px;
+	top: 23px;
+	margin: 0;
+	padding: 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+	overflow-wrap: break-word;
+	border: 1px solid #ddd;
+	border-top: none;
+}
+
+ul > li  table.condition > thead > tr > th > label>div.condition-operator-select>ul.hide{
+	display: none!important;
+}
+
+ul > li  table.condition > thead > tr > th > label>div.condition-operator-select>ul.select-style > li {
+	text-decoration: none;
+	display: block;
+	padding: 2px;
+	text-indent: 5px;
+	line-height: 1.5;
+	min-height: 0;
+	font-weight: normal;
+	white-space: nowrap;
+	width: 98%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	color: #191919;
+}  
+
+ul > li  table.condition > thead > tr > th > label>div.condition-operator-select>ul.select-style >li:hover{
+	cursor: pointer;
+	background: #C0C;
+	color: #fff;
+}
+
+ul > li  table.condition > thead > tr > th > label>div.condition-operator-select>ul.select-style > li::before{
+	border: none;
+}
+
+ul > li  table.condition > thead > tr > th > label>div.condition-operator-select>ul.select-style > li::after{
+	border: none;
+}
+
+
+
+/*stylefordelete button */
+ul > li  table.condition >thead>tr>th>span>i.fa-minus:hover{
+color: #c0c;
+}
+ul > li  table.condition >thead>tr>th>span>i.fa-plus:hover{
+color: #c0c;
+}
+
+
+ul > li  table.condition >thead>tr>th>i.fa-trash {
+    margin-left: 9px;
+    width: 12px;
+    padding: 4px 5px;
+}
+
+ul > li  table.condition >thead>tr>th>i.fa-trash:hover {
+	color: #C0C;
+	cursor: pointer;
+}
+
+ul > li  table.condition >thead>tr>th>label.trigger>span  {
+	width: 72px;
+
+}    
+
+ul > li  table.condition >thead>tr>th>label>span  {
+	color: #909;
+	margin-left: 10px;
+	padding: 0 5px;
+	border: 1px solid #cccccc;
+	text-align: center;
+	padding-left: 27px;
+	padding-top: 4px;
+	position: relative;
+	height: 19px;
+	width: 90px;
+	border-radius: 2px;
+	display: inline-block;
+	background-color: #f5f5f5;
+    background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+    background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+    background-repeat: repeat-x;
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    border-bottom-color: #b3b3b3;
+}
+
+ul > li  table.condition >thead>tr>th>label>span:hover  {
+	background: #E6E6E6;
+	cursor: pointer;
+}
+
+ul > li  table.condition >thead>tr>th>label>span>span{
+	position: absolute;
+	top: 0;
+	left: 1px;
+	display: inline-block;
+	height: 23px;
+	width: 20px;
+	border-right: 2px solid #FFF;
+	border-right-style: groove;
+}
+
+ul > li  table.condition >thead>tr>th>label>span>span>i  {
+	color: #666666;
+	padding-right: 4px;
+	position: relative;
+	top: 3.5px;
+	left: 1.7px;
+}
+
+ 
+
+ul > li  div.trigger  {
+	padding: 5px;
+	box-sizing: border-box;
+}
+
+/********style for asset source configuration*************************************/
+div.asset-source-configuration{
+    width: calc(100% - 20px);
+    margin-left: 20px;
+    margin-bottom: 17px;
+}
+
+div.asset-source-configuration > table.asset-source-table{
+	color: #333333;
+	width: 100%;
+    border: 1px solid rgb(221, 221, 221);
+	border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+}
+
+div.asset-source-configuration > table.asset-source-table > thead{
+	background-color: #F2F2F2;
+}  
+
+div.asset-source-configuration > table.asset-source-table > thead >tr> th{
+	padding: 10px; 
+    border-bottom: 1px solid #cccccc!important;
+	text-align: center;
+	color:#C0C;
+}  
+
+div.asset-source-configuration > table.asset-source-table > thead >tr> th:nth-child(1){
+    border-left: 1px solid #E5E5E5!important;
+    border-right: 1px solid #E5E5E5!important;
+}
+div.asset-source-configuration > table.asset-source-table > thead >tr> th:nth-child(2){
+    width: 40%;
+    border-right: 1px solid #E5E5E5!important;
+}
+
+div.asset-source-configuration > table.asset-source-table > tbody >tr:nth-child(even) {
+	background: #F6F6F6;
+}
+
+div.asset-source-configuration > table.asset-source-table > tbody >tr> td{
+	padding: 10px;
+	border-top: none!important;
+	text-align: center;
+}  
+
+div.asset-source-configuration > table.asset-source-table > tbody >tr> td:first-child{
+    border-left: 1px solid #E5E5E5!important;
+     border-right: 1px solid #E5E5E5!important;
+}
+
+div.asset-source-configuration > table.asset-source-table > tbody >tr:last-child{
+border-bottom: none!important;
+}
+div.asset-source-configuration > table.asset-source-table > tbody >tr> td:last-child{
+    border-right: 1px solid #E5E5E5!important;
+    border-left: none!important;
+}
+
+
+
+
+div.asset-source-configuration > table.asset-source-table > tbody >tr> td> div.checkbox {
+	width:12px ;
+	height:12px ;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	position: relative;
+	display: inline-block;
+	margin-right: 5px;
+	top: 2px; 
+}
+
+div.asset-source-configuration > table.asset-source-table > tbody >tr> td> div.checkbox >input[type="checkbox"] {
+	display: none;
+}  
+
+div.asset-source-configuration > table.asset-source-table > tbody >tr> td> div.checkbox > label {
+	width: 9.5px;
+	height: 9.5px;
+	position: absolute;
+	top: 12%;
+	left: 13%;
+	background-color: #990099;
+	opacity: 0;
+	cursor: pointer;
+}  
+
+div.asset-source-configuration > table.asset-source-table > tbody >tr> td> div.checkbox >input[type="checkbox"]:checked + label {
+	opacity: 1;
+}
+  
+div.asset-source-configuration > table.asset-source-table > tbody >tr> td{
+	position: relative;
+}
+
+div.asset-source-configuration > table.asset-source-table > tbody >tr> td>span.recordDeleted{
+	margin: 0 10px;
+	display: inline-block;
+	width: 15px;
+	position: absolute;
+	right: 10px;
+	border: 1px solid #FC0;
+	background-color: #FFD;
+	text-align: center;
+	border-radius: 50%;
+	padding: 1px;
+	cursor: pointer;
+	color: rgba(255, 0, 0, 0.5);
+	box-shadow: 0px 0px 6px 6px rgba(255, 255, 152, 0.3);
+}
+
+div.asset-source-configuration > table.asset-source-table > tbody >tr> td>span.recordDeleted  + div.error-message{
+	display: none;
+}
+
+div.asset-source-configuration > table.asset-source-table > tbody >tr> td>span.recordDeleted:hover + div.error-message{
+	position: relative;
+	display: inline-block;
+}
+
+div.asset-source-configuration > table.asset-source-table > tbody >tr> td>div.error-message>div.arrow-left{
+	width: 0;
+	height: 0;
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+	border-right: 7px solid #333333;
+	position: absolute;
+	top: -9px;
+	left: 87px;
+	z-index: 11;
+}  
+
+div.asset-source-configuration > table.asset-source-table > tbody >tr> td>div.error-message>div.message{
+	position: absolute;
+	width: 300px;
+	padding: 5px 9px;
+	background: #333333;
+	font-size: 11px;
+	color: #ccc;
+	word-wrap: break-word;
+	text-align: justify;
+	line-height: 12px;
+	top: -25px;
+	left: 94px;
+	z-index: 11;
+	border-radius: 2px;
+}
+/* styling the trigger table ***/
+
+ul > li > div.trigger > table {
+	margin-top: -13px;
+	margin-left:-10px;
+	border-collapse: collapse ;
+	border-spacing: 0px;
+}
+
+ul > li > div.trigger > table > thead > tr > th{
+	color: #C0C;
+	padding: 6px;
+	background: #F2F2F2;
+	text-align: center;
+	border: 1px solid #cfcfcf;
+}
+
+ul > li > div.trigger > table > tbody> tr > td{
+	position: relative;
+	padding: 10px 5px 10px 5px;
+	width: 100%;
+	width:  calc(100% - 10px);
+	font-size:small;
+	border: 1px solid  #E1E1E1;
+	color: #5D686B;
+}
+
+ul > li > div.trigger > table > tbody> tr > td.value{
+    min-width: 191px;
+}
+
+ul > li > div.trigger > table > tbody> tr > td.operator{
+	min-width: 183px;
+}
+
+ul > li > div.trigger > table > tbody> tr > td >span.info{
+	display: inline-block;
+	position: relative;
+	cursor: pointer;
+	top: -3px;
+}
+
+ul > li > div.trigger > table > tbody> tr > td.value>div.service-name-select{
+	min-width: 152px;
+	border-radius: 2px;
+}
+
+ul > li > div.trigger > table > tbody > tr > td > i.fa-trash{
+	border: 3px solid transparent;
+}
+
+ul > li > div.trigger > table > tbody > tr > td > i.fa-trash:hover{
+	color: #C0C;
+	cursor: pointer;
+}
+
+ul > li > div.trigger > table > tbody > tr > td > div.service-name-select{
+    display: inline-block;
+    position: relative;
+    text-align: start;
+    padding-left: 2px;
+    top: 2px;
+    width: 152px;
+    margin: 0px 6px;
+    height: 19px;
+    border: 1px solid #cccccc;
+    border-radius: 2px;
+    cursor: pointer;
+    background-color: #f5f5f5;
+    background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+    background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+    background-repeat: repeat-x;
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    border-bottom-color: #b3b3b3;
+}
+ul > li > div.trigger > table > tbody > tr > td > div.service-name-select:hover{
+background: #e6e6e6;
+}	
+
+ul > li > div.trigger > table > tbody > tr > td > div.service-name-select>span{
+    display: inline-block;
+    font-size: 12px;
+    line-height: 19px;
+    position: relative;
+    top: 1px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: #666;
+}
+
+ul > li > div.trigger > table > tbody > tr > td > div.service-name-select>div.down-triangle{
+    display: inline-block;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    right: 5px;
+    top: 8px;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #656464;
+}
+
+ul > li > div.trigger > table > tbody > tr > td > div.service-name-select >ul.select-style{
+	list-style: none;
+	text-align: start;
+	background: #fff;
+	position: absolute;
+	width: 100%;
+	left: -1px;
+	z-index: 11;
+	max-height: 200px;
+	top: 23px;
+	margin: 0;
+	padding: 0px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	overflow-wrap: break-word;
+	border: 1px solid #ddd;
+	border-top: none;
+}
+ul > li > div.trigger > table > tbody > tr > td > div.service-name-select >ul.hide{
+	display: none!important;
+}
+ 
+ul > li > div.trigger > table > tbody > tr > td > div.service-name-select >ul.select-style > li {
+	text-decoration: none;
+	display: block;
+	padding: 2px;
+	text-indent: 5px;
+	line-height: 1.5;
+	min-height: 0;
+	font-weight: normal;
+	white-space: nowrap;
+	width: 98%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	color: #191919;
+}  
+
+ul > li > div.trigger > table > tbody > tr > td > div.service-name-select >ul.select-style >li:hover{
+	cursor: pointer;
+	background: #C0C;
+	color: #fff;
+}
+
+ul > li > div.trigger > table > tbody > tr > td > div.service-name-select >ul.select-style >li::before,ul > li > div.trigger > table > tbody > tr > td > div.service-name-select>ul.select-style >li::after{
+	border: none;
+}
+
+ul > li > div.trigger > table > tbody > tr > td > div.service-name-select >ul.select-style > li.options-disable{
+	pointer-events: none;
+	color: #999999;
+	cursor: pointer;
+}
+
+ul > li > div.trigger > table > tbody > tr > td > div.service-name-select >ul.select-style > li.options-disable:hover{
+	background: #fff;
+	color: #999999;
+}
+
+ul > li > div.trigger > table > tbody > tr > td > div.service-name-select >ul.select-style > li.optgroup{
+	font-weight: bold;
+	color: #c0c;
+}
+
+ul > li > div.trigger > table > tbody > tr > td > div.service-name-select >ul.select-style > li.optgroup:hover{
+   background: #fff;
+   color: #c0c;
+}
+
+ul > li > div.trigger > table > tbody > tr > td > div.service-name-select >ul.select-style > li.optgroup-options{
+	text-indent: 10px; 
+}
+
+ul > li > div.trigger > table > tbody > tr > td > div.service-name-select >ul.select-style > li.optgroup-options-disable{
+	text-indent: 10px; 
+	color: #999999;
+	cursor: pointer;
+}
+
+ul > li > div.trigger > table > tbody > tr > td > div.service-name-select >ul.select-style > li.optgroup-options-disable:hover{
+ background: #fff;
+ color: #999999;
+}
+
+ul > li > div.trigger > table > tbody > tr > td >input[type=text] {
+    padding: 2px;
+    height: 21px;
+    font-size: 12px;
+    line-height: 22px;
+    box-sizing: border-box;
+    position: relative;
+    top: 1px;
+    width: 152px;
+    margin: 0px 6px;
+    color: #666;
+    border: 1px solid #CCCCCC;
+}
+
+ul > li > div.trigger > table > tbody > tr > td >div>input[type=text] {
+    padding: 2px;
+    height: 22px;
+    line-height: 22px;
+    font-size: 12px;
+    box-sizing: border-box;
+    position: relative;
+    width: 152px;
+    color: #666;
+    margin: 0px 6px;
+    top: 1px;
+    border: 1px solid #CCCCCC;
+}
+
+ul > li > div.trigger > table > tbody > tr > td >span.recordDeleted{
+	margin: 0 5px;
+	display: inline-block;
+	width: 15px;
+	border: 1px solid #FC0;
+	background-color: #FFD;
+	text-align: center;
+	border-radius: 50%;
+	padding: 1px;
+	position: relative;
+    top: 2px;
+    right: 1px;
+	cursor: pointer;
+	color: rgba(255, 0, 0, 0.5);
+	box-shadow: 0px 0px 6px 6px rgba(255, 255, 152, 0.3);
+}
+
+ul > li > div.trigger > table > tbody > tr > td >span.recordDeleted + div.error-message{
+	display: none;
+}  
+
+ul > li > div.trigger > table > tbody > tr > td >span.recordDeleted:hover + div.error-message{
+	position: relative;
+	display: block;
+}  
+
+ul > li > div.trigger > table > tbody > tr > td >div.error-message>div.arrow-up{
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 7px solid #333333;
+    position: absolute;
+    top: -15px;
+    left: 161px;
+	z-index: 11;
+}  
+
+ul > li > div.trigger > table > tbody > tr > td >div.error-message>div.message{
+    position: absolute;
+    width: 300px;
+    padding: 5px 9px;
+    background: #333333;
+    font-size: 11px;
+    color: #ccc;
+    word-wrap: break-word;
+    text-align: justify;
+    line-height: 12px;
+    top: -32px;
+    left: -156.5px;
+	z-index: 11;
+	border-radius: 2px;
+}
+
+/* rule confirmation box style ****************************************/
+div.rule > div.rule-tree  > ul  li  > div.confirmationBoxContainer {
+	background: rgba(0, 0, 0, 0.8) !important;
+	opacity: 1 !important;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	z-index: 11;
+}
+
+div.rule > div.rule-tree  > ul  li  > div.hide{
+	display: none !important;
+}
+
+div.rule > div.rule-tree  > ul  li  > div.confirmationBoxContainer > div.confirmationBoxInitialPosition {
+	min-width: 520px;
+	width: 40%;
+	font-size: 12px;
+	line-height: 16px;
+	padding: 1px;
+	border-radius: 2px;
+	max-height: 300px;
+	background: #FCFCFC;
+	position: fixed;
+	top: 25%;
+	left: 50%;
+	-webkit-transform: translate(-50%,-50%);
+	transform: translate(-50%,-50%);
+	position: fixed;
+	opacity: 1;
+	word-wrap: break-word;
+	-webkit-transition: all 0.2s ease-out;
+	-webkit-transition:all 0.2s ease;
+	transition: all 0.2s ease;
+	box-shadow: 0px 0px 30px #000;
+}
+
+div.confirmationBoxContainer > div.confirmationBoxFinalPosition {
+	min-width: 520px;
+	width: 40%;
+	font-size: 12px;
+	line-height: 16px;
+	padding: 1px;
+	border-radius: 2px;
+	max-height: 300px;
+	background: #FCFCFC;
+	position: fixed;
+	top: 45%;
+	left: 50%;
+	-webkit-transform: translate(-50%,-50%);
+	transform: translate(-50%,-50%);
+	position: fixed;
+	opacity: 1;
+	word-wrap: break-word;
+	-webkit-transition: all 0.2s ease-out;
+	-webkit-transition:all 0.2s ease;
+	transition: all 0.2s ease;
+	box-shadow: 0px 0px 30px #000;
+}
+
+div.confirmationBoxContainer > div  >span.title {
+	background: #000;
+	width: 100%;
+	display: inline-block;
+	color: #fff;
+	font-size: 13px;
+	font-weight: bold;
+	padding: 5px;
+	box-sizing: border-box;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+}  
+
+div.confirmationBoxContainer > div > div.content{
+	padding: 20px 20px 0px 20px;
+	margin: 0 30px 10px 30px;
+	position: relative;
+}
+
+div.confirmationBoxContainer > div > div.content> i.fa-exclamation-triangle{
+	display: inline-block;
+	color: #CACACA;
+	position: relative;
+	top: -5px;
+	font-size: 4.3em !important;
+	width: 20%;
+}
+
+div.confirmationBoxContainer > div > div.content> span {
+	color: #333;
+	display: inline-block;
+	font-size: 13px;
+	width: 80%;
+	word-wrap: break-word !important;
+	position: absolute;
+	top: 60%;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+div.confirmationBoxContainer > div > div.content> span > strong {
+	font-weight: bold;
+} 
+
+div.confirmationBoxContainer > div > div.action >span.cancel {
+	display: inline-block;
+	height:  33px;
+	background: #333;
+	color: #fff;
+	padding: 0 10px;
+	line-height: 30px;
+	border-radius: 2px;
+	float: right;
+	margin-bottom: 10px;
+}
+
+div.confirmationBoxContainer > div > div.action >span.cancel:hover {
+	background: #111;
+	cursor: pointer;
+}
+
+div.confirmationBoxContainer > div > div.action >span.delete {
+	display: inline-block;
+	height:  33px;
+	background: #C0C;
+	color: #fff;
+	padding: 0 10px;
+	line-height: 30px;
+	border-radius: 2px;
+	float: right;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+div.confirmationBoxContainer > div > div.action >span.delete:hover {
+	background: #909;
+	cursor: pointer;
+}
+/****************************drag confirmation box container***********************/
+div.rule > div.rule-tree  > ul  li  > div.drag-confirmation-container-box {
+	background: rgba(0, 0, 0, 0.8) !important;
+	opacity: 1 !important;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	z-index: 1001;
+}
+
+div.rule > div.rule-tree  > ul  li  > div.drag-confirmation-container-box  >div.drag-confirmation-box{
+	width: 450px;
+	height: auto;
+	background: #F5F5F5;
+	position: fixed;
+	top: 40%;
+	left: 50%;
+	-webkit-transform: translate(-50%,-50%);
+	transform: translate(-50%,-50%);
+	border-radius: 5px;
+}
+
+div.rule > div.rule-tree  > ul  li  > div.drag-confirmation-container-box  >div.drag-confirmation-box >div.header{
+	width: 100%;
+	height: 35px;
+	position: relative;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	background: #c7c7c7;
+	background: -webkit-linear-gradient(#c7c7c7,#949292); /* For Opera 11.1 to 12.0 */
+	background: linear-gradient(#c7c7c7,#949292);
+}
+
+div.rule > div.rule-tree  > ul  li  > div.drag-confirmation-container-box  >div.drag-confirmation-box >div.header>span.title{
+	position: absolute;
+	top: 50%;
+	left: 10px;
+	width: 90%;
+	color: #484646;
+	font-weight: bold; 
+	font-size: 15px;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+	line-height: 20px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+} 
+
+div.rule > div.rule-tree  > ul  li  > div.drag-confirmation-container-box  >div.drag-confirmation-box >div.header>i.fa-close{
+	position: absolute;
+	right: 9px;
+	top: 50%;
+	color: #c0c;
+	font-size: 14px;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+div.rule > div.rule-tree  > ul  li  > div.drag-confirmation-container-box  >div.drag-confirmation-box >div.header>i.fa-close:hover{
+	color: #000;
+	cursor: pointer;
+}
+
+div.rule > div.rule-tree  > ul  li  > div.drag-confirmation-container-box  > div.drag-confirmation-box>div.options-container{
+	background: #F6F6F6;
+	width: 100%;
+	width: calc(100% - 10px);
+	padding: 5px;
+} 
+
+div.rule > div.rule-tree  > ul  li  > div.drag-confirmation-container-box  > div.drag-confirmation-box>div.options-container>div.option{
+	margin: 10px 0px 10px 10px;
+}
+
+div.rule > div.rule-tree  > ul  li  > div.drag-confirmation-container-box  > div.drag-confirmation-box>div.options-container>div.option>span.radio-button-border{
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+	border: 2px solid #b7b7b7;
+	border-radius: 50%;
+	position: relative;
+	top: -1px;
+}
+
+div.rule > div.rule-tree  > ul  li  > div.drag-confirmation-container-box  > div.drag-confirmation-box>div.options-container>div.option>label{
+	position: relative;
+}
+
+div.rule > div.rule-tree  > ul  li  > div.drag-confirmation-container-box  > div.drag-confirmation-box>div.options-container>div.option>label>input[type="radio"]{
+	display: none;
+}
+
+div.rule > div.rule-tree  > ul  li  > div.drag-confirmation-container-box  > div.drag-confirmation-box>div.options-container>div.option>label>span{
+	color: #666;
+	font-size: 14px;
+	display: inline-block;
+	width: 85%;
+	margin-left: 10px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+div.rule > div.rule-tree  > ul  li  > div.drag-confirmation-container-box  > div.drag-confirmation-box>div.options-container>div.option>label>span::before{
+	content: "";
+	position: absolute;
+	width: 8px;
+	top: -1px;
+	left: -12px;
+	height: 8px;
+	opacity: 0;
+	background: #909;
+	border-radius: 50%;
+}
+
+div.rule > div.rule-tree  > ul  li  > div.drag-confirmation-container-box  > div.drag-confirmation-box>div.options-container>div.option>label>input[type="radio"]:checked + span::before{
+	opacity: 1;
+}
+
+div.rule > div.rule-tree  > ul  li  > div.drag-confirmation-container-box  > div.drag-confirmation-box> div.action {
+	width: 100%;
+	height: 30px;
+	background: #F6F6F6;
+	border-top: 1px solid #ddd;
+	padding-top: 7px;
+}
+
+div.rule > div.rule-tree  > ul  li  > div.drag-confirmation-container-box  > div.drag-confirmation-box> div.action>div>span.cancel {
+	display: inline-block;
+	height: 33px;
+	background: #333;
+	color: #EEE;
+	font-size: 14px;
+	padding: 0 10px;
+	line-height: 30px;
+	border-radius: 2px;
+	float: right;
+	margin-bottom: 10px;
+	margin-right: 10px;
+}
+
+div.rule > div.rule-tree  > ul  li  > div.drag-confirmation-container-box  > div.drag-confirmation-box> div.action>div>span.cancel:hover {
+	background: #121212;
+	cursor: pointer;
+}
+ 
+div.rule > div.rule-tree  > ul  li  > div.drag-confirmation-container-box  > div.drag-confirmation-box> div.action>div>span.move {
+	display: inline-block;
+	height: 33px;
+	background: #c0c;
+	color: #EEE;
+	padding: 0 10px;
+	font-size: 14px;
+	line-height: 30px;
+	border-radius: 2px;
+	float: right;
+	margin-bottom: 10px;
+	margin-right: 10px;
+}
+
+div.rule > div.rule-tree  > ul  li  > div.drag-confirmation-container-box  > div.drag-confirmation-box> div.action>div>span.move:hover {
+	background: #909;
+	cursor: pointer;
+}   
+
+div.rule > div.rule-tree  > ul  li  > div.drag-confirmation-container-box  > div.drag-confirmation-box>div.options>button{
+	display: block;
+	width: calc(100% - 50px);
+	margin: 20px;
+	padding: 5px;
+	border: none;
+	font-size: 1em;
+	text-transform: uppercase;
+	background: #c0c;
+	color: #EEE;
+	border-radius: 5px;
+	outline: none;
+	word-wrap: break-word;
+	line-height: 20px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}  
+
+div.rule > div.rule-tree  > ul  li  > div.drag-confirmation-container-box  > div.drag-confirmation-box>div.options>button:hover{
+	background: #909;
+	cursor: pointer;
+} 
+
+/* combo ajax style */
+ul > li > div.trigger > table > tbody> tr > td >div>ul.combo-ajax{
+	list-style: none;
+	text-align: start;
+	background: #fff;
+	position: absolute;
+	width: 172px;
+	left: 5px;
+	z-index: 11;
+	max-height: 200px;
+	top: 30px;
+	margin: 0;
+	padding: 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+	overflow-wrap: break-word;
+	border: 1px solid #ddd;
+	border-top: none;
+}
+
+ul > li > div.trigger > table > tbody> tr > td >div>ul.hide{
+	display: none!important; 
+}
+
+ul > li > div.trigger > table > tbody> tr > td >div>ul.combo-ajax-without-border{
+	list-style: none;
+	text-align: start;
+	background: #fff;
+	position: absolute;
+	width: 100%;
+	left: -1px;
+	z-index: 11;
+	max-height: 200px;
+	top: 30px;
+	margin: 0;
+	padding-bottom:5px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	overflow-wrap: break-word;  
+	border: none;
+}
+
+ul > li > div.trigger > table > tbody> tr > td >div>ul.combo-ajax>li{
+	text-decoration: none;
+	display: block;
+	padding: 2px .4em;
+	line-height: 1.5;
+	min-height: 0;
+	font-weight: normal;
+	width: 100%;
+}
+
+ul > li > div.trigger > table > tbody> tr > td >div>ul.combo-ajax>li:hover{
+	cursor: pointer;
+	background: #C0C;
+	color: #fff;
+}
+
+ul > li > div.trigger > table > tbody> tr > td >div>ul.combo-ajax > li::before, ul > li > div.trigger > table > tbody> tr > td >div>ul.combo-ajax > li::after{
+	content: "";
+	clear: both;
+	border: none;
+}
+
+/***********style for showing date picker**************************************************/
+ul > li > div.trigger > table > tbody> tr > td >div.date {
+	position: relative;
+}
+
+ul > li > div.trigger > table > tbody> tr > td >div.date>div>span.arrow-up{
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid  transparent;
+	border-bottom: 5px solid #3498DB;
+	position :absolute;
+	top: 23px;
+	left: 50%; 
+	box-sizing: border-box;
+}
+/**************style for showing time picker *****************************************************/
+ul > li > div.trigger > table > tbody> tr > td >div.time {
+	position: relative;
+}
+
+ul > li > div.trigger > table > tbody> tr > td >div.time>div>span.arrow-up{
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid  transparent;
+	border-bottom: 5px solid #3498DB;
+	position :absolute;
+	top: 23px;
+	left: 50%; 
+	box-sizing: border-box;
+}
+
+/*************stylefor showing date  time picker *************************************************/
+ul > li > div.trigger > table > tbody> tr > td >div.date-time-picker {
+	position: relative;
+}
+
+ul > li > div.trigger > table > tbody> tr > td >div.date-time-picker>div>span.arrow-up {
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid  transparent;
+	border-bottom: 5px solid #3498DB;
+	position :absolute;
+	top: 23px;
+	left: 50%; 
+	box-sizing: border-box;
+}
+
+/*****************style for turbine *****************************************************/
+ul > li > div.trigger > table > tbody> tr > td >div.turbine{
+	width: 100%;
+}
+
+ul > li > div.trigger > table > tbody> tr > td >div.turbine>input[type="text"]{
+	cursor: pointer;
+	pointer-events:none;
+	width: 152px;
+}
+
+ul > li > div.trigger > table > tbody> tr > td >div.turbine>input[type="text"].edit{
+	pointer-events:auto;   
+}
+
+ul > li > div.trigger > table > tbody> tr > td >div.turbine>div.bar-info-logo{
+    display: inline-block;
+    position: absolute;
+    top: 14px;
+    text-align: center;
+    height: 18px;
+    right: 5px;
+    padding-left: 1px;
+    font-size: 12px;
+}
+
+ul > li > div.trigger > table > tbody> tr > td >div.turbine>div.bar-info-logo>span.bars{
+	position: relative;
+	cursor: pointer;
+	line-height: 18px;
+}
+
+ul > li > div.trigger > table > tbody> tr > td >div.turbine>div.bar-info-logo>span.info{
+	text-align: center;
+	display: inline-block;
+	cursor: pointer;
+	position: relative;
+	line-height: 18px;
+	margin:0px 6px;
+}  
+
+ul > li > div.trigger > table > tbody> tr > td >div.turbine>div.bar-info-logo>span.edit{
+	text-align: center;
+	display: inline-block;
+	line-height: 18px;
+	cursor: pointer;
+}
+/*******draggable style***********************************************************************/
+
+/* Prevent the text contents of draggable elements from being selectable. */
+[draggable] {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	/* Required to make elements draggable in old WebKit */
+	-khtml-user-drag: element;
+	-webkit-user-drag: element;
+}
+/*******************end of rule style css*******************************************************/
+.ZIndex{
+	z-index: 10;
+}
+
+.ui-datepicker{
+	z-index: 9 !important; 
+}
+
+/*******style for body ul***************/
+body>ul.select-style{
+	list-style: none;
+	text-align: start;
+	background: #fff;
+	position: absolute;
+	width: 172px;
+	left: -7px;
+	z-index: 11;
+	max-height: 200px;
+	top: 30px;
+	margin: 0;
+	padding: 0px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	overflow-wrap: break-word;
+	border: 1px solid #ddd;
+	border-top: none;
+}
+
+body>ul.select-style > li {
+	text-decoration: none;
+	display: block;
+	padding: 2px;
+	text-indent: 5px;
+	line-height: 1.5;
+	min-height: 0;
+	font-weight: normal;
+	white-space: nowrap;
+	width: 98%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	color: #191919;
+}  
+
+
+body>ul.select-style >li:hover{
+	cursor: pointer;
+	background: #C0C;
+	background: -webkit-linear-gradient(#C400C4,#A100A1);
+	background: linear-gradient(#C400C4,#A100A1);
+	color: #fff;
+}
+
+body>ul.select-style >li::after{
+	border: none;
+}
+
+body>ul.select-style > li.options-disable{
+	color: #999999;
+	cursor: pointer ;
+
+}
+
+body>ul.select-style > li.options-disable:hover{
+	background: #fff;
+	color: #999999;
+   
+}
+
+body>ul.select-style > li.optgroup-options-disable{
+	color: #999999;
+	cursor: pointer;
+}
+
+body>ul.select-style > li.optgroup{
+	font-weight: bold;
+	color: #c0c;
+}
+
+body>ul.select-style > li.optgroup:hover{
+	background: #fff;
+	color: #c0c;;
+}
+
+body>ul.select-style > li.optgroup-options{
+	text-indent: 10px; 
+}
+
+body>ul.select-style > li.optgroup-options-disable{
+	text-indent: 10px; 
+	color: #999999;
+}
+
+body>ul.select-style > li.optgroup-options-disable:hover{
+	background: #fff;
+	color: #999999;
+}
+
+/*********style for body combo ajax***********/
+body>ul.combo-ajax{
+	list-style: none;
+	text-align: start;
+	background: #fff;
+	position: absolute;
+	width: 100%;
+	left: -1px;
+	z-index: 11;
+	max-height: 200px;
+	top: 30px;
+	margin: 0;
+	padding: 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+	overflow-wrap: break-word;
+	border: 1px solid #ddd;
+	border-top: none;
+}
+
+body>ul.hide{
+	display: hide!important;   
+}
+
+body>ul.combo-ajax-without-border{
+	list-style: none;
+	text-align: start;
+	background: #fff;
+	position: absolute;
+	width: 100%;
+	left: -1px;
+	z-index: 11;
+	max-height: 200px;
+	top: 30px;
+	margin: 0;
+	padding-bottom:5px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	overflow-wrap: break-word;  
+	border: none;
+}
+
+body>ul.combo-ajax>li{
+	text-decoration: none;
+	display: block;
+	padding: 2px .4em;
+	line-height: 1.5;
+	min-height: 0;
+	font-weight: normal;
+	width: 100%;
+}
+
+body>ul.combo-ajax>li:hover{
+	cursor: pointer;
+    background: #C0C;
+	background: -webkit-linear-gradient(#C400C4,#A100A1);
+	background: linear-gradient(#C400C4,#A100A1);
+	color: #fff;
+}
+
+body>ul.combo-ajax > li::before, body>ul.combo-ajax > li::after{
+	content: "";
+	clear: both;
+	border: none;
+}
+
+.drag-rule-ui-drop-hover
+{
+ background-color: #c0c !important;
+ opacity: 0.5;
+}

@@ -49,7 +49,8 @@ componentDidUpdate(prevProps, prevState) {
         this.refs.defaultAssetGroup.style.background = "#f7f7f7";
         this.isToShowGroupOptions = false;
   }else{
-    this.refs.defaultAssetGroupCurrentValueText.style.opacity = 1;
+    this.refs.defaultAssetGroupCurrentValueText.style.color = "#c0c";
+    this.refs.defaultAssetGroup.style.background = "linear-gradient(to bottom, #ffffff, #e6e6e6)";
     this.isToShowGroupOptions = true;
   }
 }
